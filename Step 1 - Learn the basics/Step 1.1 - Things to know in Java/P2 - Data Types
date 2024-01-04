@@ -3,6 +3,9 @@ https://www.codingninjas.com/studio/problems/data-type_8357232?utm_source=strive
 
 
 Note -> In java, strings are compared using .equals() method and not directly using == 
+We can use == operators for reference comparison (address comparison) and equals() method for 
+content comparison. In simple words, == checks if both objects point to the same memory location 
+whereas equals() evaluates the comparison of values in the objects.
 
 Solution:-
 
