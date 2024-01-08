@@ -1,0 +1,38 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/sum-of-even-odd_624650?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+import java.util.*;
+public class Main {
+	
+	public static void main(String[] args) {
+		// Write your code here
+
+		// Approach:- Get each digit of the number and then
+		// check if it's odd or even and after that if it is even
+		// do the sum in even integer else do the sum in odd integer.
+
+		int odd = 0, even = 0, temp = 0;
+		Scanner sc =  new Scanner(System.in);
+		int num = sc.nextInt();
+
+		while(num!=0)
+		{
+			temp =  num%10;
+			num = num/10;
+
+			if(temp%2 == 0)
+			{
+				even += temp;
+			}
+			else
+			{
+				odd += temp;
+			}
+		}
+
+		System.out.print(even+" "+odd);
+
+	}
+}
