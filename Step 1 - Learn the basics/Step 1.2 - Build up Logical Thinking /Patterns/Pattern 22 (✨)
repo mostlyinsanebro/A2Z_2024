@@ -1,0 +1,46 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/ninja-and-the-number-pattern-i_6581959?utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_patternproblems&leftPanelTabValue=PROBLEM
+
+
+Approach:-
+First create a 2-D matrix from scratch which have the minimum of ditance from left, top, right and bottom as the values on every 
+position. This will create a matrix like this:- for input = 3
+00000
+01110
+01210
+01110
+00000
+
+Now, substract each of these values from n and we will get the desired matrix.
+33333
+32223
+32123
+32223
+33333
+
+
+
+Solution:-
+public class Solution {
+    public static void getNumberPattern(int n) {
+        // Write your code here.
+        int leftdis,rightdis,topdis,bottomdis;
+        int val=0;
+
+        for(int i=0;i<2*n-1;i++)
+        {
+            for(int j=0;j<2*n-1;j++)
+            {
+                topdis = i;
+                leftdis = j;
+                rightdis = (2*n-1)-1-j;
+                bottomdis = (2*n-1)-1-i;
+                val = Math.min(bottomdis,Math.min(rightdis,Math.min(topdis,leftdis)));
+                System.out.print(n-val);
+            }
+            System.out.println();
+        }
+
+    }
+}
+
