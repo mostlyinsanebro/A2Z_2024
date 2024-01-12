@@ -1,0 +1,25 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/reverse-digit0316/1
+
+
+Solution:-
+class Solution
+{
+    public long reverse_digit(long n)
+    {
+        // Code here
+        long temp = n;
+        long rem = 0;
+        long rev = 0;
+        
+        
+        while(temp!=0)
+        {
+            rem = temp%10;
+            rev = rev*10 + rem;
+            temp/=10;
+        }
+        
+        return rev;
+    }
+}
