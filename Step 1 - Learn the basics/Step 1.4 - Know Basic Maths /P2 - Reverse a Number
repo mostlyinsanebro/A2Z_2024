@@ -1,14 +1,15 @@
 Problem Link:-
-https://www.geeksforgeeks.org/problems/reverse-digit0316/1
+https://www.codingninjas.com/studio/problems/reverse-of-a-number_893271?leftPanelTabValue=PROBLEM
 
 
 Solution:-
-class Solution
-{
-    public long reverse_digit(long n)
-    {
-        // Code here
-        long temp = n;
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+	public static long reverseNumber(long n) {
+		// Write your code here
+		long temp = n;
         long rem = 0;
         long rev = 0;
         
@@ -21,5 +22,7 @@ class Solution
         }
         
         return rev;
-    }
+	}
+
 }
+
