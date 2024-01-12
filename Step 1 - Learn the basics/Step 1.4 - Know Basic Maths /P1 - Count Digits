@@ -1,0 +1,25 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/count-digits_8416387?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+public class Solution {
+    public static int countDigits(int n){
+        // Write your code here.
+        int temp = n;
+        int rem = 0;
+        int count = 0;
+
+        while(temp!=0)
+        {
+            rem=temp%10;
+            if(rem!=0&&n%rem==0)
+            {
+                count++;
+            }
+            temp /=10;
+        }
+
+        return count;
+    }
+}
