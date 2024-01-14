@@ -1,34 +1,28 @@
 Problem Link:-
-https://www.codingninjas.com/studio/problems/check-prime_624934?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+https://www.geeksforgeeks.org/problems/prime-number2314/1
 
 
 Solution:-
-public class Solution {
-	public static String isPrime(int num) {
-		//Your code goes here
-		boolean isPrime = true;
-
-		if(num==1)
-		{
-			return "NO";
-		}
-
-		for(int i=2;i*i <=num;i++)
-		{
-			if(num%i==0)
-			{
-				isPrime = false;
-				break;
-			}
-		}
-
-		if(isPrime)
-		{
-			return "YES";
-		}
-		else
-		{
-			return "NO";
-		}
-	}
+class Solution{
+    static int isPrime(int N){
+        // code here
+        
+        int isPrime = 1;
+        
+        if(N==1)
+        {
+            return 0;
+        }
+        
+        for(int i=2;i*i<=N;i++)
+        {
+            if(N%i==0)
+            {
+                isPrime=0;
+                break;
+            }
+        }
+        
+        return isPrime;
+    }
 }
