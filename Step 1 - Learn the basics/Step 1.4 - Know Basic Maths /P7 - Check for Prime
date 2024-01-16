@@ -2,6 +2,7 @@ Problem Link:-
 https://www.geeksforgeeks.org/problems/prime-number2314/1
 
 
+
 Solution:-
 class Solution{
     static int isPrime(int N){
