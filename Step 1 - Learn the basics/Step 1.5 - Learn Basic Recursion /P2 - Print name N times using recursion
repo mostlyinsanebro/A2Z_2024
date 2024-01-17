@@ -1,0 +1,23 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/-print-n-times_8380707?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+
+TC -> O(N)
+SC -> O(N)+O(N)
+
+import java.util.*;
+public class Solution {
+    public static List<String> printNtimes(int n){
+        // Write your code here.
+        if(n==0)
+        {
+            return new ArrayList<String>();
+        }
+
+        List<String> al= printNtimes(n-1);
+        al.add("Coding Ninjas");
+        return al;
+    }
+}
