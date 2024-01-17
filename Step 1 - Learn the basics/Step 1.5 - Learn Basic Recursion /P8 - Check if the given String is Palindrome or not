@@ -3,6 +3,9 @@ https://www.codingninjas.com/studio/problems/check-palindrome-recursive_624386?u
 
 
 Solution:-
+TC -> O(N/2)
+SC -> Auxillary Space => O(N/2)
+
 public class Solution {
     public static boolean isPalindrome(String str) {
         // Write your code here.
