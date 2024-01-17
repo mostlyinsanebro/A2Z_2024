@@ -1,0 +1,30 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/sum-of-first-n-numbers_8876068?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Recursive Solution:-
+TC -> O(N)
+SC -> O(N) // For the call stack
+
+public class Solution {
+    public static long sumFirstN(long n) {
+        // Write your code here.
+        if(n==0)
+        {
+            return 0;
+        }
+
+        long sum = sumFirstN(n-1);
+        sum+=n;
+        return sum;
+    }
+}
+
+
+Simple O(1) Solution:- use formula (n*n+1)/2 for finding the sum of first n natural numbers
+public class Solution {
+    public static long sumFirstN(long n) {
+        // Write your code here.
+        return ((n*(n+1))/2);
+    }
+}
