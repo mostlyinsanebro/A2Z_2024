@@ -3,13 +3,16 @@ https://www.geeksforgeeks.org/problems/all-divisors-of-a-number/1
 
 
 Solution:-
+
+Time Complexity:- O(sqrt(n)) + O(number of factors*log(number of factors))
+
 class Solution {
     public static void print_divisors(int n) {
         // code here
         
         ArrayList<Integer> al = new ArrayList<Integer>();
     
-        
+        // O(sqrt(n))
         for(int i=1;i*i<=n;i++)
         {
             if(i*i == n)
@@ -23,7 +26,7 @@ class Solution {
             }
         }
         
-        
+        // Sorting takes O(nlogn) , therefore TC for the following sorting is O(number of factors*log(number of factors))
         Collections.sort(al);
         
         for(Integer i : al)
