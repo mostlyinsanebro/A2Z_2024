@@ -1,0 +1,32 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/print-fibonacci-series_7421617?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+public class Solution {
+    public static int[] generateFibonacciNumbers(int n) {
+        // Write your code here.
+        return fibonacci(n-1,n);
+    }
+
+    public static int[] fibonacci(int x,int n)
+    {
+        if(x==0)
+        {
+            int arr[] = new int[n];
+            arr[0] = 0;
+            return arr;
+        }
+
+        int arr[] = fibonacci(x-1, n);
+        if(x==1)
+        {
+            arr[1] = 1;
+        }
+        else
+        {
+          arr[x] = arr[x-1]+arr[x-2];
+        }
+        return arr; 
+    }
+}
