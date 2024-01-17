@@ -1,0 +1,28 @@
+Problem Link:-
+
+
+
+Solution:-
+TC -> O(N)
+SC -> O(N) + O(N)
+
+public class Solution
+{
+    public static int[] printNos(int x) {
+        // Write Your Code Here
+        return print(x,x);
+    }
+
+    public static int[] print(int x,int n)
+    {
+        if(x==0)
+        {
+            return new int[n];
+        }
+
+        int arr[] = print(x-1,n);
+        arr[n-x] = x;
+        return arr;
+
+    }
+}
