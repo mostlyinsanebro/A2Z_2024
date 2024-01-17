@@ -1,0 +1,29 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/hcf-and-lcm_840448?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+
+TC -> O(log(min(n,m))
+
+public class Solution {
+    public static int calcGCD(int n, int m){
+        // Write your code here.
+
+        // Use the modified versiuon of Euclidean algorithm which states that
+        // gcd(larger,smaller) = gcd(larger%smaller,smaller)
+        // Keep on doing this till one of the numbers become 0 in which case 
+        // the number other than 0 is the gcd.
+
+        while(n!=0&&m!=0)
+        {
+            if(n>m) n = n%m;
+            else    m = m%n;
+        }
+
+        if(n==0)
+         return m;
+        else
+         return n;
+    }
+}
