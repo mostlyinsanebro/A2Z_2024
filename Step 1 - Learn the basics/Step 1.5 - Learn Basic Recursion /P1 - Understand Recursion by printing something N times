@@ -1,0 +1,26 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/print-1-to-n_628290?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+
+T.C -> O(N)
+S.C -> O(N) // for array + O(N) // internal space that the recursion calls take in the memory stack.
+public class Solution {
+    public static int[] printNos(int x) {
+        // Write Your Code Here
+        return print(x,x);
+    }
+
+    public static int[] print(int x,int n)
+    {
+        if(x==0)
+        {
+            int arr[] = new int[n];
+            return arr;
+        }
+        int arr[] = print(x-1,n);
+        arr[x-1]=x;
+        return arr;
+    }
+}
