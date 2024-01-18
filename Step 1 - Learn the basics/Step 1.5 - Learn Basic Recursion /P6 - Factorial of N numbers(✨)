@@ -1,0 +1,24 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/factorial-numbers-not-greater-than-n_8365435?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+import java.util.*;
+public class Solution {
+    public static List<Long> factorialNumbers(long n) {
+        // Write Your Code Here
+        ArrayList<Long> al = new ArrayList<Long>();
+        return factorial(n,1,1,al);        
+    }
+
+    public static List<Long> factorial(long n,long i,long fact,ArrayList<Long> res)
+    {
+        if(fact<=n)
+        {
+            res.add(fact);
+            return factorial(n,i+1,fact*(i+1),res);
+        }
+
+        return res;
+    }
+}
