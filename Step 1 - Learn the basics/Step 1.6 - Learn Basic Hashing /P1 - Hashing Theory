@@ -1,0 +1,117 @@
+Hashing -> prestoring and fetching
+
+Suppose you are given an array of 10^5 and you are asked to find the frequencies of 10^5 numbers from that array. The most basic approach would be to traverse the array
+for each element and then find the frequency of every element. This takes 10^10 time using this approach.
+
+Now, 10^8 operations takes 1 sec to execute, then 10^10 will take 100 seconds to execute which is a very large amount of time.
+To reduce this time, hashing comes into the picture.
+
+NUMBER HASHING :-
+We can use number hashing in this scenario. Suppose we are given m numbers and we know that the max element that can occur is max. So, in order to find the frequency of each 
+element in the array, we can create an array and use that for number hashing i.e. we will create the array as hash[max+1] and we will store the frequency of each element
+at the corresponding index of hash array and fetch it when needed.
+
+Code -> 
+import java.util.*;
+class Solution {
+    public static void main(String[] args) {
+        // Write your code here
+        Scanner sc= new Scanner(System.in);
+        int n= sc.nextInt();
+        int arr[]= new int[n];
+        for(int i=0;i<n;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+
+        // prestore
+        int hash[]= new int[13];
+        for(int i=0;i<n;i++)
+        {
+            hash[arr[i]]++;
+        }
+
+        int t=sc.nextInt();
+        for(int i=0;i<t;i++)
+        {
+            int inp = sc.nextInt();
+            // fetch
+            System.out.println(hash[inp]);
+        }
+    } 
+}
+
+// We can fetch the frequency of any element by doing hash[elemennt].
+
+// Problem with this approach -> Inside main, the max limit for creating an array is 10^6 and it is 10^7 globally which can be problematic if we have max element greater than 10^7.
+// Also, creating a hash array that big takes up too much space.
+
+
+
+CHARACTER HASHING :-
+In order to hash character array, we can do it very easily. If we are specified with the exact details that we have to store lowercase letters, then we will have to subtract 'a' from
+each of the characters and then store that data in the character array. This way 'f' will be stored at 5th index as 'f'-'a' = 5 and so on and while retrieving, use the same approach.
+
+If we have to store all the lowercase and uppercase letters, then simply use an array of size 256 since there are 256 characters and then do mapping accordingly 'f' and fetch 
+accordingly as well, like hash['f'].
+
+Code -> 
+// specific to lowercase letters
+import java.util.*;
+class Solution {
+    public static void main(String[] args) {
+        // Write your code here
+        Scanner sc =  new Scanner(System.in);
+        String str = sc.nextLine();
+
+        // pre-storing
+        int hash[] = new int[26];
+        // since there are 26 characters in the array
+        for(int i=0;i<str.length();i++)
+        {
+            char ch = str.charAt(i);
+            hash[ch-'a']++;
+        }
+        
+        int t = sc.nextInt();
+        for(int i=0;i<t;i++)
+        {
+            String st = sc.next();
+            char c = st.charAt(0);
+            //fetching
+            System.out.println(hash[c-'a']);
+        }
+    }
+}
+
+
+// for all characters
+import java.util.*;
+class Solution {
+    public static void main(String[] args) {
+        // Write your code here
+        Scanner sc =  new Scanner(System.in);
+        String str = sc.nextLine();
+
+        // pre-storing
+        int hash[] = new int[256];
+        // since there are 26 characters in the array
+        for(int i=0;i<str.length();i++)
+        {
+            char ch = str.charAt(i);
+            hash[ch]++;
+        }
+        
+        int t = sc.nextInt();
+        for(int i=0;i<t;i++)
+        {
+            String st = sc.next();
+            char c = st.charAt(0);
+            //fetching
+            System.out.println(hash[c]);
+        }
+    }
+}
+
+Note :- There are no comlications while hashing characters, therefore always use arrays in order to hash arrays. For hashing numbers, there is some problem
+cannot create numbers greater than 10^7, so use the hash for that. Continuation is the problems ahead.
