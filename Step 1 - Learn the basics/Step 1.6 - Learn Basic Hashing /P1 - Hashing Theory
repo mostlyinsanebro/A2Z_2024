@@ -113,8 +113,15 @@ class Solution {
     }
 }
 
-Note :- There are no comlications while hashing characters, therefore always use arrays in order to hash arrays. For hashing numbers, there is some problem
-cannot create numbers greater than 10^7, so use the hash for that. Continuation is the problems ahead.
-
+Note:- There are no complications while hashing characters, therefore always use arrays to hash arrays. For hashing numbers, there is some problem
+cannot creating numbers greater than 10^7, so use the hash for that. Continuation is the problem ahead.
 
 Also, in the HashMap the values are not stored in a sorted fashion by value, use LinkedHashMap for that instead.
+
+Use HashMap by default because the average and best case T.C. in case of storing and fetching is O(1) and it is O(N) in case of worst case. Now, the worst case
+happens rarely, so prefer it.
+
+If the worst case happens and this DS fails, then switch back to LinkedHashMap as it has best, avg, and worst case T.C. in case of storing and fetching as O(logN).
+where N is the number of elements in the map DS.
+
+The worst case happens due to Internal Collisions. More on it later.
