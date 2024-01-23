@@ -115,3 +115,6 @@ class Solution {
 
 Note :- There are no comlications while hashing characters, therefore always use arrays in order to hash arrays. For hashing numbers, there is some problem
 cannot create numbers greater than 10^7, so use the hash for that. Continuation is the problems ahead.
+
+
+Also, in the HashMap the values are not stored in a sorted fashion by value, use LinkedHashMap for that instead.
