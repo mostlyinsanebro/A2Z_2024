@@ -132,3 +132,9 @@ Collision is a situation that happens when after using a hash internally by the 
 very difficult to find the key because the hashed chain still looks the same as the original array. This is the worst case in the case of an unordered map or HashMap.
 
 Pair<Integer, Integer> can not be taken as a key in HashMap.
+
+
+Note:- Traverse the HashMap in the following way.
+map.forEach((key,value) -> {
+// logic
+});
