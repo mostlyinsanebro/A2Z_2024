@@ -1,18 +1,18 @@
-Hashing -> prestoring and fetching
+Hashing -> pre-storing and fetching
 
 Suppose you are given an array of 10^5 and you are asked to find the frequencies of 10^5 numbers from that array. The most basic approach would be to traverse the array
 for each element and then find the frequency of every element. This takes 10^10 time using this approach.
 
-Now, 10^8 operations takes 1 sec to execute, then 10^10 will take 100 seconds to execute which is a very large amount of time.
+Now, 10^8 operations take 1 sec to execute, then 10^10 will take 100 seconds to execute which is a very large amount of time.
 To reduce this time, hashing comes into the picture.
 
-NUMBER HASHING :-
+NUMBER HASHING:-
 We can use number hashing in this scenario. Suppose we are given m numbers and we know that the max element that can occur is max. So, in order to find the frequency of each 
 element in the array, we can create an array and use that for number hashing i.e. we will create the array as hash[max+1] and we will store the frequency of each element
-at the corresponding index of hash array and fetch it when needed.
+at the corresponding index of the hash array and fetch it when needed.
 
 Code -> 
-import java.util.*;
+import java. util.*;
 class Solution {
     public static void main(String[] args) {
         // Write your code here
@@ -48,8 +48,8 @@ class Solution {
 
 
 
-CHARACTER HASHING :-
-In order to hash character array, we can do it very easily. If we are specified with the exact details that we have to store lowercase letters, then we will have to subtract 'a' from
+CHARACTER HASHING:-
+In order to hash character arrays, we can do it very easily. If we are specified with the exact details that we have to store lowercase letters, then we will have to subtract 'a' from
 each of the characters and then store that data in the character array. This way 'f' will be stored at 5th index as 'f'-'a' = 5 and so on and while retrieving, use the same approach.
 
 If we have to store all the lowercase and uppercase letters, then simply use an array of size 256 since there are 256 characters and then do mapping accordingly 'f' and fetch 
@@ -57,7 +57,7 @@ accordingly as well, like hash['f'].
 
 Code -> 
 // specific to lowercase letters
-import java.util.*;
+import java. util.*;
 class Solution {
     public static void main(String[] args) {
         // Write your code here
@@ -66,7 +66,7 @@ class Solution {
 
         // pre-storing
         int hash[] = new int[26];
-        // since there are 26 characters in the array
+        //Since there are 26 characters in the array
         for(int i=0;i<str.length();i++)
         {
             char ch = str.charAt(i);
@@ -86,7 +86,7 @@ class Solution {
 
 
 // for all characters
-import java.util.*;
+import java. util.*;
 class Solution {
     public static void main(String[] args) {
         // Write your code here
@@ -95,7 +95,7 @@ class Solution {
 
         // pre-storing
         int hash[] = new int[256];
-        // since there are 26 characters in the array
+        //Since there are 26 characters in the array
         for(int i=0;i<str.length();i++)
         {
             char ch = str.charAt(i);
@@ -124,4 +124,11 @@ happens rarely, so prefer it.
 If the worst case happens and this DS fails, then switch back to LinkedHashMap as it has best, avg, and worst case T.C. in case of storing and fetching as O(logN).
 where N is the number of elements in the map DS.
 
-The worst case happens due to Internal Collisions. More on it later.
+The worst case happens due to Internal Collisions.
+
+Hashing is done using various methods one of which is the division method.
+
+Collision is a situation that happens when after using a hash internally by the system, the resultant is such that all the keys are hashed at the same hash and it is still
+very difficult to find the key because the hashed chain still looks the same as the original array. This is the worst case in the case of an unordered map or HashMap.
+
+Pair<Integer, Integer> can not be taken as a key in HashMap.
