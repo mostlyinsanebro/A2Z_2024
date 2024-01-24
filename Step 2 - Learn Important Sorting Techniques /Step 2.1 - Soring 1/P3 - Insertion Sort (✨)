@@ -1,0 +1,27 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/insertion-sort_624381?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+Approach:- In Insertion Sort, we insert the element to it's correct position using left swaps.
+
+TC -> O(N^2), average and worst case
+O(N) -> Best case, in case of sorted array, no left swaps will happen so internal loop will not run even once.
+
+
+Solution:-
+public class Solution {
+    public static void insertionSort(int[] arr, int size) {
+        //Your code goes here
+        int j=0,temp=0;
+        for(int i=0;i<size-1;i++)
+        {
+            j = i;
+            while(j>=0&&arr[j+1]<arr[j])
+            {
+                temp = arr[j+1];
+                arr[j+1]=arr[j];
+                arr[j]=temp;
+                j--;
+            }
+        }
+    }
+}
