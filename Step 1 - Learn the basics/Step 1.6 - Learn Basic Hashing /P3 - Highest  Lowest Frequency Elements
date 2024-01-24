@@ -1,0 +1,48 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/k-most-occurrent-numbers_625382?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+import java.util.*;
+public class Solution {
+    public static int[] getFrequencies(int []v) {
+        // Write Your Code Here
+
+        // Approach -> Traverse the array and store the frequency of every element in the value
+        // After that, traverse the HashMap and return the smallest and largest frequency element.
+
+        HashMap<Integer,Integer> map =  new HashMap<>();
+        for(int i=0;i<v.length;i++)
+        {
+            map.put(v[i],map.getOrDefault(v[i],0)+1);
+        }
+
+        int ans[]= new int[2];
+        ans[0]=v[0];
+        ans[1]=v[0];
+
+        map.forEach((key,val) -> 
+        {
+            if(val>map.get(ans[0]))
+            {
+                ans[0] = key;
+            }
+            else if(val == map.get(ans[0])&&key<ans[0])
+            {
+                ans[0] = key;
+            }
+            if(val<map.get(ans[1]))
+            {
+                ans[1] = key;
+            }
+            else if(val == map.get(ans[1])&&key<ans[1])
+            {
+                ans[1] = key;
+            }
+
+
+        });
+
+        return ans;
+    }
+}
