@@ -1,0 +1,46 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/ninja-and-the-second-order-elements_6581960?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+public class Solution {
+    public static int[] getSecondOrderElements(int n, int []a) {
+        // Write your code here.
+
+        int ans [] = new int[2];
+
+        int l = a[0];
+        int sl = Integer.MIN_VALUE;
+        int s = a[0];
+        int ss = Integer.MAX_VALUE;
+
+        for(int i=0;i<n;i++)
+        {
+            // Finding largest and second largest elements
+            if(a[i]>l)
+            {
+                sl = l;
+                l = a[i];
+            }
+            if(a[i]<l&&a[i]>sl)
+            {
+                sl = a[i];
+            }
+
+            // Finding smallest and second smallest elements
+            if(a[i]<s)
+            {
+                ss = s;
+                s= a[i];
+            }
+            if(a[i]>s&&a[i]<ss)
+            {
+                ss = a[i];
+            }
+        }
+
+        ans[0]=sl;
+        ans[1]=ss;
+        return ans;
+    }
+}
