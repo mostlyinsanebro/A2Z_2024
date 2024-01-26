@@ -1,0 +1,109 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/sorted-array_6613259?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+Brute Force Approach:- Use a LinkedHashSet and insert the elements from the first array in it and then insert the elements from the second array in it. 
+Distinct elements will be inserted in the HashSet. After that, put the elements from HashSet in the ArrayList and sort them to maintain the needed order.
+
+Code:-
+import java. util.*;
+public class Solution {
+    public static List< Integer > sortedArray(int []a, int []b) {
+        // Write your code here
+        LinkedHashSet<Integer> set =  new LinkedHashSet<>();
+
+        
+        for(int i=0;i<a.length;i++)
+        {
+            set.add(a[i]);
+        }
+
+        for(int i=0;i<b.length;i++)
+        {
+            set.add(b[i]);
+        }
+
+        ArrayList<Integer> al = new ArrayList<>();
+
+        for(int i:set)
+        {
+            al.add(i);
+        }
+
+        Collections.sort(al);
+        return al;
+        
+    }
+}
+
+T.C -> O(n1logn+n2logn) + O(n1+n2) + O((n1+n2)long(n1+n2)) => Worst Case 
+S.C. -> O(n1+n2)// for the HashSet + O(n1+n2) for the ArrayList
+
+
+Optimal Approach:- This approach uses the two-pointer method.
+
+import java. util.*;
+public class Solution {
+    public static List< Integer > sortedarray(int []a, int []b) {
+        // Write your code here
+        ArrayList<Integer> al = new ArrayList<>();
+        int i=0,j=0;
+        if(a[i]<b[j])
+        {
+            al.add(a[i]);
+            i++;
+        }
+        else
+        {
+            al.add(b[j]);
+            j++;
+        }
+
+        while(i<a.length&&j<b.length)
+        {
+            if(a[i]<b[j])
+            {
+                if(a[i]!=al.get(al.size()-1))
+                al.add(a[i]);
+
+                i++;
+            }
+            else if(a[i]>=b[j])
+            {
+                if(b[j]!=al.get(al.size()-1))
+                al.add(b[j]);
+                j++;
+            }
+        }
+
+        if(i<a.length)
+        {
+            while(i!=a.length)
+            {
+                if(al.get(al.size()-1)!=a[i])
+                {
+                    al.add(a[i]);
+                }
+                i++;
+            }
+        }
+        if(j<b.length)
+        {
+            while(j!=b.length)
+            {
+                if(al.get(al.size()-1)!=b[j])
+                {
+                    al.add(b[j]);
+                }
+                j++;
+            }
+        }
+
+        return al;
+    }
+}
+
+
+T.C -> O(n1+n2)
+S.C -> O(n1+n2) -> in worst case, if both the arrays have all unique elements.
