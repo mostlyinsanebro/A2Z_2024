@@ -1,0 +1,119 @@
+Problem Link:-
+https://geeksforgeeks.org/problems/move-all-zeroes-to-end-of-array0751/1
+
+
+Solutions:-
+Brute :- Use another array to store the non-zero elements and then copy the non-zero elements to the start of the array and then insert zeroes to the
+remaining indexes of the array.
+Code :-
+
+
+//User function Template for Java
+
+class Solution {
+    void pushZerosToEnd(int[] arr, int n) {
+        // code here
+        
+        // Using extra array
+        int c=0,j=0;
+        
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]!=0) c=c+1;
+        }
+        
+        int temp[]= new int[c];
+        
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]!=0)
+            {
+                temp[j]=arr[i];
+                j++;
+            }
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            if(i<c)
+            arr[i]=temp[i];
+            
+            else
+            arr[i]=0;
+        }
+        
+    }
+}
+
+T.C. -> O(n)
+S.C. -> O(c) -> c being the number of non-zero elements in the array. In worst case scenario, the S.C. can be O(n).
+
+
+Optimal Solution:-
+Use the two pointer approach. Keep traversing the array with variable i and keep j at 0th index and when you encounter a non-zero element at index i,
+swap it with the index j element and increment j in that case.
+
+
+In this case, if i and j both are at the same index at a non-zero element, then the element will be swapped with itself and i and j will be incremented,
+but if the element is 0, then j will stay at that 0 while the i will keep on incrementing until it reaches the next non-zero element in the array or i reaches
+at the end of the array. On reaching the end, the array will be in the desired state and in the other case if i reaches at a non-zero element, then it will get
+swapped with j index which have a 0 element at it and j will get incremented and i will also get incremented through the outer loop. In this way, all the zeroes 
+will move at the end of the array leaving the non-zero elements in the original order.
+
+Code:-
+class Solution {
+    void pushZerosToEnd(int[] arr, int n) {
+        // code here
+        int j=0,temp=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]!=0)
+            {
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                j++;
+            }
+        }
+    }
+}
+
+
+T.C. -> O(n)
+
+
+Approach 3:- This works for 95% of the test cases. T.C. -> O(n).
+
+
+//User function Template for Java
+
+class Solution {
+    void pushZerosToEnd(int[] arr, int n) {
+        // code here
+        
+        int i=0,j=0,temp=0;
+        
+        while(i<n&&j<n)
+        {
+            if(arr[i]==0)
+            {
+                j=i+1;
+                while(j<n&&arr[j]==0)
+                {
+                    j++;
+                }
+                if(j>=n)
+                {
+                    break;
+                }
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                j++;
+            }
+            i++;
+        }
+        
+    }
+}
