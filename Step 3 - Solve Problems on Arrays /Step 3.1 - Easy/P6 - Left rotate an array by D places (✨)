@@ -1,0 +1,107 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/rotate-array-by-n-elements-1587115621/1?utm_source=geeksforgeeks&utm_medium=article_practice_tab&utm_campaign=article_practice_tab\
+
+
+Solutions:-
+Approach 1:- Rotate the array to the left by 1 place and do it k times.
+class Solution
+{
+    //Function to rotate an array by d elements in a counter-clockwise direction. 
+    static void rotateArr(int arr[], int d, int n)
+    {
+        //Add your code here
+        d = d%n;
+        int temp = 0;
+        
+        for(int i=0;i<d;i++)
+        {
+            temp = arr[0];
+            for(int j=0;j<n-1;j++)
+            {
+                arr[j] = arr[j+1];
+            }
+            arr[n-1]=temp;
+        }
+        
+    }
+}
+
+T.C. -> O(n*d)  -- The time complexity is very large and gives a TLE error.
+-- d is the number of places we have to rotate the array to the left.
+
+
+Approach 2:- Use an extra array of d size, put the first d places in that array, rotate the last indexes from d+1 -> n to the left and
+put the first d elements from the extra array to the end of the resultant array, the array will be rotated to the left by d places.
+class Solution
+{
+    //Function to rotate an array by d elements in a counter-clockwise direction. 
+    static void rotateArr(int arr[], int d, int n)
+    {
+        d = d%n;
+        //Add your code here
+        int ans[]=new int[d];
+        
+        // Put the first d elements into the extra array.
+        for(int i=0;i<d;i++)
+        {
+            ans[i]=arr[i];
+        }
+        
+        // Rotate the elements from index d -> n to the left by d places.
+        for(int i=d;i<n;i++)
+        {
+            arr[i-d]=arr[i];
+        }
+        
+        // Now, put the first d elements in the extra array to the end of the original array.
+        for(int i=0;i<d;i++)
+        {
+            arr[i+n-d]=ans[i];
+        }
+    }
+}
+
+T.C -> O(n+d)
+S.C -> O(d)
+
+
+Approach 3 -> Reverse the array from 0 -> d, Reverse the array from d+1 -> n, and then Reverse the whole array. 
+This will rotate the array to the left by d places.
+class Solution
+{
+    //Function to rotate an array by d elements in a counter-clockwise direction. 
+    static void rotateArr(int arr[], int d, int n)
+    {
+        //Add your code here
+        d = d%n;
+        
+        // Reverse the array from 0 -> d
+        reverse(arr,0,d-1);
+        
+        // Reverse the array from d+1 -> n
+        reverse(arr,d,n-1);
+        
+        // Reverse the whole array
+        reverse(arr,0,n-1);
+        
+        
+    }
+    
+    public static void reverse(int arr[],int l,int r)
+    {
+        int temp=0;
+        while(l<=r)
+        {
+            temp=arr[l];
+            arr[l]=arr[r];
+            arr[r]=temp;
+            l++;
+            r--;
+        }
+    }
+}
+
+
+T.C -> O(2n) ~ O(n)
+S.C. -> O(1)
+
