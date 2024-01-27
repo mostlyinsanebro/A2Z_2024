@@ -1,0 +1,115 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/missing-number-in-array1416/1
+
+
+Solution:-
+BRUTE FORCE:- Using Linear Search
+
+The brute force approach will be to run a loop from 1 to n and do a linear search for that element in the array. If the element does 
+not exist in the array, it is the missing number.
+
+Code:-
+class Solution {
+    int missingNumber(int array[], int n) {
+        // Your Code Here
+        int flag =0,ans=0;
+        
+        for(int i=1;i<=n;i++)
+        {
+            flag=0;
+            for(int j=0;j<array.length;j++)
+            {
+                if(array[j]==i)
+                {
+                    flag=1;
+                    break;
+                }
+            }
+            
+            if(flag==0)
+            {
+                ans=i;
+                break;
+            }
+        }
+        return ans;
+    }
+}
+
+T.C. -> O(n*n)
+S.C. -> O(1)
+------------------------------------------------------------------------------------------------------------------------------------
+BETTER APPROACH:- Use a Hash array.
+Declare a hash array of size n+1 for having indexes from 0 -> n. Traverse the hash array and increase the count of value at the ith
+index by 1. The run a loop from 1 -> n and see which index in the hash array has 0 at its index from 1 -> n. That index will be the missing element.
+
+class Solution {
+    int missingNumber(int array[], int n) {
+        // Your Code Here
+        int hash[]=new int[n+1];
+        int missing =0;
+        
+        for(int i=0;i<array.length;i++)
+        {
+            hash[array[i]]++;
+        }
+        
+        for(int i=1;i<=n;i++)
+        {
+            if(hash[i]==0)
+            {
+                missing = i;
+                break;
+            }
+        }
+        return missing;
+    }
+}
+
+T.C. -> O(2n)~O(n)
+S.C. -> O(n+1)
+
+
+Optimal Solution 1:- Use the sum of the first n natural numbers.
+The sum of n numbers is (n*(n+1))/2. We will use this to get the missing number between 1 and n.
+We will get the sum of the first n natural numbers, then keep on subtracting the array elements from this sum and after looping the whole array,
+we will get the missing number.
+
+Code:-
+class Solution {
+    int missingNumber(int arr[], int n) {
+        // Your Code Here
+        int sum = (n*(n+1))/2;
+        
+        for(int i=0;i<arr.length;i++)
+        {
+            sum -= arr[i];
+        }
+        return sum;
+    }
+}
+
+T.C. -> O(n)
+S.C. -> O(1)
+
+Optimal Solution 2:- Use the XOR approach.
+a^a = 0
+a^0 = a
+Use this approach.
+class Solution {
+    int missingNumber(int array[], int n) {
+        // Your Code Here
+        int XOR1=0,XOR2=0;
+        for(int i=0;i<array.length;i++)
+        {
+            XOR1 = XOR1^array[i];
+            XOR2 = XOR2^(i+1);
+        }
+        XOR2=XOR2^n;
+        
+        return XOR1^XOR2;
+    }
+}
+
+T.C. -> O(n) -- This approach is slightly better than sum approach, incase n is too big.
+
