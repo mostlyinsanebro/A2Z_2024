@@ -1,0 +1,79 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/find-the-single-element_6680465?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+
+Brute Force :- Linear Search( Loop the whole array for each number and check if it has 1 occurence after travesring the array.
+If yes, it is the answer.)
+
+Code:- 
+    public static int getSingleElement(int []arr){
+        // Write your code here.
+        int el = 0,c=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            el = arr[i];
+            c = 0;
+            for(int j=0;j<arr.length;j++)
+            {
+                if(arr[j]==el)
+                {
+                    c++;
+                }
+            }
+            if(c==1)
+            {
+                return el;
+            }
+        }
+        return el;
+    }
+}
+
+T.C. -> O(n^2)
+S.C. -> O(1)
+
+Better Approach:-
+public class Solution {
+    public static int getSingleElement(int []arr){
+        // Write your code here.
+        HashMap<Integer,Integer> map= new HashMap<>();
+
+        for(int i=0;i<arr.length;i++)
+        {
+            map.put(arr[i],map.getOrDefault(arr[i], 0)+1);
+        }
+        int ans[] = new int[1];
+
+        map.forEach((k,v) -> 
+            {if(v==1) ans[0] = k;}
+        );
+        return ans[0];
+    }
+}
+
+T.C. -> O(N log M)+ O(M)   ==> M == N/2+1
+S.C. -> O(M)
+
+
+Optimal Approach :- Use XOR
+Use the concept , a^a = 0 and a^0 = a.
+
+So, do the XOR of the whole array, all the numbers appearing twice will cancel out each other and the only number
+appearing once will be the answer after XOR of the whole array.
+
+Code :-
+    public static int getSingleElement(int []arr){
+        // Write your code here.
+        int XOR = 0;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            XOR = XOR ^ arr[i];
+        }
+        return XOR;
+    }
+
+T.C. -> O(N)
+S.C. -> O(1)
