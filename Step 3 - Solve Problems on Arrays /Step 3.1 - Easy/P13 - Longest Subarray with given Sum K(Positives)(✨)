@@ -8,7 +8,7 @@ Brute Force Apprach:- Create all subarray combinations and then check which suba
 the answer.
 Code:-
 
-    public static int longestSubarrayWithSumK(int []a, long k) {
+   public static int longestSubarrayWithSumK(int []a, long k) {
         // Write your code here
 
         int len = 0;
@@ -20,17 +20,18 @@ Code:-
             for(int j=i;j<n;j++)
             {
                 sum=0;
-                for(int z=i;z<j;z++)
+                for(int z=i;z<=j;z++)
                 {
                     sum+=a[z];
                 }
 
                 if(sum==k)
                 {
-                    len = Math.max(len,j-i);
+                    len = Math.max(len,j-i+1);
                 }
             }
         }
+
         return len;
     }
 
