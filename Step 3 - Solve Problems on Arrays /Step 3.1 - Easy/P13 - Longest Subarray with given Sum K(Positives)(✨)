@@ -4,7 +4,7 @@ https://www.codingninjas.com/studio/problems/longest-subarray-with-sum-k_6682399
 
 Solution:-
 
-Brute Force Apprach:- Create all subarray combinations and then check which subaay has the sum == k having max length. That will be
+Brute Force Approach:- Create all subarray combinations and then check which subarray has the sum == k having a max length. That will be
 the answer.
 Code:-
 
@@ -36,5 +36,81 @@ Code:-
     }
 
 
-T.C. -> O(N^3) --> Loop is running for i, for each i for j and then for each j, for  i-> j.
+T.C. -> O(N^3) --> Loop is running for i, for each i for j, and then for each j, for  i-> j.
+
+Optimised Brute Force:- 
+In place of looping from i to j ( the internal z-loop), for creating all subarrays, what can be done is to keep on adding the elements at j 
+to the sum and checking if it's equal to k. Doing this will create a sum of all subarrays. Check which length is the biggest then, that will be the answer.
+
+Code:-
+    public static int longestSubarrayWithSumK(int []a, long k) {
+        // Write your code here
+
+        int n = a.length;
+        int len=0;
+        long sum=0;
+
+        for(int i=0;i<n;i++)
+        {
+            sum=0;
+            for(int j=i;j<n;j++)
+            {
+                sum+=a[j];
+                if(sum==k)
+                {
+                    len = Math.max(len,j-i+1);
+                }
+            }
+        }
+        return len;     
+    }
+
+T.C. -> O(N^2)
+S.C. -> O(1)
+
+
+Optimized approach in case of positives and zeroes only:- 
+Use a 2 pointer approach, a sliding window solution for it.
+
+    public static int longestSubarrayWithSumK(int []a, long k) {
+        // Write your code here
+
+
+        long sum=a[0];
+        int i=0,j=0,len=0;
+        int n = a.length;
+
+        // Run a loop while the right pointer goes out of the array
+        while(j<n)
+        {
+
+            //Subtract from the left of the array while the sum is > k.
+            while(i<=j&&sum>k)
+            {
+                sum-=a[i];
+                i++;
+            }
+
+            // If sum is == k, then compare the length of this subarray to the length
+            // of max subarray till now.
+            if(sum==k)
+            {
+                len = Math.max(len,j-i+1);
+            }
+
+            // Slide the window to the right-hand side by one.
+            j++;
+
+            // If the right pointer is in range, then add the element at the right index to the 
+            // array element.
+            if(j<n)
+                sum+=a[j];
+        }
+
+        // return the max subarray length.
+         return len;
+}
+
+
+
 
