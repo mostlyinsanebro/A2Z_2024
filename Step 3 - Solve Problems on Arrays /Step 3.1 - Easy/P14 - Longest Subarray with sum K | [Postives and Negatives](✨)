@@ -1,0 +1,63 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/longest-subarray-with-sum-k_5713505?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:
+
+Brute Force:- Same as P13.
+
+Optimal Solution:-
+This apprach is better for an array having only positives w/o negatives and zeroes and is optimal for an array having positives, negatives and zeroes.
+
+Approach:- If we want to fins a subarray with a given sum k and we are at a point till which the sum is x from the start ( point z), then if there exists a 
+subarray with sum x-k (suppose this is till index i from the start), then we will have the subarray having sum k by doing z-i.
+
+For applying this approach , we will have to use a hashMap that will store the sum upto a point with corresponding index.
+
+Code:- 
+ public static int longestSubarrayWithSumK(int []a, long k) {
+        // Write your code here
+
+        // Declaring var for lenth of longest subarray with sum k and prefix sum.
+        int maxLen=0;
+        long psum=0;
+
+        // Creating hashMap for storing the psum till index i. This will be used later.
+        HashMap<Long,Integer> map = new HashMap<>();
+
+        // Traversing the array.
+        for(int i=0;i<a.length;i++)
+        {
+            // Storing prefix sum.
+            psum+=a[i];
+
+            // If initially, we get a subarray with prefix sum  == k, then store it's length in maxlen.
+            if(psum==k)
+            {
+                maxLen=i+1;
+            }
+
+            // Now, get the x-k and check if it exists in the hashMap. If yes, then check if it is greater than maxLen, if yes, it will be the new subarray.
+            // This will happen for the cases where the prefix sum will be greater than k.
+            long rem = psum-k;
+
+            if(map.containsKey(rem))
+            {
+                maxLen=Math.max(mexLen,i-map.get(rem));
+            }
+
+            // This if condition is to handle the 0 and -ve elements because we want the longest subarray, so we are trying to store a prefix sum
+            // with it's index in such a way that it will be furthest to the left from the current index.
+            // map.put() is just for storing prefix sum with an index.
+            if(map.containsKey(psum)==false)
+            map.put(psum,i);
+        }
+
+        return maxLen;
+
+    }
+
+
+
+T.C. -> O(N logN)
+S.C. -> O(N) -- because we are creating a hashMap with N elements for each index.
