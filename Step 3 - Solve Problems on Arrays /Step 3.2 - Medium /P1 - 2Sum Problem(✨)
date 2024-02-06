@@ -1,0 +1,94 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/reading_6845742?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+Brute Force:-
+    public static String read(int n, int []book, int target){
+        // Write your code here.
+        
+        for(int i=0;i<n-1;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                if(book[i]==target-book[j])
+                {
+                    return "YES";
+                }
+            }
+        }
+        return "NO";    
+}
+
+T.C. -> O(n^2)
+
+Better Approach:- The approach is to use a HashMap containing array element along with it's index.
+First, traverse the array and put every element along with it's index in the HashMap. After that, traverse the 
+array and then check if target-arr[i] exists in the hashMap and also if that target-arr[i] element is not the element itself,
+then return "YES". If, after traversing the whole array, we do not find any such element in array, return "NO".
+
+Code:-
+    public static String read(int n, int []book, int target){
+        // Write your code here.
+        HashMap<Integer,Integer> map= new HashMap<>();
+
+        for(int i=0;i<n;i++)
+        {
+            map.put(book[i],i);
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            if(map.containsKey(target-book[i])&&map.get(target-book[i])!=i)
+            {
+                return "YES";
+            }
+        }
+
+        return "NO";
+}
+
+T.C. -> O(N) * O(1)-> this is the time complexity of inserting an element in hashmap
+S.C. -> O(N) -- for creating the hashmap.
+
+Optimal Appraoch:- Sort the array and then use 2 pointer approach on it.
+//User function Template for Java
+
+
+class Solution {
+    boolean hasArrayTwoCandidates(int arr[], int n, int x) {
+        // code here
+        
+        Arrays.sort(arr);
+        
+        int l=0,sum=0;
+        int r=n-1;
+        
+        
+        while(l<r)
+        {
+            sum = arr[l]+arr[r];
+            if(sum==x)
+            {
+                return true;
+            }
+            else if(sum<x)
+            {
+                l++;
+            }
+            else
+            {
+                r--;
+            }
+        }
+        
+        return false;
+    }
+}
+
+
+
+T.C. -> O(N log N)
+S.C. -> O(1)
+
+    
