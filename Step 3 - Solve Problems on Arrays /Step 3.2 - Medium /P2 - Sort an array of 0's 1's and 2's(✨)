@@ -48,4 +48,52 @@ S.C  -> O(1)
 Optimal Approach :-
 Dutch National Flag Algorithm
 
+This algorith works on three pointers -> low, mid, high.
 
+This algorithm states that the indexes from 0 -> low -1 , will have 0's.
+The indexes from low -> mid-1 , will have 1's.
+The indexes from mid -> high, will have all unsorted elements.
+The indexes from high+1 -> n will have all 2's.
+
+Now, if arr[mid] == 0
+      swap(arr[low],arr[mid])
+      low++;  mid++;
+else if arr[mid] == 1
+      mid++;
+else
+     swap(arr[high],arr[mid])
+     high--;
+
+Code:- 
+   public static void sortArray(ArrayList<Integer> arr, int n) {
+        // Write your code here.
+
+        int low=0,mid=0,high=n-1;
+        int temp=0;
+
+        while(mid<=high)
+        {
+            if(arr.get(mid) == 0)
+            {
+                temp=arr.get(mid);
+                arr.set(mid,arr.get(low));
+                arr.set(low,temp);
+                low++;
+                mid++;
+            }
+            else if(arr.get(mid)==1)
+            {
+                mid++;
+            }
+            else
+            {
+                temp=arr.get(high);
+                arr.set(high,arr.get(mid));
+                arr.set(mid,temp);
+                high--;
+            }
+        }
+    }
+
+T.C - > O(N)
+S.C. -> O(1)
