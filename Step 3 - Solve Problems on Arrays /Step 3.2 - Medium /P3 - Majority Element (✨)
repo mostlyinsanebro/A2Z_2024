@@ -1,0 +1,112 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/majority-element_6783241?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+
+Brute Force:-
+    public static int majorityElement(int []arr) {
+        // Write your code here
+        int ans = 0,n=arr.length,c=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(arr[j]==arr[i])
+                    c++;
+                if(c>n/2)
+                    return arr[i];
+            }
+        }
+        return ans;
+    }
+
+T.C. -> O(n^2)
+S.C. -> O(1)
+
+
+Better Approach:- Using HashMap
+Store every element in the HashMap with their count and then traverse in the HashMap and on seeing an key which
+has count > n/2, return it's value.
+
+Code:-
+ public static int majorityElement(int []arr) {
+        // Write your code here
+        int n=arr.length;
+        HashMap<Integer,Integer> map= new HashMap<>();
+        for(int i=0;i<arr.length;i++)
+        {
+            map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+        }
+        
+        for(Map.Entry<Integer,Integer> it : map.entrySet())
+        {
+            if(it.getValue()> n/2)
+            {
+                return it.getKey();
+            }
+        }
+        return -1;
+}
+
+T.C. -> O(N) + O(N)  -- in order to put and find an element in HashMap, the T.C. is O(1).
+S.C. -> O(N) -- incase every element is unique in the array
+
+
+
+Optimal Solution:- Moore's Voting algorithm
+
+Intuition:- If an element appears more than n/e times, then it will not get cancelled.
+
+There are two variables we have to consider in this algorithm -> el and cnt.
+Initially the count will be 0 and whenever the cnt is 0, we will consider the element at which the pointer currently is 
+to be the el i.e. the majority element.
+
+Now, take el = arr[0] and cnt = 1 and run a loop for i -> 1-> n.
+If arr[i] == el then cnt++;
+else cnt-- .
+
+Also, if the cnt becomes 0 at any i, then arr[i] will become the contender to be the majority element.
+
+Now, after traversing the whole array, we will have an el which will be the contender for being the majority element -> 
+it may or may not be the majority element.
+
+So, traverse the array again and check if the count of el > n/2. If yes, it is the ans else return -1.
+
+Code:-
+    public static int majorityElement(int []arr) {
+        // Write your code here
+        int cnt = 1,el = arr[0];
+
+        // Apply Moore's Voting algorithm.
+        for(int i=1;i<arr.length;i++)
+        {
+            if(arr[i]==el)
+                cnt++;
+            else 
+            {
+                if(cnt==0)
+                {
+                    cnt++;
+                    el = arr[i];
+                }
+                else
+                    cnt--;
+            }  
+        }
+
+        int c=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]==el)
+                c++;
+        }
+        if(c>arr.length/2)
+            return el;
+        
+        return -1;
+  }
+
+
+  T.C.-> O(N)
+  S.C. -> O(1)
