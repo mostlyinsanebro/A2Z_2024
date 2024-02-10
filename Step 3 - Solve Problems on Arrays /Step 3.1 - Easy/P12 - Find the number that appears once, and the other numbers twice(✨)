@@ -4,7 +4,7 @@ https://www.codingninjas.com/studio/problems/find-the-single-element_6680465?utm
 
 Solution:-
 
-Brute Force :- Linear Search( Loop the whole array for each number and check if it has 1 occurence after travesring the array.
+Brute Force:- Linear Search( Loop the whole array for each number and check if it has 1 occurrence after traversing the array.
 If yes, it is the answer.)
 
 Code:- 
@@ -44,12 +44,16 @@ public class Solution {
         {
             map.put(arr[i],map.getOrDefault(arr[i], 0)+1);
         }
-        int ans[] = new int[1];
+         
+        for(Map.Entry<Integer,Integer> t:map.entrySet())
+        {
+            if(t.getValue()==1)
+            {
+                return t.getKey();
+            }
+        }
 
-        map.forEach((k,v) -> 
-            {if(v==1) ans[0] = k;}
-        );
-        return ans[0];
+        return 0;
     }
 }
 
@@ -57,13 +61,13 @@ T.C. -> O(N log M)+ O(M)   ==> M == N/2+1
 S.C. -> O(M)
 
 
-Optimal Approach :- Use XOR
-Use the concept , a^a = 0 and a^0 = a.
+Optimal Approach:- Use XOR
+Use the concept, a^a = 0 and a^0 = a.
 
-So, do the XOR of the whole array, all the numbers appearing twice will cancel out each other and the only number
-appearing once will be the answer after XOR of the whole array.
+So, do the XOR of the whole array, all the numbers appearing twice will cancel out each other, and the only number
+appearing once will be the answer after the XOR of the whole array.
 
-Code :-
+Code:-
     public static int getSingleElement(int []arr){
         // Write your code here.
         int XOR = 0;
