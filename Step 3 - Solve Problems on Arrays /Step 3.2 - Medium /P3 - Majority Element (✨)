@@ -48,17 +48,17 @@ Code:-
         return -1;
 }
 
-T.C. -> O(N) + O(N)  -- in order to put and find an element in HashMap, the T.C. is O(1).
-S.C. -> O(N) -- incase every element is unique in the array
+T.C. -> O(N) + O(N)  -- to put and find an element in HashMap, the T.C. is O(1).
+S.C. -> O(N) -- in case every element is unique in the array
 
 
 
-Optimal Solution:- Moore's Voting algorithm
+Optimal Solution:- Moore's Voting Algorithm
 
-Intuition:- If an element appears more than n/e times, then it will not get cancelled.
+Intuition:- If an element appears more than n/2 times, then it will not get canceled.
 
 There are two variables we have to consider in this algorithm -> el and cnt.
-Initially the count will be 0 and whenever the cnt is 0, we will consider the element at which the pointer currently is 
+Initially, the count will be 0 and whenever the cnt is 0, we will consider the element at which the pointer currently is 
 to be the el i.e. the majority element.
 
 Now, take el = arr[0] and cnt = 1 and run a loop for i -> 1-> n.
