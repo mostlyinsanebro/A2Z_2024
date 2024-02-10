@@ -1,0 +1,58 @@
+Problem:-
+Given an array with +ve, -ve and zeroes, print the subarray with maximum subarray sum.
+
+Example:- arr[]={-2,-3,4,-1,-2,1,5,-3}
+
+Ans:- 4 -1 -2 1 5
+
+Solution:- 
+Approach:- Use Kadane's Algorithm -> Use the approach that if the prefix sum at any point going forward is 0, we will not take it to the as the prefix to the
+next element, instaed we will make the sum as 0 only.
+
+In addition to that, if at any point we see that sum==0, it means that subaary is just starting, so store that index in start variable and when the prefix sum 
+becomes larger than sum, store that start variable in the ansStart and store that index in the ansEnd variable.
+
+The subarray with maxSum will be from ansStart to ansEnd.
+
+Code:-
+public class Solution {
+	
+	public static long maxSubarraySum(int[] arr, int n) {
+		// write your code here
+		long sum=0;
+		int start=0;
+		long maxSum=Long.MIN_VALUE;
+		int ansStart=-1;
+		int ansEnd=-1;
+
+		for(int i=0;i<n;i++)
+		{
+			if (sum==0) start=i;
+			sum+=arr[i];
+
+			if(sum>maxSum)
+			{
+				maxSum=sum;
+				ansStart=start;
+				ansEnd=i;
+			}
+
+			if(sum<0)
+				sum=0;
+		}
+
+		if(maxSum<0)	return 0;
+
+		else
+		{
+			for(int i=ansStart;i<ansEnd;i++)
+			{
+				System.out.print(arr[i]+" ");
+			}
+
+		return maxSum;
+		}
+}
+
+T.C. -> O(N)
+S.C. -> O(1)
