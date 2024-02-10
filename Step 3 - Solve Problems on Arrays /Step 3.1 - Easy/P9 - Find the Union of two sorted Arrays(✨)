@@ -4,7 +4,7 @@ https://www.codingninjas.com/studio/problems/sorted-array_6613259?utm_source=str
 
 
 Solution:-
-Brute Force Approach:- Use a LinkedHashSet and insert the elements from the first array in it and then insert the elements from the second array in it. 
+Brute Force Approach:- Use a HashSet and insert the elements from the first array in it and then insert the elements from the second array in it. 
 Distinct elements will be inserted in the HashSet. After that, put the elements from HashSet in the ArrayList and sort them to maintain the needed order.
 
 Code:-
@@ -12,7 +12,7 @@ import java. util.*;
 public class Solution {
     public static List< Integer > sortedArray(int []a, int []b) {
         // Write your code here
-        LinkedHashSet<Integer> set =  new LinkedHashSet<>();
+        HashSet<Integer> set =  new HashSet<>();
 
         
         for(int i=0;i<a.length;i++)
@@ -107,4 +107,4 @@ public class Solution {
 
 
 T.C -> O(n1+n2)
-S.C -> O(n1+n2) -> in worst case, if both the arrays have all unique elements.
+S.C -> O(n1+n2) -> in the worst case, if both the arrays have all unique elements.
