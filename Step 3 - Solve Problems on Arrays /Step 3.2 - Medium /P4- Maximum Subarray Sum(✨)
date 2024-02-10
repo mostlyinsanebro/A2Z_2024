@@ -1,0 +1,68 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/maximum-subarray-sum_630526?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+
+Better Brute Force:- Create every subarray combination, calculate the subarray sum and get the maximum subarray sum in maxSum.
+
+Code:-
+	public static long maxSubarraySum(int[] arr, int n) {
+		// write your code here
+		int maxSum=0,sum=0;
+
+		for(int i=0;i<n;i++)
+		{
+			sum=0;
+			for(int j=i;j<n;j++)
+			{
+				sum+=arr[j];
+				maxSum=Math.max(maxSum,sum);
+			}
+		}
+		return maxSum;
+	}
+
+T.C. -> O(N^2)
+S.C. -> O(1)
+
+
+Optimal Solution:- Use Kadane's Algorithm.
+This algorithm says to not carry a -ve prefix sum to the next element, carry a positive prefix sum, even if it's a one.
+
+Appraoch:- Take two vars, sum and maxSum and set both to arr[0].
+
+
+Now, traverse from i = 1 -> n and check if sum<0, if yes then reset sum = arr[i], else do sum+=arr[i] i.e. carry over the previos prefix sum.
+Then, compare sum with maxSum.  After ending the loop, if the maxSum<0 then return 0 else retuen maxSum.
+
+Code:-
+	public static long maxSubarraySum(int[] arr, int n) {
+		// write your code here
+		long sum=arr[0];
+		long maxSum=arr[0];
+
+		for(int i=1;i<n;i++)
+		{
+			if(sum<0)
+			{
+				sum=arr[i];
+			}
+			else
+			{
+				sum+=arr[i];
+			}
+
+			maxSum=Math.max(sum,maxSum);
+		}
+
+		if(maxSum<0)	return 0;
+
+		return maxSum;
+}
+
+
+T.C.-> O(N)
+S.C. -> O(1)
+
+
