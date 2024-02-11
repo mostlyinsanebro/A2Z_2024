@@ -94,3 +94,29 @@ Code:-
 T.C. -> O(N)
 S.C. -> O(1)
 
+
+Solution just for finding the maxProfit of buy and selling a stock only once:-
+
+Code:-
+     public static int bestTimeToBuyAndSellStock(int []prices) {
+        // Write your code here.
+        int min=prices[0];
+
+        int diff=0,maxDiff=Integer.MIN_VALUE;
+
+        int i=1;
+        
+        while(i<prices.length)
+        {
+            diff = prices[i]-min;
+
+            maxDiff = Math.max(diff,maxDiff);
+
+            min=Math.min(min,prices[i]);
+
+            i++;
+        }
+
+        if(maxDiff<0) return 0;
+        else return maxDiff;
+    }
