@@ -1,0 +1,96 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/best-time-to-buy-and-sell-stock_6194560?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+Note:- Stock can be bought only once and sold only once.
+
+Solution:-
+
+Brute Force:- Traverse on each element using i from 0 -> n-1 and make it the day when you buy the stock and then for each i, traverse the array from j -> i+1 to n
+and check if the difference between arr[j]-arr[i] is maximum than all the other combinations or not. If yes, then make the ansBuy = i and ansSell = j and update the 
+maxDiff to diff i.e. arr[j]-arr[i].
+
+Code:- 
+    public static int bestTimeToBuyAndSellStock(int []arr) {
+        // Write your code here.
+        int maxDiff = Integer.MIN_VALUE;
+        int diff = 0,n=arr.length;
+        int buyDay=0;
+        int ansSell=0,ansBuy=0;
+
+        for(int i=0;i<n-1;i++)
+        {
+            diff = 0;
+            buyDay=i;
+            for(int j=i+1;j<n;j++)
+            {
+                diff = arr[j]-arr[i];
+                if(diff>maxDiff)
+                {
+                    ansSell = j;
+                    ansBuy = buyDay;
+                    maxDiff = diff;
+                }
+            }
+        }
+
+        
+        if(maxDiff<0) return 0;
+
+        else
+        {
+            System.out.println(arr[ansBuy]+" "+arr[ansSell]);
+            return maxDiff;
+        }       
+}
+
+T.C. -> O(N^2)
+
+
+Optimal Solution:- The optimal solution consists of calculating the minimum value from the left of an element and then finding the maxDifference.
+
+Code:- 
+    public static int bestTimeToBuyAndSellStock(int []arr) {
+        // Write your code here.
+        int diff=0,maxDiff=Integer.MIN_VALUE;
+
+        int buyDay=0,ansBuy=0,ansSell=0;
+
+        int min=arr[0];
+
+        int i=1;
+
+        while(i<arr.length)
+        {
+            diff=arr[i]-min;
+
+            if(diff>0&&diff>maxDiff)
+            {
+                maxDiff=diff;
+                ansSell=i;
+                ansBuy=buyDay;
+            }
+            else
+            {
+                if(arr[i]<min)
+                {
+                    min=arr[i];
+                    buyDay=i;
+                }
+            }
+
+            i++;
+        }
+
+        if(maxDiff<0) return 0;
+
+
+        else 
+        {
+            System.out.println(arr[ansBuy]+" "+arr[ansSell]);
+            return maxDiff;
+        }
+}
+
+T.C. -> O(N)
+S.C. -> O(1)
+
