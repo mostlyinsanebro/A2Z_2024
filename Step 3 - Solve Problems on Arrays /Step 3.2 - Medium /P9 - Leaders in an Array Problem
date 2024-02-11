@@ -1,0 +1,61 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/superior-elements_6783446?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+Brute Force:- Traverse from the end of the array and keep checking if every element is a leader or not. If yes, then put it in arrayList.
+
+Code:-
+    public static List< Integer > superiorElements(int []arr) {
+        // Write your code here.
+        ArrayList<Integer> al=new ArrayList<>();
+        int n=arr.length;
+        boolean greater=true;
+        //al.add(arr[n-1]);
+        for(int i=n-1;i>=0;i--)
+        {
+            greater=true;
+            for(int j=i+1;j<n;j++)
+            {
+                if(arr[i]<=arr[j])
+                {
+                    greater=false;
+                    break;
+                }
+            }
+
+            if(greater) al.add(arr[i]);
+        }
+
+        return al;
+}
+
+T.C. -> O(N^2)
+S.C. -> O(N) -> for craeting the ArrayList that stores the answer.
+
+
+Optimal Solution:-
+Run a loop from the right to left of an array and keep taking the max till an element, if the current element is > max, then it is a leader, else not
+
+Code:-
+        public static List< Integer > superiorElements(int []arr) {
+        // Write your code here.
+        ArrayList<Integer> al= new ArrayList<>();
+
+        int n=arr.length;
+        int max=Integer.MIN_VALUE;;
+
+        for(int i=n-1;i>=0;i--)
+        {
+            if(arr[i]>max)
+            {
+                al.add(arr[i]);
+                max=arr[i];
+            }
+        }
+        return al;
+}
+
+
+T.C. -> O(N)
+S.C. -> O(1)
