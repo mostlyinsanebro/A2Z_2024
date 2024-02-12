@@ -1,0 +1,17 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/next-greater-permutation_6929564?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+
+
+Solution:-
+
+Brute Force:- It involves three steps.
+1. Create all possible permutations of array in sorted order using recursion and store them.
+2. Do a linear search for the given permutation.
+3. Print the next permutation. If the next permutation is the last of the list, then print the first permutation from the list.
+
+
+T.C. -> O(N!*N) -- N! because there are N! permutations of an array and for every permutation there are N elements.
+Note:- The T.C. is very large, thus, we will just mention this to the interviewer and move on to the optimal solution.
+
+
+Optimal Solution:-
