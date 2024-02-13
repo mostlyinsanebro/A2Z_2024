@@ -1,7 +1,6 @@
 Problem Link:-
 https://www.codingninjas.com/studio/problems/superior-elements_6783446?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
 
-
 Solution:-
 Brute Force:- Traverse from the end of the array and keep checking if every element is a leader or not. If yes, then put it in arrayList.
 
