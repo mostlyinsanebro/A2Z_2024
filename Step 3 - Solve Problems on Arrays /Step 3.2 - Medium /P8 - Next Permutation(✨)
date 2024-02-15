@@ -15,3 +15,93 @@ Note:- The T.C. is very large, thus, we will just mention this to the interviewe
 
 
 Optimal Solution:-
+Appraoch:- It involves three steps.
+
+Step1). Identify the breakpoint from right -> left of the array where arr[i]< arr[i+1].
+
+Step 2). Find the next greater element to that element in the right array i.e. from idx+1 -> n-1 and swap that next greater 
+element to that breakpoint element.
+
+Step 3). Reverse the array from idx+1 to n-1, in order to create the smallest possibile subarray from idx+1 to n-1.
+
+Edge Case:- Also cover the case where there is no breakpoint, in that case that array is the largest permutation. For that,
+simply reverse the array for getting the next permutation which will simply be the first permutation for that array.
+
+Code:-
+ static List<Integer> nextPermutation(int n, int arr[]){
+        // code here
+        ArrayList<Integer> al= new ArrayList<>();
+        
+        int idx=-1;
+        
+        // Find the breakpoint
+        for(int i=n-2;i>=0;i--)
+        {
+            if(arr[i]<arr[i+1])
+            {
+                idx=i;
+                break;
+            }
+        }
+        
+        // If there is no breakpoint, then that means the array is the last in the permutation
+        // Simply reverse it to get the srating permutation.
+        if(idx==-1)
+        {
+            rev(arr,0,n-1);
+        for(int i=0;i<arr.length;i++)
+        {
+            al.add(arr[i]);
+        }
+        
+        return al;
+        }
+        
+        
+        // If there is abreakpoint, then find the next largest element to the right of 
+        // that breakpoint and since the right array is simply in increasing order from
+        // right to left, the next greater can be found by running loop from right -> left
+        // and the first greater element that appears first, will be the next greater element.
+        // Swap the i and idx element.
+        
+        int temp=0;
+        for(int i=n-1;i>idx;i--)
+        {
+            if(arr[i]>arr[idx])
+            {
+                temp=arr[i];
+                arr[i]=arr[idx];
+                arr[idx]=temp;
+                break;
+            }
+        }
+        
+        // Now, the array to the right of the breakpoint is simply in descending order,
+        // so in order to make it to smallest possibility of it, just reverse it.
+        rev(arr,idx+1,n-1);
+        
+        
+        for(int i=0;i<arr.length;i++)
+        {
+            al.add(arr[i]);
+        }
+        
+        return al;
+        
+    }
+    
+    static void rev(int arr[],int l,int r)
+    {
+        int temp=0;
+        while(l<=r)
+        {
+            temp=arr[l];
+            arr[l]=arr[r];
+            arr[r]=temp;
+            l++;
+            r--;
+        }
+    }
+
+T.C. -> O(N)
+S.C. -> O(N) -> just for returning the answer, not anything else.Else it will be O(1).
