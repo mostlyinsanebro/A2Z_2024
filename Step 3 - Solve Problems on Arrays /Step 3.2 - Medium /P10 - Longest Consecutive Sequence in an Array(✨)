@@ -74,4 +74,41 @@ T.C. -> O(NlogN) + O(N)
 S.C. -> O(1)
 
 
-Optimal Solution:-
+Optimal Solution:- We will put the array elements in a HashSet and then traverse the HashSet. Now, for every element in the hashSet, we will check if there exists
+an element smaller than the current element. In this way, we will make sure that the current element is not a middle element of a sequence. If there does not exist
+an element before the current element that means it is the starting element of a sequence and then check till when the sequence goes and store it in the max count.
+
+
+Code:-
+public class Solution {
+    public static int longestSuccessiveElements(int []arr) {
+        // Write your code here.
+        HashSet<Integer> set=new HashSet<>();
+        int curCnt=1,maxCnt=Integer.MIN_VALUE;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            set.add(arr[i]);
+        }
+
+        for(int i:set)
+        {
+            int val=i;
+            curCnt=0;
+            if(set.contains(--val))
+            {
+                while(set.contains(val))
+                {
+                    val++;
+                    curCnt++;
+                }
+                maxCnt=Math.max(maxCnt,curCnt);
+            }
+        }
+
+        return maxCnt;
+}
+
+T.C. -> At max, the tc will be O(3N) i.e. O(N) for traversing and putting elements in the array and O(2N) for finding the longest sequence.
+S.C. -> O(N)
+
