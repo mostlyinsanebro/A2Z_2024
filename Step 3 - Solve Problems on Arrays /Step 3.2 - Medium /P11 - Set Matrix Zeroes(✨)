@@ -4,15 +4,15 @@ https://leetcode.com/problems/set-matrix-zeroes/description/
 
 Solution:- 
 
-Brute Force:- Traverse the matrix and for each element equal to 0, mark the corresponding rows and columns to that element which are not 0 with a unique number.
-Then traverse the matrix again and for each element which is equal to the unique number, make it 0.
+Brute Force:- Traverse the matrix and for each element equal to 0, mark the corresponding rows and columns to that element that are not 0 with a unique number.
+Then traverse the matrix again and for each element that is equal to the unique number, make it 0.
 
 Code:-
 lass Solution {
     public void setZeroes(int[][] matrix) {
 
         // Approach -> Traverse the whole array and for each position having a zero on it, mark the corresponding
-        // rows and columns as -1.Then again,traverse the array and mark the -1's as 0.
+        // rows and columns as -1.Then again, traverse the array and mark the -1's as 0.
 
         int n=matrix.length;
         int m=matrix[0].length;
@@ -62,4 +62,50 @@ lass Solution {
 
 T.C. -> O(n*m)*O(n+m) + O(n*m) ~O(N^3)
 S.C. -> O(1)
+
+
+
+Better Approach:- For this approach, we need to know for each element whether a 0 comes in its corresponding row or col, and if yes, then make it a 0
+else not. To achieve that, we take 2 arrays, col[m] and row[n] and they will be initialized to 0. Now, traverse the array for each element that is 0, and make
+the col[j] and row[i] as 1. Now, again traverse the array, and for each position matrix[i][j], if col[j]==1 || row[i] ==1, then mark that element as 0.
+
+Code:-
+   public void setZeroes(int[][] matrix) {
+
+        int n=matrix.length;
+        int m=matrix[0].length;
+
+        int row[]=new int[n];
+        int col[]=new int[m];
+
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    row[i]=1;
+                    col[j]=1;
+                }
+            }
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(row[i]==1||col[j]==1)
+                {
+                    matrix[i][j]=0;
+                }
+            }
+        }
+}
+
+
+T.C. -> O(n*m)
+S.C. -> O(n) + O(m)
+
+Optimal Approach:-
 
