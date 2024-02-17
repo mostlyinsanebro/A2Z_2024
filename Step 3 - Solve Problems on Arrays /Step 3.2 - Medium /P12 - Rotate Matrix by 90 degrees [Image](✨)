@@ -3,7 +3,7 @@ https://www.codingninjas.com/studio/problems/rotate-the-matrix_6825090?utm_sourc
 
 
 Solution:-
-Brute Force -> Simply identify what will be the new indexes of each element after rotating the matrix by 90 degrees in clockwise direction and map in the new matrix.
+Brute Force -> Simply identify what will be the new indexes of each element after rotating the matrix by 90 degrees in a clockwise direction and map in the new matrix.
 
 Code:- 
  public static void rotateMatrix(int [][]mat){
@@ -35,4 +35,38 @@ Code:-
 T.C. -> O(N^2)
 S.C. -> O(N^2)
 
-Optimal Solution:- Try to solve it in place.
+Optimal Solution:- For rotating the array in place, first transpose the matrix and then reverse each row. We will get to our answer.
+
+Code:-
+public static void rotateMatrix(int [][]mat){
+        // Write your code here.
+
+        // Transpose the matrix.
+        int n=mat.length;
+        int temp=0;
+
+        for(int i=0;i<n-1;i++)
+        {
+            for(int j=i+1;j<n;j++)
+            {
+                temp=mat[i][j];
+                mat[i][j]=mat[j][i];
+                mat[j][i]=temp;
+            }
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n/2;j++)
+            {
+                temp=mat[i][j];
+                mat[i][j]=mat[i][n-j-1];
+                mat[i][n-j-1]=temp;
+            }
+        }
+   }
+
+T.C. -> O(N/2*N/2) + O(N*N/2) ~ O(N*N/2)
+S.C. -> O(N)
+
+
