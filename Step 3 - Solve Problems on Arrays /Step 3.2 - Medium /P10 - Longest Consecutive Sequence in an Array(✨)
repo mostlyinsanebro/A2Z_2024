@@ -80,11 +80,10 @@ an element before the current element that means it is the starting element of a
 
 
 Code:-
-public class Solution {
-    public static int longestSuccessiveElements(int []arr) {
+ public static int longestSuccessiveElements(int []arr) {
         // Write your code here.
         HashSet<Integer> set=new HashSet<>();
-        int curCnt=1,maxCnt=Integer.MIN_VALUE;
+        int curCnt=1,maxCnt=1;
 
         for(int i=0;i<arr.length;i++)
         {
@@ -107,7 +106,7 @@ public class Solution {
         }
 
         return maxCnt;
-}
+    }
 
 T.C. -> At max, the tc will be O(3N) i.e. O(N) for traversing and putting elements in the array and O(2N) for finding the longest sequence.
 S.C. -> O(N)
