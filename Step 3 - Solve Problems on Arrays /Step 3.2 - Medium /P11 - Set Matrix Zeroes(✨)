@@ -1,0 +1,65 @@
+Problem Link:-
+https://leetcode.com/problems/set-matrix-zeroes/description/
+
+
+Solution:- 
+
+Brute Force:- Traverse the matrix and for each element equal to 0, mark the corresponding rows and columns to that element which are not 0 with a unique number.
+Then traverse the matrix again and for each element which is equal to the unique number, make it 0.
+
+Code:-
+lass Solution {
+    public void setZeroes(int[][] matrix) {
+
+        // Approach -> Traverse the whole array and for each position having a zero on it, mark the corresponding
+        // rows and columns as -1.Then again,traverse the array and mark the -1's as 0.
+
+        int n=matrix.length;
+        int m=matrix[0].length;
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    markRow(matrix,i);
+                    markCol(matrix,j);
+                }
+            }
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+               if(matrix[i][j]==-525)
+               {
+                   matrix[i][j]=0;
+               }
+            }
+        }
+    }
+        public static void markRow(int[][] matrix,int row)
+        {
+            for(int j=0;j<matrix[0].length;j++)
+            {
+                if(matrix[row][j]!=0)
+                matrix[row][j]=-525;
+            }
+        }
+
+        public static void markCol(int[][] matrix,int col)
+        {
+            for(int i=0;i<matrix.length;i++)
+            {
+                if(matrix[i][col]!=0)
+                matrix[i][col]=-525;
+            }
+        }   
+}
+
+
+T.C. -> O(n*m)*O(n+m) + O(n*m) ~O(N^3)
+S.C. -> O(1)
+
