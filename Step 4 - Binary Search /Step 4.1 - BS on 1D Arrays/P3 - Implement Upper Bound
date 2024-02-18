@@ -1,0 +1,29 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/implement-upper-bound_8165383?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:- Make a few tweaks to the lower bound.
+
+Code:- 
+    public static int upperBound(int []arr, int x, int n){
+        // Write your code here.
+        int ans=n,l=0,r=n-1,mid=0;
+
+        while(l<=r)
+        {
+            mid=(l+r)/2;
+
+            if(arr[mid]>x)
+            {
+                ans=mid;
+                r = mid-1;
+            }
+            else 
+                l = mid+1;
+        }
+        return ans;
+  }
+
+T.C. -> O(logN)
+S.C. -> O(1)
+
