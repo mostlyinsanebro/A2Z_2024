@@ -1,0 +1,34 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/lower-bound_8165382?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+
+Approach:- Since we have to find the smallest index having value grrater than x, so go to the left of the mid if arr[mid]==x and update ans = mid.
+If arr[mid]>x, then save it in ans and go to the left of the array.
+If arr[mid]<x, then go to the right of the array and do not save the sanswer because we want such an element which is greater than x.
+
+Code:-
+       public static int lowerBound(int []arr, int n, int x) {
+        // Write your code here
+        int l=0,r=n-1,mid=0,ans=n;
+
+        while(l<=r)
+        {
+            mid=(l+r)/2;
+
+            if(arr[mid]>=x)
+            {
+                ans = mid;
+                r = mid-1;
+            }
+            else 
+             l=mid+1;
+              
+        }
+
+        return ans;
+  }
+
+T.C. -> O(logN)
+S.C. -> O(1)
