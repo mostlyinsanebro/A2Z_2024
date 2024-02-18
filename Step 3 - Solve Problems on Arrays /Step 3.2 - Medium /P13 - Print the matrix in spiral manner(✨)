@@ -1,0 +1,61 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/spiral-matrix_6922069?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:- There is only one solution to this problem which is implementation based. Take four variables left,right,top and bottom and then traverse from
+right -> left, then top -> bottom, then right -> left, then bottom -> top and keep doing this with checks in place.
+
+Code:-
+   public static int[] spiralMatrix(int [][]matrix) {
+        // Write your code here.
+        int n=matrix.length;
+        int m=matrix[0].length;
+        
+        int ans[]=new int[n*m];
+
+        // Traverse from left -> right, then from top -> bottom , then right -> left
+        // and then bottom -> top.
+
+        int left = 0,right=m-1,top=0,bottom=n-1;
+        int idx=0;
+        while(left<=right&&top<=bottom)
+        {
+            for(int i=left;i<=right;i++)
+            {
+                ans[idx]=matrix[top][i];
+                idx++;
+            }
+            top++;
+
+            for(int i=top;i<=bottom;i++)
+            {
+                ans[idx]=matrix[i][right];
+                idx++;
+            }
+            right--;
+
+            if(top<=bottom)
+            {
+                for(int i=right;i>=left;i--)
+                {
+                    ans[idx]=matrix[bottom][i];
+                    idx++;
+                }
+                bottom--;
+            }
+            if(left<=right)
+            {
+                for(int i=bottom;i>=top;i--)
+                {
+                    ans[idx]=matrix[i][left];
+                    idx++;
+                }
+                left++;
+            }
+        }
+
+        return ans;
+}
+
+T.C. -> O(N^M)
+S.C. -> O(N^M) -> Only to return the answer.
