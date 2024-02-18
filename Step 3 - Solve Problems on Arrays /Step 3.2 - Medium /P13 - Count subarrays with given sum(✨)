@@ -1,0 +1,32 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/subarray-sums-i_1467103?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:- 
+
+Brute Force:- Create all subarrays and then check a subarray has sum == s, if yes then include it in counting, else no.
+Code:-
+    public static int findAllSubarraysWithGivenSum(int arr[], int s) {
+        // Write your code here.    
+        int sum=0,c=0,n=arr.length;
+
+
+        for(int i=0;i<n;i++)
+        {
+            sum=0;
+            for(int j=i;j<n;j++)
+            {
+               
+                sum+=arr[j];
+               
+                if(sum==s)
+                    c++;
+            }
+        }
+        return c;
+}
+
+T.C. -> O(N^2)
+S.C. -> O(1)
+
+Better Approach:-
