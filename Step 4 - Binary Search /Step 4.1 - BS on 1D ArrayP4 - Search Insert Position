@@ -1,0 +1,37 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/algorithm-to-find-best-insert-position-in-sorted-array_839813?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:- Use the concept lower bound.
+
+Code:-
+    public static int searchInsert(int [] arr, int m){
+        // Write your code here.
+        int ans=Integer.MIN_VALUE,low=0,high=arr.length-1,mid=0;
+
+        while(low<=high)
+        {
+            mid= (low+high)/2;
+
+            if(arr[mid]==m)
+            {
+                return mid;
+            }
+            else if(arr[mid]<m)
+            {
+                ans = mid;
+                low = mid+1;
+            }
+            else
+            {
+                high = mid-1;
+            }
+        }
+
+        if(ans==Integer.MIN_VALUE) return 0;
+         return ans+1;
+}
+
+T.C. -> O(logN)
+S.C. -> O(1)
+
