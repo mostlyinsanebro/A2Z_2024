@@ -1,0 +1,61 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/search-in-a-rotated-sorted-array-ii_7449547?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+Brute Force:- Use linear search.
+
+Optimal:- Add the condition if arr[low] == arr[mid] == arr[high], then trim down the search space in the previous solution.
+
+Code:-
+   public static boolean searchInARotatedSortedArrayII(int []arr, int key) {
+        // Write your code here.
+        int low=0,high=arr.length-1,mid=0;
+
+        while(low<=high)
+        {
+            mid=(low+high)/2;
+
+            if(arr[mid]==key)
+            {
+                return true;
+            }
+
+            // If low==mid==high
+            if(arr[low]==arr[mid]&&arr[mid]==arr[high])
+            {
+                low++;
+                high--;
+                continue;
+            }
+            // If left half is sorted
+            if(arr[low]<=arr[mid])
+            {
+                if(key>=arr[low]&&key<=arr[mid])
+                {
+                    high=mid-1;
+                }
+                else
+                {
+                    low=mid+1;
+                }
+            }
+            else
+            {
+                if(key>=arr[mid]&&key<=arr[high])
+                {
+                    low=mid+1;
+                }
+                else
+                {
+                    high=mid-1;
+                }
+            }
+        }
+
+        return false;
+}
+
+T.C. -> O(logN)
+S.C. -> O(1)
+
