@@ -1,0 +1,87 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/find-the-element-that-appears-once-in-sorted-array0624/1?utm_source=geeksforgeeks&utm_medium=ml_article_practice_tab&utm_campaign=article_practice_tab
+
+Solution:-
+
+Brute Force:- We know that every element appears 2 times and one appears only once, so we can traverse the array and check which element appears only once
+by checking the previous and next elements for every element in the array.
+
+Code:-
+    int findOnce(int arr[], int n)
+    {
+        // Complete this function
+        if(n==1)
+            return arr[0];
+        
+        for(int i=0;i<n;i++)
+        {
+            if(i==0)
+            {
+                if(arr[i]!=arr[i+1])
+                    return arr[i];
+            }
+            else if(i==n-1)
+            {
+                if(arr[i]!=arr[i-1])
+                    return arr[i];
+            }
+            else
+            {
+                if(arr[i]!=arr[i+1]&&arr[i]!=arr[i-1])
+                    return arr[i];
+            }
+        }  
+        return -1;
+}
+
+
+Optimal Solution:- Use Binary Search for it.
+
+Approach:-
+Use the concept that if we are on the left half of the single element, then same elements are on the (even,odd) indexes i.e. like (0,1) and (2,3)..
+and if we are on the right half of the single element, then same elements are on the (odd,even) indexes i.e. (5,6) and (7,8) like this...
+
+Do the elimination in BS based on this scenario.
+
+Code:- 
+int findOnce(int arr[], int n)
+    {
+        // Complete this function
+        
+        // Check for the first element
+        if(n==1)
+            return arr[0];
+            
+        if(arr[0]!=arr[1])
+            return arr[0];
+            
+        // Check for the last element of the array.
+        if(arr[n-1]!=arr[n-2])
+            return arr[n-1];
+            
+            
+        int low=1,high=n-2,mid=0;
+        
+        while(low<=high)
+        {
+            mid = (low+high)/2;
+            
+            if(arr[mid]!=arr[mid-1]&&arr[mid]!=arr[mid+1])
+                return arr[mid];
+                
+                
+            // Check for left part of array
+            if((mid%2==1&&arr[mid]==arr[mid-1])||(mid%2==0&&arr[mid]==arr[mid+1]))
+            {
+                low = mid+1;
+            }
+            // Check for right half
+            else
+            {
+                high = mid-1;
+            }
+        }
+        
+        return -1;
+}
+
