@@ -34,3 +34,41 @@ Code:-
         
         return min;
 }
+
+
+For array having duplicate elements add the case if arr[low] == arr[high] && arr[high] == arr[mid], then make the search space lesser by doing
+low++ , high-- and continue;
+
+Code:-
+ public int findMin(int[] arr) {
+        
+        int low=0,high = arr.length-1,mid=0,min=Integer.MAX_VALUE;
+
+        while(low<=high)
+        {
+            mid = (low+high)/2;
+            // In case array has only one element.
+            min = Math.min(arr[mid],min);
+
+            // If array has duplicate elements on the low, mid and high, then make the search space smaller.
+            if(arr[low]==arr[mid]&&arr[mid]==arr[high])
+            {
+                low++;
+                high--;
+                continue;
+            }
+
+            if(arr[low]<=arr[mid])
+            {
+                min = Math.min(arr[low],min);
+                low = mid+1;
+            }
+            else
+            {
+                min = Math.min(arr[mid],min);
+                high = mid-1;
+            }
+        }
+
+        return min;
+}
