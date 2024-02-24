@@ -1,0 +1,79 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/peak-element/1
+
+
+Solution:-
+
+Brute Force:- Traverse the array and simply find the peak element in O(N) time complexity.
+
+Code:-
+    public static int findPeakElement(ArrayList<Integer> arr) {
+        // Write your code here.
+        for(int i=0;i<arr.size();i++)
+        {
+            if(i==0)
+            {
+                if(arr.get(i)> arr.get(i+1))
+                    return i;
+            }
+            else if(i==arr.size()-1)
+            {
+                if(arr.get(i)>arr.get(i-1))
+                    return i;
+            }
+            else
+            {
+                if(arr.get(i)>arr.get(i+1)&&arr.get(i)>arr.get(i-1))
+                    return i;
+            }
+        }
+
+        return -1;
+}
+T.C. -> O(N)
+
+Optimal Approach:- We will be using the approach of Binary Search in this.
+
+Why B.S. -> Because we are trying to find something in this problem. 
+
+Approach:- We will use the approach that the peak will either be on the left of the mid or the right of it. If the mid is on the steeping low slope, then that 
+means that the peak is on the left of it and if the mid is on the peaking side, then peak is on the right, so go right.
+
+
+Code:-
+	public int peakElement(int[] arr,int n)
+    {
+       //add code here.
+       
+       if(n==1) return arr[0];
+       
+       if(arr[0]>=arr[1]) return 0;
+       
+       if(arr[n-1]>=arr[n-2]) return n-1;
+       
+       
+       int low=1,high=n-2,mid=0;
+       
+       while(low<=high)
+       {
+           mid = (low+high)/2;
+           
+           if(arr[mid]>=arr[mid-1]&&arr[mid]>=arr[mid+1])
+            return mid;
+           else if(arr[mid]<arr[mid-1])
+           {
+               high = mid-1;
+           }
+           else
+           {
+               low=mid+1;
+           }
+       }
+       
+       return -1;
+}
+
+
+
+
+
