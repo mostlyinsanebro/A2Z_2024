@@ -1,0 +1,36 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/rotated-array_1093219?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:- It works on the concept that one half in sorted array is sorted and the other half is not sorted.
+
+Code:-
+ int findMin(int arr[], int n)
+    {
+        //complete the function here
+        
+        int low=0,high=n-1,mid=0,min=Integer.MAX_VALUE;
+        
+        while(low<=high)
+        {
+            mid = (low+high)/2;
+            
+            // If left half is sorted, then the minimum element would be the low.
+            // Compare it with min and go to the right half of the array
+            if(arr[low]<=arr[mid])
+            {
+                min = Math.min(arr[low],min);
+                low=mid+1;
+            }
+            
+            // else if right half is sorted, compare the min and arr[mid] because arr[mid] will be 
+            // the minimum element from the right half and then go to the left half of the array.
+            else
+            {
+                min = Math.min(arr[mid],min);
+                high = mid-1;
+            }
+        }
+        
+        return min;
+}
