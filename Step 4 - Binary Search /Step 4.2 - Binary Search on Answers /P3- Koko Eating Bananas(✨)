@@ -1,0 +1,82 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/minimum-rate-to-eat-bananas_7449064?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+
+
+Solution:-
+Brute Force:- Traverse from 1 to max(arr) and then try and find which element fulfills the minimumRateToEatBananas condition(refer problem link to get question 
+statement).
+
+Code:- 
+    public static int minimumRateToEatBananas(int []v, int h) {
+        // Write Your Code Here
+        int max=Integer.MIN_VALUE;
+
+        for(int i=0;i<v.length;i++)
+        {
+            max=Math.max(max,v[i]);
+        }
+
+        int div=0,rem=0,sum=0;
+
+        for(int i=1;i<=max;i++)
+        {
+            sum=0;
+            for(int j=0;j<v.length;j++)
+            {
+                div = v[j]/i;
+                rem = v[j]%i;
+                
+                if(rem!=0) sum+=div+1;
+                else       sum+=div;
+            }
+            if(sum<=h) return i;
+            
+        }
+        return -1;
+}
+
+T.C. -> O(max*N) ~ This will give TLE error.
+
+Optimal Solution:- Use BS for finding the minRate between 1 and max.
+
+    public static int totalHours(int v[],int mid)
+    {
+        int totalhours=0;
+        for(int i=0;i<v.length;i++)
+        {
+            totalhours+= Math.ceil((double)v[i]/(double)mid);
+        }
+        return totalhours;
+    }
+    public static int minimumRateToEatBananas(int []v, int h) {
+        // Write Your Code Here
+        int max=Integer.MIN_VALUE;
+
+        for(int i=0;i<v.length;i++)
+        {
+            max=Math.max(max,v[i]);
+        }
+
+        int div=0,rem=0,sum=0,low=1,high=max,ans=-1,mid=0;
+
+        while(low<=high)
+        {
+            mid = (low+high)/2;
+            sum = totalHours(v,mid);
+            
+            if(sum<=h)
+            {
+                ans = mid;
+                high = mid-1;
+            }
+            else
+            {
+                low = mid+1;
+            }
+        }
+        return ans;
+}
+
+T.C. -> O(N*log(max)) 
+
+O(N) for finding the max element and log(max) for BS of minRate from 1 -> max.
