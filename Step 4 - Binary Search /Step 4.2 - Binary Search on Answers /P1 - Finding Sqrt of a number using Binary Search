@@ -1,0 +1,61 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/square-root-integral_893351?leftPanelTab=0%3Futm_source%3Dstriver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+Brute Force:- Simple traversal.
+
+Code:- 
+public static int sqrtN(long x) {
+		/*
+		 * Write your code here
+		 */
+
+	    long ans = 1;
+
+		for(long i=1;i<=x;i++)
+		{
+			if(i*i<=x)
+        		ans = i;
+       		else
+        		break;
+		 }
+		 return (int)ans;
+}
+ 
+T.C. -> O(N)
+
+Optimal Solution:- Using Binary Search.
+We are using this approach because of the reason that for finding the root of a number, when we traverse from 1-> n, then
+1, 2 ,3 , 4, 5, 6 ........ 25.
+Till 5, i*i<=n and after that i*i > N, so we will set low = 1 and high = n, and try and find the mid where mid*mid <=N.
+If mid*mid>N, we go to left of the array and if mid*mid<=N, we set ans = mid and go to right part of the array.
+
+Code:-
+	public static int sqrtN(long N) {
+		/*
+		 * Write your code here
+		 */
+
+		long ans=0;
+		long low=1,high=N,mid=0;
+
+		while(low<=high)
+		{
+			mid = (low+high)/2;
+
+			if(mid*mid<=N)
+			{
+				ans = mid;
+				low = mid+1;
+			}
+			else if(mid*mid>N)
+			{
+				high = mid-1;
+			}
+		}
+		return (int)ans;
+}
+
+T.C. -> O(logN)
+
