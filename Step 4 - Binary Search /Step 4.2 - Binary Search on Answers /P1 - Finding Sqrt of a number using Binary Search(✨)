@@ -1,6 +1,7 @@
 Problem Link:-
 https://www.codingninjas.com/studio/problems/square-root-integral_893351?leftPanelTab=0%3Futm_source%3Dstriver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
 
+Note:- Whenever there is a possible range of answers then we can apply binary search.
 
 Solution:-
 Brute Force:- Simple traversal.
