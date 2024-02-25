@@ -1,0 +1,58 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/nth-root-of-m_1062679?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+
+Brute Force:-
+    public static int NthRoot(int n, int m) {
+        // Write your code here.
+        int ans=0,val=0;
+
+        for(int i=1;i<=m;i++)
+        {
+            val = (int)Math.pow(i,n);
+
+            if(val== m)
+            {
+                return i;
+            }
+            else if(val>m)
+            {
+                break;
+            }
+        }
+
+        return -1;
+}
+
+T.C. -> O(m*logn)
+
+
+Optimal Solution:- Use binary Search. Whenever we have a range from 1->n and we know the answer lies between 1 and n, we can use BS in it, then.
+
+        int low=0,high=m,val=0,mid=0;
+
+        while(low<=high)
+        {
+            mid = (low+high)/2;
+
+            val = (int) Math.pow(mid,n);
+
+            if(val==m)
+                return mid;
+            else if(val>m)
+            {
+                high = mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+
+        return -1;
+}
+
+T.C. -> O(log(N*M)) -> logM for the BS and logN for finding pow(mid,n)
+
