@@ -1,0 +1,112 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/rose-garden_2248080?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+Brute Force:- Go from the i = min of the array to i = max of the array and find out for what value of i will the flowers bloom in such a way that
+we will be able to make m bouquets with each bouquet having k flowers.
+
+Code:-
+    public static int roseGarden(int[] arr, int r, int b) {
+        // Write your code here.
+        int max=Integer.MIN_VALUE,min=Integer.MAX_VALUE,bouquets=0,flowers=0,div=0;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            max = Math.max(arr[i],max);
+            min = Math.min(arr[i],min);
+        }
+
+        for(int i=min;i<=max;i++)
+        {
+            bouquets=0;
+            flowers = 0;
+
+            for(int j=0;j<arr.length;j++)
+            {
+                div = i/arr[j];
+                if(div>=1)
+                    flowers+=1;
+                else
+                   flowers=0;
+
+                if(flowers==r)
+                {
+                    bouquets++;
+                    flowers=0;
+                }
+
+                if(bouquets==b)
+                    return i;
+            }
+        }
+        return -1;
+}
+
+T.C. -> O(N*(max-min))
+
+Optimal Solution:- We know the range in which our answer is hidden, so we can apply Binary Search on it in order to optimise our solution.
+
+Code:-
+public class Solution {
+    public static int noOfBouquets(int arr[],int r,int b,int mid)
+    {
+            int bouquets=0;
+            int flowers = 0;
+            int div=0,ans=-1,rem=0;
+
+         for(int j=0;j<arr.length;j++)
+            {
+                div = mid/arr[j];
+                if(div>=1)
+                    flowers+=1;
+                else
+                   flowers=0;
+
+                if(flowers==r)
+                {
+                    bouquets++;
+                    flowers=0;
+                }
+            }
+            return bouquets;
+    }
+    public static int roseGarden(int[] arr, int r, int b) {
+        // Write your code here.
+        int max=Integer.MIN_VALUE,min=Integer.MAX_VALUE;
+        int bouquets=0,ans=-1;
+
+        if(r*b > arr.length) return -1;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            max = Math.max(arr[i],max);
+            min = Math.min(arr[i],min);
+        }
+        int low=min,high=max,mid=0;
+
+        while(low<=high)
+        {
+            mid = (low+high)/2;
+
+
+            bouquets = noOfBouquets(arr,r,b,mid);
+
+                if(bouquets>=b)
+                {
+                    ans = mid;
+                    high = mid-1;
+                }
+                else
+                {
+                    low=mid+1;
+                }
+            
+        }
+        return ans;
+   }
+}
+
+
+T.C. -> O(N*log(max-min))
+
