@@ -86,3 +86,5 @@ public class Solution {
         return ans;
     }
 }
+
+T.C. -> O(N*log(max))
