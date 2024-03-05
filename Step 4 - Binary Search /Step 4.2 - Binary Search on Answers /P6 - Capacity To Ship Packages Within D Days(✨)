@@ -1,0 +1,103 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/capacity-to-ship-packages-within-d-days_1229379?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+Brute Force:- Using Binary Search
+Code:-
+public class Solution {
+    public static int findSum(int weights[],int cap)
+    {
+        int days=0,i=0,sum=0;
+
+        while(i<weights.length)
+        {
+            sum=0;
+            while(i<weights.length&&sum+weights[i]<=cap)
+            {
+                sum+=weights[i];
+                i++;
+            }
+            days++;
+        }
+
+        return days;
+    }
+    public static int leastWeightCapacity(int[] weights, int d) {
+        // Write your code here.
+        int sum=0,max=Integer.MIN_VALUE;
+
+        for(int i=0;i<weights.length;i++)
+        {
+            max=Math.max(weights[i],max);
+            sum+=weights[i];
+        }
+
+        int days=0;
+
+        for(int cap=max;cap<=sum;cap++)
+        {
+            days = findSum(weights,cap);
+            if(days<=d)
+            {
+                return cap;
+            }
+        }
+        return -1;
+    }
+}
+
+T.C. -> O(N*(sum-max))
+S.C. -> O(1)
+
+Optimal Solution:- Using Binary Search
+public class Solution {
+    public static int findSum(int weights[],int cap)
+    {
+        int days=0,i=0,sum=0;
+
+        while(i<weights.length)
+        {
+            sum=0;
+            while(i<weights.length&&sum+weights[i]<=cap)
+            {
+                sum+=weights[i];
+                i++;
+            }
+            days++;
+        }
+
+        return days;
+    }
+    public static int leastWeightCapacity(int[] weights, int d) {
+        // Write your code here.
+        int sum=0,max=Integer.MIN_VALUE;
+
+        for(int i=0;i<weights.length;i++)
+        {
+            max=Math.max(weights[i],max);
+            sum+=weights[i];
+        }
+
+        int days=0,low=max,high=sum,mid=0,ans=0;
+
+        while(low<=high)
+        {
+            mid = (low+high)/2;
+            days = findSum(weights,mid);
+            if(days<=d)
+            {
+                ans=mid;
+                high = mid-1;
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+}
+
+T.C. -> O(N*log(sum-max))
+S.C. -> O(1)
