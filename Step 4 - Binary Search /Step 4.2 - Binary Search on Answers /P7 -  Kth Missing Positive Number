@@ -1,0 +1,25 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/kth-missing-element_893215?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+Brute Force:- The concept used is that whatever element is smaller than k in the array will take one place and we will have to increase k by 1. This way we will
+get the kth missing element from an array starting from 1. Initially, take k as the answer because k can potentially be the smallest missing number in the array.
+Traverse the array after that and whenever you find a smaller element than k, increase k by 1, this will make sure that each smaller element takes makes up for one
+place before k, so we will have to increase k by 1 and when element is >k, we break out of the loop and return k.
+Code:-
+
+    public static int missingK(int[] vec, int n, int k) {
+        // Write your code here.
+        for(int i=0;i<n;i++)
+        {
+            if(vec[i]<=k) k++;
+            else break;
+        }
+        return k;
+    }
+
+T.C. -> O(N)
+S.C. -> O(1)
+
+
