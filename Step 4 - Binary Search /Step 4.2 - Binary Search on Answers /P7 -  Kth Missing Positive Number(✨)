@@ -23,3 +23,34 @@ T.C. -> O(N)
 S.C. -> O(1)
 
 
+Optimal Solution:- Use the approach that how many elements are missing till a particular number.
+
+Code:-
+    public static int missingK(int[] vec, int n, int k) {
+        // Write your code here.
+        int low=0,high=n-1,mid=0,miss=0;
+        if(k<vec[0])
+            return k;
+
+        while(low<=high)
+        {
+            mid=(low+high)/2;
+            miss=vec[mid]-(mid+1);
+
+            if(miss<k)
+            {
+                low=mid+1;
+            }
+            else if(miss>=k)
+            {
+                high=mid-1;
+            }
+        }
+
+        int highmiss=k-(vec[high]-(high+1));
+        return vec[high]+highmiss;
+       // return high;
+}
+
+
+T.C. -> O(logN)
