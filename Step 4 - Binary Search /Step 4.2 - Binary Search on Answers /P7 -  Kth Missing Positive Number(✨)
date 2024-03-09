@@ -48,7 +48,7 @@ Code:-
         }
 
         int highmiss=k-(vec[high]-(high+1));
-        return vec[high]+highmiss;
+        return vec[high]+highmiss;  // or return high+1+k or low+k; // Both of these are derivations of vec[high]+k-vec[high]+high+1;
        // return high;
 }
 
