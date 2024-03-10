@@ -25,6 +25,9 @@ S.C. -> O(1)
 
 Optimal Solution:- Use the approach that how many elements are missing till a particular number.
 
+Steps:- 1. Find the closest numbers.
+2. Add more to the lower number.
+
 Code:-
     public static int missingK(int[] vec, int n, int k) {
         // Write your code here.
