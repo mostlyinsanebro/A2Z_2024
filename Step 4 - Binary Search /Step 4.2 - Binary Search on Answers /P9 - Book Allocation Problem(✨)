@@ -113,4 +113,4 @@ T.C. -> O(log(sum-max)*N)
 
 
 
-Split array - Largest Sum (Similar problem - Ditto)
+Split array - Largest Sum and Painter's Problem are identical to Allocate Books (Similar problem - Ditto).
