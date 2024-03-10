@@ -1,0 +1,112 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/allocate-books_1090540?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+Brute Force:- Using Linear Search
+    public static int getStudents(ArrayList<Integer> arr,int pages)
+    {
+        // int curCnt=1,curSum=0;
+        // for(int i=0;i<arr.size();i++)
+        // {
+        //     if(curSum+arr.get(i)<=sum)
+        //     {
+        //         curSum+=arr.get(i);
+        //     }
+        //     else
+        //     {
+        //         curSum=arr.get(i);
+        //         curCnt++;
+        //     }
+        // }
+
+        // return curCnt;
+
+        int n = arr.size(); // size of array
+        int students = 1;
+        long pagesStudent = 0;
+        for (int i = 0; i < n; i++) {
+            if (pagesStudent + arr.get(i) <= pages) {
+                // add pages to current student
+                pagesStudent += arr.get(i);
+            } else {
+                // add pages to next student
+                students++;
+                pagesStudent = arr.get(i);
+            }
+        }
+        return students;
+    }
+    public static int findPages(ArrayList<Integer> arr, int n, int m) {
+        // Write your code here.
+
+        if(m>n) return -1;
+
+        int max=Integer.MIN_VALUE,sum=0,stu=0;
+
+        for(int i=0;i<arr.size();i++)
+        {
+            max=Math.max(arr.get(i),max);
+            sum+=arr.get(i);
+        }
+
+        for(int i=max;i<=sum;i++)
+        {
+            stu=getStudents(arr,i);
+            if(stu==m) return i;
+        }
+        return -1;
+}
+
+T.C. -> O((sum-max)*N)
+S.C. -> O(1)
+
+Optimal Solution:- Using Binary Search
+    public static int getStudents(ArrayList<Integer> arr,int pages)
+    {
+        
+        int n = arr.size(); // size of array
+        int students = 1;
+        long pagesStudent = 0;
+        for (int i = 0; i < n; i++) {
+            if (pagesStudent + arr.get(i) <= pages) {
+                // add pages to current student
+                pagesStudent += arr.get(i);
+            } else {
+                // add pages to next student
+                students++;
+                pagesStudent = arr.get(i);
+            }
+        }
+        return students;
+    }
+    public static int findPages(ArrayList<Integer> arr, int n, int m) {
+        // Write your code here.
+
+        if(m>n) return -1;
+
+        int max=Integer.MIN_VALUE,sum=0,stu=0;
+
+        for(int i=0;i<arr.size();i++)
+        {
+            max=Math.max(arr.get(i),max);
+            sum+=arr.get(i);
+        }
+
+        int low=max,high=sum,mid=0,ans=0;
+
+        while(low<=high)
+        {
+            mid=(low+high)/2;
+            stu=getStudents(arr,mid);
+            if(stu>m) 
+            {
+                low=mid+1;
+            }
+            else high=mid-1;
+        }
+        return low;
+}
+
+
+T.C. -> O(log(sum-max)*N)
