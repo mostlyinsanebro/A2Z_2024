@@ -1,0 +1,97 @@
+What is Linked List?
+It is basically a ds in which the elements are stored in non-contiguous memory locations in the heap.We have nodes which have data and the location of the next node
+and using this concept, we can traverse the Linked List. The first element of LL is called head and last element is called the tail.
+
+Where is it used?
+In ds, LL is used in stacks and queues.
+In real life, LL is used in the browsers. Suppose we search for striver -> a2z -> problem -> article. In hindsight, LL is being used in this as we can go from
+one page to another and we can also come back from pages to previos pages.
+
+
+Implementation -> using classes in java.
+
+class Node
+{
+  int data;
+  Node next;
+
+  Node(data)
+  {  
+    this.data = data;
+    this.next = null;
+  }
+
+  Node(data,next)
+  {
+    this.data = data;
+    this.next = next;
+  }
+}
+
+main()
+{
+  Node n=new Node(5);
+  System.out.println(n.data);
+}
+
+
+Memory Used:-
+  The data will take 4 bytes for storing int and 4 bytes for storing pointer to Node, thus in total 8 bytes for a single node. - 32 bit
+
+  The data will take 4 bytes for storing int and 8 bytes for storing pointer to Node, thus in total 12 bytes for a single node. - 64 bit
+
+
+Convert array to Linked List:-
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ };
+
+ *****************************************************************/
+
+public class Solution {
+    public static Node constructLL(int []arr) {
+        // Write your code here
+        Node head = new Node(arr[0]);
+        Node mover = head;
+
+        for(int i=1;i<arr.length;i++)
+        {
+            Node n = new Node(arr[i]);
+            mover.next = n;
+            mover=mover.next;
+        }
+        return head;
+    }
+}
+
+T.C. -> O(N)
+
+Traverse a Linked Lis :-
+Node traverse = head;
+while(traverse!=null)
+{
+  System.out.print(temp.data+" ");
+  traverse = traverse.next;
+}
+
+
+
