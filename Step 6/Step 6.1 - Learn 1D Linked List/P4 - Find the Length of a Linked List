@@ -1,0 +1,22 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/count-nodes-of-linked-list_5884?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries&leftPanelTabValue=PROBLEM
+
+
+Solution:-
+public class Solution {
+    public static int length(Node head){
+        //Your code goes here
+        int count=0;
+        Node temp=head;
+
+        while(temp!=null)
+        {
+            count++;
+            temp=temp.next;
+        }
+
+        return count;
+    }
+}
+
+T.C.-> O(N) -> N==length of linkedlist
