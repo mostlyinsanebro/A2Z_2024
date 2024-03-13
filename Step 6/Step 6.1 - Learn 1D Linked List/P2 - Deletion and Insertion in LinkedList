@@ -1,5 +1,6 @@
-Delete the head of LL:-
+DELETION IN LINKED LIST
 
+// Delete the head of LL:-
 Node deleteHead(Node head)
 {
   if(head==null)  // Incase LL is empty
@@ -9,8 +10,7 @@ Node deleteHead(Node head)
  temp.next = null;
 }
 
-Delete the tail of LL :-
-
+// Delete the tail of LL :-
 Node deleteTail(Noade head)
 {
   Node temp=head;
@@ -22,3 +22,73 @@ Node deleteTail(Noade head)
   }
     temp.next = null;
 }
+
+
+// Delete kth element in LL:-
+Node deleteK(Node head,int k)
+{
+  Node temp=head;
+  if(temp==null) return null; // If LL is empty
+
+  if(k==1) // If we have to remove the first element
+  {
+    head=head.next;
+    temp.next=null;
+    return head;
+  }
+
+  Node prev=null;
+  int c=0;
+  while(temp!=null)
+  {
+    c++;
+    if(c==k)
+    {
+      prev.next.next=temp.next;
+      temp.next=null;
+      break;
+    }
+prev=temp;
+temp=temp.next;
+}
+
+return head;
+}
+
+
+
+// Delete kth element in LL:-
+Node deleteValue(Node head,int val)
+{
+  Node temp=head;
+  if(temp==null) return null; // If LL is empty
+
+  if(head.data==val) // If we have the val at the head
+  {
+    head=head.next;
+    temp.next=null;
+    return head;
+  }
+
+  Node prev=null;
+  while(temp!=null)
+  {
+    if(temp.data==val)
+    {
+      prev.next.next=temp.next;
+      temp.next=null;
+      break;
+    }
+prev=temp;
+temp=temp.next;
+}
+
+return head;
+}
+
+INSERTION IN LINKLED LIST
+
+
+T.C. -> O(N)
+
+
