@@ -86,9 +86,120 @@ temp=temp.next;
 return head;
 }
 
-INSERTION IN LINKLED LIST
+T.C. -> O(N)
 
+INSERTION IN LINKED LIST
+
+// Insert at the head of LL:-
+Node insertHead(Node head)
+{
+ Node temp=new Node(5);
+ temp.next = head;
+ head = temp;
+ return head;
+}
+
+T.C. -> O(1)
+
+
+// Insert at the end of LL:-
+Node insertAtEnd(Node head,int val)
+{
+  Node n = new Node(val); 
+  if(head==null) return n;
+  Node temp = head;
+  while(temp.next!=null)
+  {
+    temp = temp.next;
+  }
+temp.next = n;
+return head;
+}
+
+
+// Insert at Kth position in LL:-
+Node insertAtK(Node head,int k,int val)
+{
+  if(head==null) // If LL is empty
+  {
+    if(k==1) // If LL is empty and we have to insert at 1st position.
+    {
+      Node n = new Node(val);
+      return n;
+    }
+    return null;
+  }
+
+if(k==1) // Insert at the head of LL
+{
+  Node n = new Node(val);
+  n.next = head;
+  head = n;
+  return head;
+}
+
+Node temp=head;
+int c=0;
+
+
+while(temp!=null)
+{
+  c++;
+  if(c==k-1)
+  {
+    Node n = new Node(val);
+    n.next = temp.next;
+    temp.next = n;
+    break;
+  }
+temp = temp.next;
+}
+
+return head;
+}
 
 T.C. -> O(N)
+
+
+// Insert before a value in LL. It is guaranteed that an element will always be there before which value is to be inserted in LL.
+Node insertBeforeVal(Node head,int bVal,int val)
+{
+  if(head==null) // If LL is empty
+  {
+    System.out.println('Value not found');
+    return null;
+  }
+
+if(head.data==bVal) // Insert at the head of LL
+{
+  Node n = new Node(val);
+  n.next = head;
+  head = n;
+  return head;
+}
+
+Node temp=head;
+int c=0;
+boolean found=false;
+
+
+while(temp.next!=null)
+{
+  if(temp.next.data==bVal)
+  {
+    Node n = new Node(val);
+    n.next = temp.next;
+    temp.next = n;
+    found=true;
+    break;
+  }
+temp = temp.next;
+}
+if(found==false) 
+{
+  System.out.println('Value not found');
+}
+return head;
+}
 
 
