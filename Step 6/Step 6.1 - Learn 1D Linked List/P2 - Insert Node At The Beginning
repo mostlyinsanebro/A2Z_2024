@@ -40,9 +40,9 @@ public class Solution
 {
     public static Node insertAtFirst(Node list, int newValue) {
         // Write your code here
-        Node n = new Node(newValue);
-        n.next = list;
-        return n;
+        Node n =  new Node(newValue,list);
+        list = n;
+        return list;
 
     }
 }
