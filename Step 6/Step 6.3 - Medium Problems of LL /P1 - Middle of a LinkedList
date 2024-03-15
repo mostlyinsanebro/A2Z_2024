@@ -1,0 +1,56 @@
+Problem Link:-
+https://www.codingninjas.com/studio/problems/middle-of-linked-list_973250?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+
+
+Solution:-
+Brute Force:- Take the count of LL and then half it and traverse to that node and return it.
+Code:-
+public class Solution
+{
+    public static Node findMiddle(Node head)
+    {
+        // Write your code here.
+        Node temp=head;
+        if(head==null)
+            return head;
+        int c=0;
+        while(temp!=null)
+        {
+            c++;
+            temp=temp.next;
+        }
+
+      
+            c=c/2;
+     
+
+        temp=head;
+        int sc=1;
+        while(sc<=c)
+        {
+            sc++;
+            temp=temp.next;
+        }
+        return temp;
+}
+T.C. -> O(N)
+
+Optimal Solution:- Use tortoise-hare method. slow-fast pointer approach.
+Code:-
+    public static Node findMiddle(Node head)
+    {
+        // Write your code here.
+       
+        Node slow=head;
+        Node fast=head;
+
+        while(fast!=null&&fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+
+        return slow;
+    }
+
+    T.C.-> O(N/2)
