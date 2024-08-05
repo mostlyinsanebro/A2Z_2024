@@ -1,0 +1,63 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/sum-of-all-divisors-from-1-to-n4738/1
+
+
+Solution:- Brute Force
+Iterate from numbers 1 -> n and then find the divisors for all these numbers and add them together.
+class Solution{
+    static long sumOfDivisors(int N){
+        // code here
+        int ans[]=new int[N];
+        int sum=0;
+        for(int i=1;i<=N;i++)
+        {
+            for(int j=2;j<=i/2;j++)
+            {
+                if(i%j==0)
+                    sum+=j;
+            }
+            if(i==1)
+            sum+=i;
+            else
+            sum+=1+i;
+        }
+        return sum;
+    }
+}
+
+T.C -> O(N^2)
+
+Optimal Solution:- Use the contriburion technique.
+for N=8
+for i=1, sum = 1
+for i=2, sum = 1+2
+for i=3, sum=1+3
+for i=4, sum=1+2+4
+for i=5, sum=1+5
+for i=6, sum=1+2+3+6
+for i=7, sum=1+7
+for i=8, sum=1+2+4+8
+
+Now, for getting the contribution of each number to the overall sum, do (N/i)
+so for i=1 , contribution = (8/1), which means 1 has contributed 8 times to the sum and since it's value is 1, multiply
+the contribution by the value.
+fir contribution of 2, 8/2 => 4, and multiply it by 2 since value is 2.
+for cont of 3, 8/3 => 2, means 3 is happening 2 times in the contribution for i=3 and i=6, it's total contibution sum = 2*3 => 6.
+
+
+Code:-
+class Solution{
+    static long sumOfDivisors(int N){
+        // code here
+        long sum=0,contribution=0;
+        
+        for(int i=1;i<=N;i++)
+        {
+            contribution = N/i;
+            sum+=contribution*i;
+        }
+        return sum;
+    }
+}
+
+T.C. -> O(N)
