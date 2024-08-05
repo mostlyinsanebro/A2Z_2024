@@ -9,16 +9,13 @@ SC -> Auxillary Space => O(N/2)
 public class Solution {
     public static boolean isPalindrome(String str) {
         // Write your code here.
-        if(str.length()==0||str.length()==1)
-        {
-            return true;
-        }
-
-        char s = str.charAt(0);
-        char e = str.charAt(str.length()-1);
-
-        return s==e&&isPalindrome(str.substring(1,str.length()-1));
-        
-        
+        return ispal(0,str.length()-1,str);
+    }
+    public static boolean ispal(int l,int r,String str)
+    {
+        if(l>=r) return true;
+        if(str.charAt(l)!=str.charAt(r))
+            return false;
+        return ispal(l+1,r-1,str);
     }
 }
