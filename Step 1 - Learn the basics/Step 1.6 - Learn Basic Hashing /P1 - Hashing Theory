@@ -116,6 +116,9 @@ class Solution {
 Note:- There are no complications while hashing characters, therefore always use arrays to hash characters. For hashing numbers, there is some problem
 cannot creating numbers greater than 10^7, so use the hash for that. Continuation is the problem ahead.
 
+T.C. -> Ordered HashMap -> O(logN) in best,avg and worst case.
+Unordered Map -> O(1) in best and avg case and O(N) in worst case.
+
 Also, in the HashMap the values are not stored in a sorted fashion by value, use LinkedHashMap for that instead.
 
 Use HashMap by default because the average and best case T.C. in case of storing and fetching is O(1) and it is O(N) in case of worst case. Now, the worst case
@@ -138,3 +141,6 @@ Note:- Traverse the HashMap in the following way.
 map.forEach((key,value) -> {
 // logic
 });
+
+
+HashMaps are created using 3 methods. You should know only about Division Method.
