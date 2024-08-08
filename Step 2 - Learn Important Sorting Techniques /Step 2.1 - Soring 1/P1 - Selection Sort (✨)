@@ -1,34 +1,36 @@
 Problem Link:-
-https://www.codingninjas.com/studio/problems/selection-sort_624469?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
-
+https://www.geeksforgeeks.org/problems/selection-sort/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=selection-sort
 
 Approach:- Selection sort stands for selecting the smallest element of the array and bringing it at the start of the array to it's rightful place.
 Note -> Use the index.
 
 Solution:-
-public class Solution {
-    public static void selectionSort(int[] arr) {
-        //Your code goes here
-        int minidx=0,temp=0;
+class Solution
+{
 
-        for(int i=0;i<arr.length-1;i++)
-        {
-            minidx = i;
-
-            for(int j=i+1;j<arr.length;j++)
-            {
-                if(arr[j]<arr[minidx])
-                {
-                    minidx = j;
-                }
-            }
-
-            // swap min and arr[i]
-            temp = arr[i];
-            arr[i] = arr[minidx];
-            arr[minidx] = temp;
-        }
-    }
+    void selectionSort(int arr[], int n)
+	{
+	    //code here
+	    int minidx=0,temp=0;
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        minidx=i;
+	        
+	        for(int j=i+1;j<n;j++)
+	        {
+	            if(arr[j]<arr[minidx])
+	            {
+	                minidx=j;
+	            }
+	        }
+	        
+	        // swap i's value with minidx's value.
+	        temp=arr[minidx];
+	        arr[minidx]=arr[i];
+	        arr[i]=temp;
+	    }
+	}
 }
 
 
