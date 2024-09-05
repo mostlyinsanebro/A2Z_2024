@@ -44,7 +44,6 @@ the contribution by the value.
 fir contribution of 2, 8/2 => 4, and multiply it by 2 since value is 2.
 for cont of 3, 8/3 => 2, means 3 is happening 2 times in the contribution for i=3 and i=6, it's total contibution sum = 2*3 => 6.
 
-
 Code:-
 class Solution{
     static long sumOfDivisors(int N){
