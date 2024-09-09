@@ -1,0 +1,33 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/insertion-sort/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=insertion-sort
+
+
+Approach:- Use recursion to traverse the array and then do left swaps for each element until it reaches its rightful place.
+
+Code:-
+class Solution
+{
+  //Function to sort the array using insertion sort algorithm.
+  public void insertionSort(int arr[], int n)
+  {
+      //code here
+      if(n==1) return;
+      
+      insertionSort(arr,n-1);
+      
+      int idx = n-1;
+      int j=idx;
+      int temp=0;
+      
+      while(j>0&&arr[j]<arr[j-1])
+      {
+        temp=arr[j];
+        arr[j]=arr[j-1];
+        arr[j-1]=temp;
+        j--;
+      }
+  }
+}
+
+T.C. -> O(N^2)
+Auxillary or Stack Space:- O(N)
