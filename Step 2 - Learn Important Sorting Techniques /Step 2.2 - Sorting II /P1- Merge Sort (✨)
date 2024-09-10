@@ -2,4 +2,76 @@ Problem Link:-
 https://www.geeksforgeeks.org/problems/merge-sort/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=merge-sort
 
 
-Approach:-
+Approach:- The approach is Divide and Merge.
+
+The basic approach is to divide the array into 2 hypothetical parts till the array can not be divided further and then merge each half with the other doing a merge 
+at that time.
+
+Code:-
+class Solution
+{
+    void mergeSort(int arr[], int low, int high)
+    {
+        //code here
+        if(low>=high)
+        {
+            return;
+        }
+        int mid = (low+high)/2;
+        
+        mergeSort(arr,low,mid);
+        mergeSort(arr,mid+1,high);
+        merge(arr,low,mid,high);
+    }
+    void merge(int arr[],int low,int mid,int high)
+    {
+        int left = low;
+        int right=mid+1;
+        
+        ArrayList<Integer> al = new ArrayList<>();
+        
+        while(left<=mid&&right<=high)
+        {
+            if(arr[left]<arr[right])
+            {
+                al.add(arr[left]);
+                left++;
+            }
+            else
+            {
+                al.add(arr[right]);
+                right++;
+            }
+        }
+        
+        while(left<=mid)
+        {
+            al.add(arr[left]);
+            left++;
+        }
+        while(right<=high)
+        {
+            al.add(arr[right]);
+            right++;
+        }
+        
+        for(int i=low;i<=high;i++)
+        {
+            arr[i]=al.get(i-low);
+        }
+    }
+}
+
+
+T.C. -> 
+
+        mergeSort(arr, low, mid);   -- This line takes O(log2 n) as for a 16-sized array, it will be divided 4 times, so log2 (16) = 4
+        mergeSort(arr,mid+1,high); -- log2 n
+        merge(arr,low,mid,high);   -- Merge at the worst case takes O(n) time.
+
+O(NlogN)
+
+
+S.C. or Auxillary Space -> O(N) -- as we use an extra ArrayList for space N in the worst-case scenario.
+
+Auxillary Space (Additional)
