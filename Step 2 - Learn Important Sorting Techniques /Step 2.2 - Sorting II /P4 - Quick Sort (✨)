@@ -1,0 +1,55 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/quick-sort/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=quick-sort
+
+
+Code:-
+class Solution
+{
+    //Function to sort an array using quick sort algorithm.
+    static void quickSort(int arr[], int low, int high)
+    {
+        // code here
+        if(low<high)
+        {
+            int pidx = partition(arr,low,high);
+            quickSort(arr,low,pidx-1);
+            quickSort(arr,pidx+1,high);
+        }
+    }
+    static int partition(int arr[], int low, int high)
+    {
+        // your code here
+        int pivot = low;
+        int i=low;
+        int j=high;
+        int temp;
+        
+        while(i<j)
+        {
+            while(arr[i]<=arr[pivot]&&i<high)
+            {
+                i++;
+            }
+            while(arr[j]>arr[pivot]&&j>low)
+            {
+                j--;
+            }
+            
+            if(i<j)
+            {
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
+        
+        temp=arr[pivot];
+        arr[pivot] = arr[j];
+        arr[j]=temp;
+        
+        return j;
+        } 
+}
+
+T.C -> O(NlogN)
+S.C. -> O(N) -> for only stack space...
