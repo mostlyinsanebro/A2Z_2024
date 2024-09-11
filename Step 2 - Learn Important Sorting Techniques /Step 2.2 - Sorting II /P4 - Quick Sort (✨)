@@ -49,6 +49,10 @@ class Solution
         
         return j;
         } 
+
+T.C. -> O(NlogN)
+S.C. -> O(1) -> No extra space used apart from 0(logN) stack space.
+
 }
 
 T.C -> O(NlogN)
