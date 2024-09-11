@@ -2,7 +2,7 @@ Problem Link:-
 https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/
 
 
-Approach:- Find the correct position of the min element and then from there check if array is sorted or not till the end and then check if array is sorted 
+Brute Force Approach:- Find the correct position of the min element and then from there check if array is sorted or not till the end and then check if array is sorted 
 from start to that index and return true if it is sorted in fact.
 
 Code:-
@@ -57,6 +57,27 @@ class Solution {
         }
 
         return isSorted;
+    }
+}
+
+T.C. -> O(N) + O(N) => O(2N) => O(N)
+S.C. -> O(1)
+
+
+Optimal Approach:- Traverse the array and check for discontinuities, because if the array is rotated, then there would be one point where element at idx
+would be greater than the element at idx+1 and if the dis. is <= 1, that means the array is sorted and rotated, else not.
+
+Code:-
+class Solution {
+    public boolean check(int[] arr) {
+        int dis = 0,n=arr.length;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]>arr[(i+1)%n]) dis++;
+        }
+
+        return dis<=1;
     }
 }
 
