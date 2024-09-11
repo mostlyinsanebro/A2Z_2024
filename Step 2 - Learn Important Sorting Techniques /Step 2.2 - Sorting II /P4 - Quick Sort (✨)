@@ -5,7 +5,7 @@ https://www.geeksforgeeks.org/problems/quick-sort/1?utm_source=youtube&utm_mediu
 Code:-
 class Solution
 {
-    //Function to sort an array using quick sort algorithm.
+    //Function to sort an array using Quick sort algorithm.
     static void quickSort(int arr[], int low, int high)
     {
         // code here
@@ -53,7 +53,19 @@ class Solution
 T.C. -> O(NlogN)
 S.C. -> O(1) -> No extra space used apart from 0(logN) stack space.
 
+
+For descending, change the condition in the partition function ->
+ while(arr[i]>=arr[pivot]&&i<high)
+            {
+                i++;
+            }
+            while(arr[j]<arr[pivot]&&j>low)
+            {
+                j--;
+            }
+
 }
 
 T.C -> O(NlogN)
 S.C. -> O(N) -> for only stack space...
+
