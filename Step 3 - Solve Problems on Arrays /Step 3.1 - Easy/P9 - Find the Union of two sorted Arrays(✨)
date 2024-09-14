@@ -2,7 +2,6 @@ Problem Link:-
 https://www.codingninjas.com/studio/problems/sorted-array_6613259?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
 
 
-
 Solution:-
 Brute Force Approach:- Use a HashSet and insert the elements from the first array in it and then insert the elements from the second array in it. 
 Distinct elements will be inserted in the HashSet. After that, put the elements from HashSet in the ArrayList and sort them to maintain the needed order.
