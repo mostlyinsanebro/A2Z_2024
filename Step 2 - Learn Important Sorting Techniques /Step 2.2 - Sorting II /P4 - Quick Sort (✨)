@@ -2,6 +2,12 @@ Problem Link:-
 https://www.geeksforgeeks.org/problems/quick-sort/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=quick-sort
 
 
+Approach:- Follow these two steps for this algorithm.
+
+Step 1). Pick a pivot and put it in it's rightful place.
+Step 2). Smaller on the left and greater on the right.
+Step 3). Repeat steps 1 and 2.
+
 Code:-
 class Solution
 {
