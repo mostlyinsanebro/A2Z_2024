@@ -87,7 +87,7 @@ Code:-
 
             if(cnt==0)
                 {
-                    el=arr[I];
+                    el=arr[i];
                     cnt=1;
                 }
         }
