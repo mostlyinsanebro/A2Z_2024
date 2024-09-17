@@ -83,15 +83,13 @@ Code:-
             if(arr[i]==el)
                 cnt++;
             else 
-            {
-                if(cnt==0)
+              cnt--;
+
+            if(cnt==0)
                 {
-                    cnt++;
-                    el = arr[i];
+                    el=arr[I];
+                    cnt=1;
                 }
-                else
-                    cnt--;
-            }  
         }
 
         int c=0;
