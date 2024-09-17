@@ -63,7 +63,7 @@ to be the el i.e. the majority element.
 
 Now, take el = arr[0] and cnt = 1 and run a loop for i -> 1-> n.
 If arr[i] == el then cnt++;
-else cnt-- .
+else cnt--.
 
 Also, if the cnt becomes 0 at any i, then arr[i] will become the contender to be the majority element.
 
