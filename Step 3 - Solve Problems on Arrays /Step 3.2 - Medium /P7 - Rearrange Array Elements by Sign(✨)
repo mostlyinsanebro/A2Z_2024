@@ -97,102 +97,89 @@ S.C. -> O(N)
 
 
 
-Note:- Above approaches work in case the number of positive and negative elements are equal. If the number of positive and negative elements is not equal, then
+Note: The above approaches work if the number of positive and negative elements are equal. If the number of positive and negative elements is not equal, then
 we will have to make some tweaks.
 
+Approach:- Take two pointers, pidx and nidx, pidx on the first positive number and nidx on the first negative number in arr. After that, traverse the ans array and 
+if the index%2==0, then place a positive number on that index and go to the next positive element in arr, else place a negative number on the odd index and find the 
+next negative in the arr. Do this while the pidx<n and nidx<a n and as soon as one of them becomes >=n, then place all the remaining elements whether they are 
+all positives or all negatives at the end of the array depending on the situation.
+
 Code:-
-    public static int[] alternateNumbers(int []a) {
-        // Write your code here.
-        int pCnt=0,nCnt=0,n=a.length,i=0;
-        int pidx=0,nidx=0;
-        for(i=0;i<n;i++)
+ // Online Java Compiler
+// Use this editor to write, compile, and run your Java code online
+import java.util.*;
+
+class Solution {
+    public static void main(String[] args) {
+        // Write your code here
+        Scanner sc= new Scanner(System.in);
+
+        int n=sc.nextInt();
+        int arr[]= new int[n];
+
+        for(int i=0;i<n;i++)
         {
-            if(a[i]<0) nCnt++;
+            arr[i]=sc.nextInt();
         }
-        pCnt=n-nCnt;
 
-        int pos[]=new int[pCnt];
-        int neg[]=new int[nCnt];
+        int ans[]=new int[n];
+        int pidx=0,nidx=0;
 
-        for(i=0;i<n;i++)
+        while(pidx<n&&arr[pidx]<0) 
         {
-            if(a[i]>0)
+            pidx++;
+        }
+
+        while(nidx<n&&arr[nidx]>0)
+        {
+            nidx++;
+        }
+
+        int i=0;
+
+        while(i<n&&pidx<n&&nidx<n)
+        {
+            if(i%2==0)
             {
-                pos[pidx]=a[i];
+                ans[i]=arr[pidx];
                 pidx++;
+
+                while(pidx<n&&arr[pidx]<0) pidx++;
             }
             else
             {
-                neg[nidx]=a[i];
+                ans[i]=arr[nidx];
                 nidx++;
+
+                while(nidx<n&&arr[nidx]>0) nidx++;
             }
+            i++;
         }
 
-        pidx=0;
-        nidx=0;
-        i=0;
-
-        // for(i=0;i<pCnt;i++)
-        // {
-        //     System.out.print(pos[i]+" ");
-        // }
-        // System.out.println();
-
-        // for(i=0;i<nCnt;i++)
-        // {
-        //     System.out.print(neg[i]+" ");
-        // }
-
-        if(pCnt>nCnt)
+        if(pidx<n)
         {
-            while(i/2<nCnt)
+            while(pidx<n)
             {
-                if(i%2==0)
-                {
-                    a[i]=pos[pidx];
-                    pidx++;
-                }
-                else
-                {
-                    a[i]=neg[nidx];
-                    nidx++;
-                }
-                i++;
-            }
-
-            while(i<n)
-            {
-                a[i]=pos[pidx];
-                pidx++;
+                ans[i]=arr[pidx];pidx++;
                 i++;
             }
         }
         else
         {
-            while(i/2<pCnt)
+            while(nidx<n)
             {
-                if(i%2==0)
-                {
-                    a[i]=pos[pidx];
-                    pidx++;
-                }
-                else
-                {
-                    a[i]=neg[nidx];
-                    nidx++;
-                }
-                i++;
-            }
-            while(i<n)
-            {
-                a[i]=neg[nidx];
+                ans[i]=arr[nidx];
                 nidx++;
                 i++;
             }
-
         }
 
-        return a;
+        for(i=0;i<n;i++)
+        {
+            System.out.print(ans[i]+" ");
+        }
+    }
 }
 
 T.C. -> O(N)
