@@ -2,6 +2,7 @@ Problem Link:-
 https://codingninjas.com/studio/problems/alternate-numbers_6783445?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
 
 
+
 Solution:- 
 
 Brute Force:- Use two arrays, stote all negatives in one array and all positives in another array.
