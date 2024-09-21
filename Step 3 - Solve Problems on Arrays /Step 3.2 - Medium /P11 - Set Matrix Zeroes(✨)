@@ -178,7 +178,7 @@ class Solution {
 }
 
 
-T.C. -> O*=(n*m)
+T.C. -> O(n*m)
 S.C. -> O(1)
 
 
