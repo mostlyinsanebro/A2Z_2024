@@ -80,34 +80,37 @@ an element before the current element that means it is the starting element of a
 
 
 Code:-
- public static int longestSuccessiveElements(int []arr) {
+import java.util.*;
+public class Solution {
+    public static int longestSuccessiveElements(int []arr) {
         // Write your code here.
-        HashSet<Integer> set=new HashSet<>();
-        int curCnt=1,maxCnt=1;
+        HashSet<Integer> set=  new HashSet<>();
 
         for(int i=0;i<arr.length;i++)
         {
             set.add(arr[i]);
         }
 
+        int val=0,cnt=0,max=Integer.MIN_VALUE;
+
         for(int i:set)
         {
-            int val=i;
-            curCnt=0;
-            if(set.contains(--val))
+            val = i;
+            cnt=0;
+            if(set.contains(val-1)==false)
             {
                 while(set.contains(val))
                 {
                     val++;
-                    curCnt++;
+                    cnt++;
                 }
-                maxCnt=Math.max(maxCnt,curCnt);
+
+                max = Math.max(max,cnt);
             }
         }
-
-        return maxCnt;
+        return max;
     }
-
+}
 T.C. -> At max, the tc will be O(3N) i.e. O(N) for traversing and putting elements in the array and O(2N) for finding the longest sequence.
 S.C. -> O(N)
 
