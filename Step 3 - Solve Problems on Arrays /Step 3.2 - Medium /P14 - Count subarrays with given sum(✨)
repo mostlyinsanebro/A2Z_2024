@@ -70,6 +70,6 @@ class Solution {
     }
 }
 
-T.C. -> O(N)
+T.C. -> O(N*logN) -> if insert and extraction from HashMap are O(logN) and T.C. -> O(N) if insert and extraction from HashMap are O(1)
 S.C. -> O(N)
 
