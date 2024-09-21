@@ -29,4 +29,47 @@ Code:-
 T.C. -> O(N^2)
 S.C. -> O(1)
 
-Better Approach:-
+Optimal Approach:-
+Make use of the prefix sum approach, where if at any point while traversing the array, we find the sum-target to be present in the prefix, that means the target
+is also there in the prefix. Get the count of that sum-target and add it to the resultant count.
+
+Step 1). Create a hashmap where the key is the sum and the value is the count of that sum.
+
+Step 2). Insert (0,1) in the HashMap. It will compensate for all the subarrays whose sum is directly equal to the target.
+
+Step 3). Traverse the array from the start and keep finding the sum at each step.
+
+Step 4). If there exists a sum-target in the HashMap already, add its occurrences to the count.
+
+Step 5). Add that sum and its occurrence to the HashMap.
+
+
+Code:-
+class Solution {
+    public int subarraySum(int[] arr, int k) {
+        
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+        map.put(0,1);
+
+        int sum=0,cnt=0;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            sum+=arr[i];
+
+            if(map.containsKey(sum-k))
+            {
+                cnt+=map.get(sum-k);
+            }
+
+            map.put(sum,map.getOrDefault(sum,0)+1);
+        }
+
+        return cnt;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(N)
+
