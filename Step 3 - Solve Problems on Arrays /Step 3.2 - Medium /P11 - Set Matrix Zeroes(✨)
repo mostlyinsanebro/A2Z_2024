@@ -114,7 +114,7 @@ class Solution {
     public void setZeroes(int[][] matrix) {
 
         // In place of using two extra arrays to keep track of the rows and columns having zeroes
-        // make the use of the first row and forst col of array itself.
+        // make use of the first row and first col of the array itself.
 
         int n=matrix.length;
         int m=matrix[0].length;
