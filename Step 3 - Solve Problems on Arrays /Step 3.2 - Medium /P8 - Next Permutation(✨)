@@ -1,11 +1,11 @@
 Problem Link:-
-https://www.codingninjas.com/studio/problems/next-greater-permutation_6929564?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+https://leetcode.com/problems/next-permutation/
 
 
 Solution:-
 
 Brute Force:- It involves three steps.
-1. Create all possible permutations of array in sorted order using recursion and store them.
+1. Create all possible permutations of the array in sorted order using recursion and store them.
 2. Do a linear search for the given permutation.
 3. Print the next permutation. If the next permutation is the last of the list, then print the first permutation from the list.
 
@@ -45,7 +45,7 @@ Code:-
         }
         
         // If there is no breakpoint, then that means the array is the last in the permutation
-        // Simply reverse it to get the srating permutation.
+        // Simply reverse it to get the next permutation.
         if(idx==-1)
         {
             rev(arr,0,n-1);
@@ -58,11 +58,11 @@ Code:-
         }
         
         
-        // If there is abreakpoint, then find the next largest element to the right of 
+        // If there is a breakpoint, then find the next largest element to the right of 
         // that breakpoint and since the right array is simply in increasing order from
-        // right to left, the next greater can be found by running loop from right -> left
+        // right to left, the next greater can be found by running a loop from right -> left
         // and the first greater element that appears first, will be the next greater element.
-        // Swap the i and idx element.
+        // Swap the i and idx elements.
         
         int temp=0;
         for(int i=n-1;i>idx;i--)
