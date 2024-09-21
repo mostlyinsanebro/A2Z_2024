@@ -4,7 +4,7 @@ https://www.codingninjas.com/studio/problems/subarray-sums-i_1467103?utm_source=
 
 Solution:- 
 
-Brute Force:- Create all subarrays and then check a subarray has sum == s, if yes then include it in counting, else no.
+Brute Force:- Create all subarrays and then check if a subarray has sum == s, if yes then include it in counting, else no.
 Code:-
     public static int findAllSubarraysWithGivenSum(int arr[], int s) {
         // Write your code here.    
