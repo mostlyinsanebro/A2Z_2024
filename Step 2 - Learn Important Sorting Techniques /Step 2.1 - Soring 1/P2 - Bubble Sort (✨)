@@ -35,4 +35,4 @@ class Solution
 }
 
 T.C. -> Avg and Worst Case -> O(N^2)
-Best Case -> O(1) -> Enters loop only once.
+Best Case -> O(N) -> Enters loop only once.
