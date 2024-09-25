@@ -60,3 +60,8 @@ T.C. -> O(logN)  -- Best case and avg case
 O(n/2) -> worst case,  case -> [3,3,1,3,3,3,3]  target=1
 S.C. -> O(1)
 
+
+Note-> In the future, whenever you get a problem with duplicates like this, try to solve it first for unique elements and see where it fails, and then introduce 
+some tweaks that will solve the duplicate problem.
+
+
