@@ -53,6 +53,7 @@ Code:-
             // If array has duplicate elements on the low, mid and high, then make the search space smaller.
             if(arr[low]==arr[mid]&&arr[mid]==arr[high])
             {
+                min=Math.min(min,arr[mid]);
                 low++;
                 high--;
                 continue;
