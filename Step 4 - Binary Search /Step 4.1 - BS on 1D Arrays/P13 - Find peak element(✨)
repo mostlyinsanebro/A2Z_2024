@@ -40,6 +40,8 @@ due to all these reasons B.S. is the answer for it.
 Approach:- We will use the approach that the peak will either be on the left of the mid or the right of it. If the mid is on the steeping low slope, then that 
 means that the peak is on the left of it and if the mid is on the peaking side, then peak is on the right, so go right.
 
+And in case of multiple peaks, if we are the lowest point between two peaks, then go either way.
+
 
 Code:-
 	public int peakElement(int[] arr,int n)
@@ -75,6 +77,7 @@ Code:-
 }
 
 
-
+T.C. -> O(logN)
+S.C. -> O(1)
 
 
