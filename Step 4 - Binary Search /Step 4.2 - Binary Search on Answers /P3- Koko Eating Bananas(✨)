@@ -1,6 +1,6 @@
 Problem Link:-
 https://www.codingninjas.com/studio/problems/minimum-rate-to-eat-bananas_7449064?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
-
+https://leetcode.com/problems/koko-eating-bananas/submissions/1402689258/
 
 Solution:-
 Brute Force:- Traverse from 1 to max(arr) and then try and find which element fulfills the minimumRateToEatBananas condition(refer problem link to get question 
@@ -76,6 +76,9 @@ Optimal Solution:- Use BS for finding the minRate between 1 and max.
         }
         return ans;
 }
+
+T.C. -> O(N*log(maxofArray))
+S.C. -> O(1)
 
 T.C. -> O(N*log(max)) 
 
