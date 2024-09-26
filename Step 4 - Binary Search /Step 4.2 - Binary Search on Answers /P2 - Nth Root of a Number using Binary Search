@@ -55,5 +55,47 @@ Optimal Solution:- Use binary Search. Whenever we have a range from 1->n and we 
         return -1;
 }
 
-T.C. -> O(log(N*M)) -> logM for the BS and logN for finding pow(mid,n)
+T.C. -> O(Nlog(M)) -> logM for the BS and logN for finding pow(mid,n)
 
+
+Another Optimal Solution without pow function:-
+class Solution
+{
+    public int func(int mid,int n,int m)
+    {
+        long ans=1;
+        for(int i=1;i<=n;i++)
+        {
+
+            ans=ans*mid;
+            
+            if(ans>m) return 2;
+        }
+        
+        if(ans==m) return 1;
+        
+        return 0;
+    }
+    public int NthRoot(int n, int m)
+    {
+        // code here
+        int l=1,h=m;
+        int mid=0,ans=0;
+        
+        while(l<=h)
+        {
+            mid=(l+h)/2;
+            
+            ans=func(mid,n,m);
+            
+            if(ans==1) return mid;
+            
+            else if(ans==2) h=mid-1;
+        
+            else 
+                l=mid+1;
+        }
+        
+        return -1;
+    }
+}
