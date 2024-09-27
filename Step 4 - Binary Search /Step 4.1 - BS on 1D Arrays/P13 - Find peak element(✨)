@@ -3,7 +3,6 @@ https://www.geeksforgeeks.org/problems/peak-element/1
 https://leetcode.com/problems/find-peak-element/description/
 
 Solution:-
-
 Brute Force:- Traverse the array and simply find the peak element in O(N) time complexity.
 
 Code:-
