@@ -1,6 +1,6 @@
 Problem Link:-
 https://www.codingninjas.com/studio/problems/rose-garden_2248080?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
-
+https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/description/
 
 Solution:-
 Brute Force:- Go from the i = min of the array to i = max of the array and find out for what value of i will the flowers bloom in such a way that
