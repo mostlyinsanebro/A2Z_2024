@@ -1,6 +1,6 @@
 Problem Link:-
 https://www.codingninjas.com/studio/problems/kth-missing-element_893215?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
-
+https://leetcode.com/problems/kth-missing-positive-number/submissions/1404872805/
 
 Solution:-
 Brute Force:- The concept used is that whatever element is smaller than k in the array will take one place and we will have to increase k by 1. This way we will
