@@ -1,0 +1,65 @@
+Problem Link:-
+https://leetcode.com/problems/split-array-largest-sum/description/
+
+
+Solution:-
+The solution is similar to the Book Allocation problem. Remember that, to get the low instead of sum, it will pass only then. Find the reason for that??
+
+Solution:-
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        if(k>nums.length) return -1;
+
+        int sum=0,max=Integer.MIN_VALUE;
+
+        for(int i=0;i<nums.length;i++)
+        {
+            max=Math.max(max,nums[i]);
+            sum+=nums[i];
+        }
+
+        int lsum=0,c=0,l=max;
+        int mid=0,h=sum;
+        while(l<=h)
+        {
+            mid=(l+h)/2;
+            lsum=0;
+            c=0;
+            for(int j=0;j<nums.length;j++)
+            {
+                if(lsum+nums[j]==mid)
+                {
+                    lsum=0;
+                    c++;
+                }
+                else if(lsum+nums[j]>mid)
+                {
+                    lsum=nums[j];
+                    c++;
+                }
+                else
+                {
+                    lsum+=nums[j];
+                }
+            }
+            if(lsum!=0)
+                c++;
+
+            System.out.println(mid+" "+c);
+            if(c<=k)
+            {
+                h=mid-1;
+            }
+            else
+            {
+                l=mid+1;
+            }
+        }
+
+        return l;
+    }
+}
+
+
+T.C. -> O(Nlog(sum-max))
+S.C. -> O(1)
