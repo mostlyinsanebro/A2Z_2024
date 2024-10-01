@@ -1,0 +1,8 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/the-painters-partition-problem1535/1
+
+
+Solution:- Same as Book allocation and largest split subarray sum.
+
+T.C. -> O(N*log(sum-max))
+S.C. -> O(1)
