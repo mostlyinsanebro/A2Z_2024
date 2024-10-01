@@ -1,0 +1,115 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/minimize-max-distance-to-gas-station/1
+
+
+Solution:-
+
+Brute Force:- We are taking an extra array that will store the number of gas stations that should be there in each partition such that the max distance between any two
+gas stations become minimum.
+
+Code:-
+class Solution {
+    public static double findSmallestMaxDist(int stations[], int k) {
+        // code here
+        double diff=0,secLen=0,maxVal=-1;
+        int maxIdx=-1;
+        double sL=-1;
+        int n=stations.length;
+        int ans[]=new int[n-1];
+        
+        for(int gas=1;gas<=k;gas++)
+        {
+            maxVal=-1;
+            maxIdx=-1;
+            for(int i=0;i<n-1;i++)
+            {
+                diff=stations[i+1]-stations[i];
+                sL=diff/(ans[i]+1);
+                
+            if(maxVal<sL)
+                {
+                    maxVal=sL;
+                    maxIdx=i;
+                }
+            }
+            ans[maxIdx]++;
+        }
+        
+        // for(int i=0;i<n-1;i++)
+        // {
+        //     System.out.print(ans[i]+" ");
+        // }
+        
+        maxVal=-1;
+        
+        for(int i=0;i<n-1;i++)
+        {
+            sL=(stations[i+1]-stations[i])/(double)(ans[i]+1);
+            //sL=Math.round(sL*100.0)/100.0;
+            if(sL>maxVal)
+            {
+                maxVal=sL;
+            }
+        }
+        
+        //maxVal=Math.round(maxVal*100.0)/100.0;
+        //System.out.println(maxVal);
+        return maxVal;
+    }
+}
+
+T.C.-> O(k*N)+O(N)
+S.C. -> O(1)
+
+It gives T.L.E error. Optimise it.
+
+Better Approach:- Use a priority Queue. The priority queu stores the largest element at the top, make use of that part to make your answer.
+
+Code:-
+class Solution {
+    
+    public static class Pair
+    {
+        double first;
+        int second;
+        
+        Pair(double first,int second)
+        {
+            this.first=first;
+            this.second=second;
+        }
+    }
+    public static double findSmallestMaxDist(int stations[], int k) {
+        // code here
+        
+        int n=stations.length;
+        
+        int ans[]=new int[n-1];
+        
+        PriorityQueue<Pair> pq=new PriorityQueue<>((a,b)->Double.compare(b.first,a.first));
+        
+        // Adding initial values to priority Queue
+        for(int i=0;i<n-1;i++)
+        {
+            pq.add(new Pair(stations[i+1]-stations[i],i));
+        }
+        
+        for(int i=1;i<=k;i++)
+        {
+            Pair p=pq.poll();
+            int idx = p.second;
+            
+            ans[idx]++;
+            
+            double d = (stations[idx+1]-stations[idx])/(double)(ans[idx]+1);
+            
+            pq.add(new Pair(d,idx));
+        }        
+        return pq.peek().first;       
+    }
+}
+
+T.C. -> O(NlogN) + O(k*logN)
+S.C. -> O(2N) ~ one for array and one for priority Queue.
+
+Optimal Solution:-
