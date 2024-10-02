@@ -1,0 +1,192 @@
+Problem Link:-
+https://leetcode.com/problems/median-of-two-sorted-arrays/
+https://www.geeksforgeeks.org/problems/median-of-2-sorted-arrays-of-different-sizes/1
+https://www.naukri.com/code360/problems/median-of-two-sorted-arrays_985294?leftPanelTabValue=PROBLEM
+
+Brute Force Solution:-
+Store teh union of two arrays in the third array in sorted manner and then get the median from that answer array.
+
+Code:-
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int p1=0,p2=0,n1=0,n2=0,i=0;
+        n1=nums1.length;
+        n2=nums2.length;
+        int ans[]=new int[n1+n2];
+        int n=n1+n2;
+
+        while(p1!=n1&&p2!=n2)
+        {
+            if(nums1[p1]<nums2[p2])
+            {
+                ans[i]=nums1[p1];
+                p1++;
+            }
+            else
+            {
+                ans[i]=nums2[p2];
+                p2++;
+            }
+            i++;
+        }
+
+        while(p1!=n1)
+        {
+            ans[i]=nums1[p1];
+            p1++;
+            i++;
+        }
+
+        while(p2!=n2)
+        {
+            ans[i]=nums2[p2];
+            p2++;
+            i++;
+        }
+
+        if(ans.length%2==0)
+        {
+            return (ans[n/2]+ans[n/2-1])/(double)(2.0);
+        }
+        else
+        {
+            return ans[n/2];
+        }
+    }
+}
+
+T.C. -> O(n1+n2)
+S.C. -> O(n1+n2)
+
+
+Better Solution:- We don't need to store all the elements of the union in an extra array, we just need the elements for a particular index, store them
+in variables while traversing both the arrays simultaneously and then get the answer from there.
+
+Code:-
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n1=0,n2=0,n=0,i=0,j=0,c=0,idx1=0,idx2=0,el=0;
+        int e1=Integer.MIN_VALUE;
+        int e2=Integer.MIN_VALUE;
+        n1=nums1.length;
+        n2=nums2.length;
+        n=n1+n2;
+
+        idx1=n/2-1;
+        idx2=n/2;
+
+        while((e1==Integer.MIN_VALUE||e2==Integer.MIN_VALUE)&&i!=n1&&j!=n2)
+        {
+            if(nums1[i]<nums2[j])
+            {
+                el=nums1[i];
+                i++; 
+            }
+            else
+            {
+                el=nums2[j];
+                j++;
+            }
+
+            if(c==idx1)  e1=el;
+            else if(c==idx2) e2=el;
+
+            c++;
+        }
+
+        while(i!=n1)
+        {
+            el=nums1[i];
+            i++;
+
+            if(c==idx1) e1=el;
+            else if(c==idx2) e2=el;
+            c++;
+        }
+
+        while(j!=n2)
+        {
+            el=nums2[j];
+            j++;
+
+            if(c==idx1) e1=el;
+            else if(c==idx2) e2=el;
+            c++;
+        }
+
+        if(n%2!=0) return e2;
+        else return (double)(e1+e2)/(double)(2.0);
+    }
+}
+
+T.C. -> O(n1+n2)
+S.C. -> O(1)
+
+
+Optimal Solution :- The solution is to use an approach where we take first x elements from the smaller array and n1+n2+1/2 - x elements from larger array
+and then put mid1 at the xth element of smaller array and mid2 at the (n1+n2+1/2 - mid1)th element of larger array.
+Then find l1 as smallerarray[mid1-1] and l2 as largerarray[mid2-1] and r1 as smallerarray[mid1] and largerarray[mid2]
+and then check where is the correct positioning of elements is occuring such that the resultant array is sorted i.e. i1 <=r2 and l2<=r1.
+if yes, then if the n1+n2%2==0, then return max(l1,l2)
+else return (max(l1,l2)+min(r1+r2))/2.0.
+
+
+if in case, l1>r2 then we need to go toleft of smaller array i.e. do h=mid1-1
+else l=mid1+1
+
+
+Code:-
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        // Optimal Solution.
+
+        // Steps
+        // Step 1. Find the smaller sized array 
+        int n1=nums1.length;
+        int n2=nums2.length;
+
+        int mid1=0,mid2=0,n=0,l=0,h=0;
+
+        n=n1+n2;
+
+        if(n1>n2)   return findMedianSortedArrays(nums2,nums1);
+
+        h=n1;
+
+        while(l<=h)
+        {
+            mid1=(l+h)/2;
+            mid2=(n1+n2+1)/2 - mid1;
+            int l1=Integer.MIN_VALUE;
+            int l2=Integer.MIN_VALUE;
+            int r1=Integer.MAX_VALUE;
+            int r2=Integer.MAX_VALUE;
+
+            if(mid1>0) l1=nums1[mid1-1];
+            if(mid2>0) l2=nums2[mid2-1];
+
+            if(mid1<=n1-1) r1=nums1[mid1];
+            if(mid2<=n2-1) r2=nums2[mid2];
+
+            if(l1<=r2&&l2<=r1)
+            {
+                if(n%2!=0) return Math.max(l1,l2);
+                else
+                {
+                    
+                 return (double)(Math.max(l1,l2)+Math.min(r1,r2))/2.0;
+                }
+            }
+            else if(l1>r2)
+                h=mid1-1;
+            else
+                l=mid1+1;
+        }
+
+        return 0;
+
+    }
+}
+
+T.C. -> O(min(logn,logm)) ~ n -> length of nums1 and m -> length of nums2
+S.C. -> O(1)
