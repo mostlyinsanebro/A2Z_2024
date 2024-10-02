@@ -4,7 +4,7 @@ https://www.geeksforgeeks.org/problems/median-of-2-sorted-arrays-of-different-si
 https://www.naukri.com/code360/problems/median-of-two-sorted-arrays_985294?leftPanelTabValue=PROBLEM
 
 Brute Force Solution:-
-Store teh union of two arrays in the third array in sorted manner and then get the median from that answer array.
+Store the union of two arrays in the third array in a sorted manner and then get the median from that answer array.
 
 Code:-
 class Solution {
@@ -60,7 +60,7 @@ S.C. -> O(n1+n2)
 
 
 Better Solution:- We don't need to store all the elements of the union in an extra array, we just need the elements for a particular index, store them
-in variables while traversing both the arrays simultaneously and then get the answer from there.
+in variables, while traversing both arrays simultaneously and then getting the answer from there.
 
 Code:-
 class Solution {
@@ -123,15 +123,15 @@ T.C. -> O(n1+n2)
 S.C. -> O(1)
 
 
-Optimal Solution :- The solution is to use an approach where we take first x elements from the smaller array and n1+n2+1/2 - x elements from larger array
+Optimal Solution:- The solution is to use an approach where we take first x elements from the smaller array and n1+n2+1/2 - x elements from larger array
 and then put mid1 at the xth element of smaller array and mid2 at the (n1+n2+1/2 - mid1)th element of larger array.
 Then find l1 as smallerarray[mid1-1] and l2 as largerarray[mid2-1] and r1 as smallerarray[mid1] and largerarray[mid2]
-and then check where is the correct positioning of elements is occuring such that the resultant array is sorted i.e. i1 <=r2 and l2<=r1.
+and then check where the correct positioning of elements is occurring such that the resultant array is sorted i.e. i1 <=r2 and l2<=r1.
 if yes, then if the n1+n2%2==0, then return max(l1,l2)
 else return (max(l1,l2)+min(r1+r2))/2.0.
 
 
-if in case, l1>r2 then we need to go toleft of smaller array i.e. do h=mid1-1
+if in case, l1>r2 then we need to go to the left of smaller array i.e. do h=mid1-1
 else l=mid1+1
 
 
@@ -141,7 +141,7 @@ class Solution {
         // Optimal Solution.
 
         // Steps
-        // Step 1. Find the smaller sized array 
+        // Step 1. Find the smaller-sized array 
         int n1=nums1.length;
         int n2=nums2.length;
 
