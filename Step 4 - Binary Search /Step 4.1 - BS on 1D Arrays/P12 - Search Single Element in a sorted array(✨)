@@ -3,6 +3,7 @@ https://www.geeksforgeeks.org/problems/find-the-element-that-appears-once-in-sor
 
 Solution:-
 
+
 Brute Force:- We know that every element appears 2 times and one appears only once, so we can traverse the array and check which element appears only once
 by checking the previous and next elements for every element in the array.
 
