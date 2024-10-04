@@ -1,0 +1,27 @@
+Problem Link:-
+https://leetcode.com/problems/linked-list-cycle/
+https://www.geeksforgeeks.org/problems/detect-loop-in-linked-list/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+
+Optimal Solution:-
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+
+        boolean loop=false;
+
+        while(fast!=null&&fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+
+            if(slow==fast)
+            {
+                loop=true;
+                break;
+            }
+        }
+        return loop;
+    }
+}
+
