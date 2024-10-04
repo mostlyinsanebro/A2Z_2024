@@ -44,7 +44,7 @@ Node deleteK(Node head,int k)
     c++;
     if(c==k)
     {
-      prev.next.next=temp.next;
+      prev.next=temp.next;
       temp.next=null;
       break;
     }
@@ -75,7 +75,7 @@ Node deleteValue(Node head,int val)
   {
     if(temp.data==val)
     {
-      prev.next.next=temp.next;
+      prev.next=temp.next;
       temp.next=null;
       break;
     }
