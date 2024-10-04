@@ -1,0 +1,72 @@
+Problem Link:-
+https://www.naukri.com/code360/problems/reverse-linked-list_920513
+https://leetcode.com/problems/reverse-linked-list/description/
+
+
+Brute Solution:- The approach is to put the Linked List in al and then reverse the al. After that, create a new LL out of the reversed al and return it's head.
+
+Code:-
+class Solution {
+    public ArrayList reverse(ArrayList<Integer> al)
+    {
+        int l=0,r=al.size()-1;
+        int t=0;
+        while(l<=r)
+        {
+            t=al.get(l);
+            al.set(l,al.get(r));
+            al.set(r,t);
+            l++;
+            r--;
+        }
+        return al;
+    }
+    public ListNode reverseList(ListNode head) {
+
+        if(head==null) return null;
+        ListNode temp=head;
+        ArrayList<Integer> al= new ArrayList<>();
+
+        while(temp!=null)
+        {
+            al.add(temp.val);
+            temp=temp.next;
+        }
+
+        reverse(al);
+
+        head=new ListNode(al.get(0));
+        temp=head;
+        for(int i=1;i<al.size();i++)
+        {
+            ListNode n=new ListNode(al.get(i));
+            temp.next=n;
+            temp=temp.next;
+        }
+        return head;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(N)
+
+Optimal Approach:- Change the pointers.
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null) return head;
+        ListNode prev=null;
+        ListNode curr=head;
+        ListNode ahead=head.next;
+
+        while(ahead!=null)
+        {
+            curr.next = prev;
+            prev=curr;
+            curr=ahead;
+            ahead=ahead.next;
+        }
+
+        curr.next=prev;
+        return curr;
+    }
+}
