@@ -2,6 +2,34 @@ Problem Link:-
 https://leetcode.com/problems/linked-list-cycle/
 https://www.geeksforgeeks.org/problems/detect-loop-in-linked-list/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 
+Brute Force Solution:-
+The solution says to use a hashSet ds. We store the nodes in HashSet as we traverse the LL and if we find any node already in the LL, that means that the node
+has already been visited and there is a loop in the LL.
+
+Code:-
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        HashSet<ListNode> set=new HashSet<>();
+
+        ListNode temp=head;
+
+        while(temp!=null)
+        {
+            if(set.contains(temp))
+                return true;
+
+            set.add(temp);
+
+            temp=temp.next;
+        }
+
+        return false;
+    }
+}
+
+T.C. -> O(N*2logN) ~ if insertion and selection from hashSet takes logN time.
+S.C. -> O(N)
+
 Optimal Solution:-
 public class Solution {
     public boolean hasCycle(ListNode head) {
@@ -25,3 +53,10 @@ public class Solution {
     }
 }
 
+T.C. -> O(N)
+S.C. -> O(1)
+
+INTUITION:-
+The intuition is that we are moving slow pointer by one and fast pointer by 2 and effectively fast is moving towards slow with double the pace as slow is moving away from fast,
+thus there will always be a point when fast reaches slow and the distance between them continues to reduce by one with each step and it is bound to come down to 0
+eventually. Thus, we are using the tortoise-hare approach here.
