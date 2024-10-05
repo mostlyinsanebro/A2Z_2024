@@ -1,0 +1,70 @@
+Problem Link:-
+https://leetcode.com/problems/linked-list-cycle-ii/description/
+https://www.geeksforgeeks.org/problems/find-the-first-node-of-loop-in-linked-list--170645/1
+
+Brute Force Solution:-
+Use a hashMap and traverse the array while keeping the occurrences in the map as well and on finding the node already there in HashMap, then return it as an answer.
+
+Code:-
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        HashMap<ListNode,Integer> map= new HashMap<>();
+
+        ListNode temp=head;
+
+        while(temp!=null)
+        {
+            if(map.containsKey(temp)) return temp;
+            map.put(temp,map.getOrDefault(temp,0)+1);
+            temp=temp.next;
+        }
+        return null;
+        
+    }
+}
+
+Note:- Store the Node as key and not the value as key.
+
+T.C.-> O(N*2logN) ~ lgN if map tales logN for insertion and selection and 1 if map takes O(1) for insertion and selection.
+S.C. -> O(N)
+
+
+Optimal Solution:-
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode fast=head;
+        ListNode slow=head;
+
+        while(fast!=null&&fast.next!=null)
+        {
+            fast=fast.next.next;
+            slow=slow.next;
+
+            if(fast==slow)
+            {
+                slow=head;
+                while(fast!=slow)
+                {
+                    slow=slow.next;
+                    fast=fast.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+        
+    }
+}
+
+T.C.-> O(N)
+S.C. -> O(1)
+
+INTUITION:- The intuition is that when the slow reaches the start of the loop, suppose it has covered L1 distance from the start, then fast would have covered 
+2*L1 distance from the start as it moved twice as fast as slow. Now, the distance from fast to low is d. At the point when low and fast have met in the loop, the fast
+pointer would have traveled a distance of 2*d, and thus slow would have moved a distance of d, thus the loop is l1+d, this can be rightly said.
+
+Now, the point of collision is d from the start of the loop and the total length of the loop is l1+d, thus to reach there again, we would need to go l1 places ahead.
+Now, we are not storing l1 anywhere but we know that the start of loop is l1 from the start of LL, so we will place slow at the start of LL and fast will remain at the 
+collision point.
+
+We will increase the pointer one by one for each fast and slow pointer and they will meet at the start only after travelling l1 distance.
