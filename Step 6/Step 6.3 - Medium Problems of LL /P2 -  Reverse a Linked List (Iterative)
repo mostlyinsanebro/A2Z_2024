@@ -53,6 +53,30 @@ S.C. -> O(N)
 Alternative Brute Force:- Take a stack, traverse the LL, and put all elements in the stack. Now, keep retrieving the elements from the stack and keep putting them 
 in the linked list, that will reverse the LL but in terms of data and not the node.
 
+Code:-
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        Stack<Integer> st = new Stack<>();
+
+        ListNode temp=head;
+        while(temp!=null)
+        {
+            st.push(temp.val);
+            temp=temp.next;
+        }
+
+        temp=head;
+        while(temp!=null)
+        {
+            temp.val=st.pop();
+            temp=temp.next;
+        }
+        return head;
+    }
+}
+
+T.C. -> O(2N) ~ for traversing the LL twice.
+S.C. -> O(N) ~ for storing elements of LL in stack.
 
 Optimal Approach:- Change the pointers.
 class Solution {
