@@ -32,7 +32,8 @@ T.C. -> O(N*logN) ~ if the selection and insertion in HashMap take logN time.
 S.C. -> O(N)
 
 
-Better Approach:- Find the starting point of the Linked List and then find the length of the loop using that starting point.
+Optimal Approach:- Find if there is a loop in LL and where we get fast and slow as equal, then traverse till the pointer comes back to that 
+same pointer and count the length of the loop.
 
 Code:-
 
