@@ -4,6 +4,31 @@ https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-
 
 Solution:- 
 Brute Force:- Do a linear search and find the first and last occurence of an element.
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int fo=-1;
+        int lo=-1;
+
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]==target)
+            {
+                fo=i;
+                lo=i;
+                while(i<nums.length&&nums[i]==target)
+                {
+                    lo=i;
+                    i++;
+                }
+            }
+        }
+        int ans[]=new int[2];
+        ans[0]=fo;
+        ans[1]=lo;
+        return ans;
+    }
+}
+
 
 Optimal Solution:-
 Use Binary Search
