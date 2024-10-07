@@ -50,6 +50,10 @@ class Solution {
 T.C. -> O(N)
 S.C. -> O(N)
 
+Alternative Brute Force:- Take a stack, traverse the LL, and put all elements in the stack. Now, keep retrieving the elements from the stack and keep putting them 
+in the linked list, that will reverse the LL but in terms of data and not the node.
+
+
 Optimal Approach:- Change the pointers.
 class Solution {
     public ListNode reverseList(ListNode head) {
