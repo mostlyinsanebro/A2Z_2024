@@ -4,7 +4,7 @@ https://www.geeksforgeeks.org/problems/find-length-of-loop/1?utm_source=youtube&
 
 
 Brute Force Solution: Using a HashMap to store the indexes of each node, if the LL reaches the end, then there is no loop. If a node is traversed twice in the 
-hashMap, that means a loop exists in the LL and return the previous inserted node's index - the index of current element, that will give the length of loop in LL.
+hashMap, that means a loop exists in the LL and returns the previous inserted node's index - the index of current element, that will give the length of loop in LL.
 
 Code:-
 class Solution {
@@ -30,3 +30,44 @@ class Solution {
 
 T.C. -> O(N*logN) ~ if the selection and insertion in HashMap take logN time.
 S.C. -> O(N)
+
+
+Better Approach:- Find the starting point of the Linked List and then find the length of the loop using that starting point.
+
+Code:-
+
+class Solution {
+    // Function to find the length of a loop in the linked list.
+    public int countNodesinLoop(Node head) {
+        // Add your code here.
+        Node fast=head;
+        Node slow=head;
+        int ans=1;
+        while(fast!=null&&fast.next!=null)
+        {
+            fast=fast.next.next;
+            slow=slow.next;
+            
+            if(fast==slow)
+            {
+                ans=1;
+                fast=slow.next;
+                while(fast!=slow)
+                {
+                    fast=fast.next;
+                    ans++;
+                }
+                return ans;
+            }
+        }
+        return 0;
+       
+        
+    }
+}
+
+
+T.C. -> O(N)
+S.C. -> O(1)
+
+
