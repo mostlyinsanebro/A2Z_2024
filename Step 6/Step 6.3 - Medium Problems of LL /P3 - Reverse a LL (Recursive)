@@ -1,0 +1,27 @@
+Problem Link:-
+https://leetcode.com/problems/reverse-linked-list/
+
+
+Solution:-
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null) return head;
+        return reverse(null,head,head.next);
+    }
+    public ListNode reverse(ListNode prev,ListNode curr,ListNode ahead)
+    {
+        if(ahead==null)
+        {
+            curr.next=prev;
+            return curr;
+        }
+
+        curr.next=prev;
+
+        return reverse(curr,ahead,ahead.next);
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(N) ~ For storing the elements in the stack for recursion.
+
