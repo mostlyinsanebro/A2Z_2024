@@ -1,6 +1,6 @@
 Problem Link:-
 https://www.codingninjas.com/studio/problems/rotated-array_1093219?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
-
+https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 
 Solution:- It works on the concept that one half in sorted array is sorted and the other half is not sorted.
 
