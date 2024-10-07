@@ -14,14 +14,13 @@ class Solution {
         HashMap<Node,Integer> map = new HashMap<>();
         Node temp=head;
         
-        int ans=0,c=0;
+        int c=0;
         while(temp!=null)
         {
             if(map.containsKey(temp))
-                return ans-map.get(temp)+1;
+                return c-map.get(temp);
                 
             map.put(temp,c);
-            ans=c;
             c++;
             temp=temp.next;
         }
