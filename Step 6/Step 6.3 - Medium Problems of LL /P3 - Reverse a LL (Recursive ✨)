@@ -2,7 +2,7 @@ Problem Link:-
 https://leetcode.com/problems/reverse-linked-list/
 
 
-Solution:-
+Solution 1:-
 class Solution {
     public ListNode reverseList(ListNode head) {
         if(head==null||head.next==null) return head;
@@ -24,4 +24,25 @@ class Solution {
 
 T.C. -> O(N)
 S.C. -> O(N) ~ For storing the elements in the stack for recursion.
+
+// But we are passing extra parameters to achieve this. Let's solve it by passing no additional parameters to the recursion function.
+
+Solution 2:-
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null)
+            return head;
+
+        ListNode newHead = reverseList(head.next);
+
+        ListNode front = head.next;
+        front.next=head;
+        head.next=null;
+        return newHead;
+    }
+}
+
+T.C -> O(N)
+S.C. -> O(N)
+
 
