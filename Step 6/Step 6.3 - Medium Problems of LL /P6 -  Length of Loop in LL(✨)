@@ -1,0 +1,33 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/find-length-of-loop/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=find-length-of-loop
+
+
+
+Brute Force Solution: Using a HashMap to store the indexes of each node, if the LL reaches the end, then there is no loop. If a node is traversed twice in the 
+hashMap, that means a loop exists in the LL and return the previous inserted node's index - the index of current element, that will give the length of loop in LL.
+
+Code:-
+class Solution {
+    // Function to find the length of a loop in the linked list.
+    public int countNodesinLoop(Node head) {
+        // Add your code here.
+        HashMap<Node,Integer> map = new HashMap<>();
+        Node temp=head;
+        
+        int ans=0,c=0;
+        while(temp!=null)
+        {
+            if(map.containsKey(temp))
+                return ans-map.get(temp)+1;
+                
+            map.put(temp,c);
+            ans=c;
+            c++;
+            temp=temp.next;
+        }
+        return 0;
+    }
+}
+
+T.C. -> O(N*logN) ~ if the selection and insertion in HashMap take logN time.
+S.C. -> O(N)
