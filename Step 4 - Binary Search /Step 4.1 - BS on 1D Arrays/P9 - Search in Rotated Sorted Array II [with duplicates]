@@ -22,6 +22,9 @@ Code:-
             }
 
             // If low==mid==high
+            // This condition is written to trim down the search space. If the mid!=target and low==mid==high, then we can remove low and high from the search
+            // and then look for our answer. Also, we use continue, because we may still get mid==low==high, after trimming down the search space once, thus we 
+            // use continue sp that we can trim down the search space till this condition does not become false, low==mid==high...
             if(arr[low]==arr[mid]&&arr[mid]==arr[high])
             {
                 low++;
