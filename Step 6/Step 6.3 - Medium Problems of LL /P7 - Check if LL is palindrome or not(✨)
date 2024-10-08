@@ -1,0 +1,121 @@
+Problem Link:-
+https://leetcode.com/problems/palindrome-linked-list/description/
+
+
+Brute Force Solution:- Put the linked list in an arrayList and then check if arrayList elements are palindrome or not.
+
+Code:-
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ArrayList<Integer> al = new ArrayList<>();
+        ListNode temp=head;
+
+        while(temp!=null)
+        {
+            al.add(temp.val);
+            temp=temp.next;
+        }
+
+        int l=0,r=al.size()-1;
+        while(l<=r)
+        {
+            if(al.get(l)!=al.get(r))
+                return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+}
+
+T.C. -> O(2N)~O(N)
+S.C. -> O(N) => for the arrayList
+
+
+Appraoch 2:- We can use arrayList in place of stack
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        Stack<Integer> st = new Stack<>();
+
+        ListNode temp=head;
+
+        while(temp!=null)
+        {
+            st.push(temp.val);
+            temp=temp.next;
+        }
+
+        temp=head;
+        while(temp!=null)
+        {
+            if(temp.val!=st.pop())
+                return false;
+            temp=temp.next;
+        }
+
+        return true;
+
+    }
+}
+
+T.C. -> O(2N) ~ O(N)
+S.C. -> O(N) => for the arrayList
+
+
+Optimal Appraoch:- There are a few steps that we will have to follow to do it in place.
+Step 1). Find the middle (m1) of the LL.
+Step 2). Reverse the second half of the Linked List i.e. from mid.next -> end of LL.
+Step 3). Check if LL is palindrom or not by comparing the first and second half of LL.
+Step 4). Reverse the second half of LL and make it in the originla LL.
+
+Code:-
+class Solution {
+    public ListNode reverse(ListNode head)
+    {
+        if(head==null||head.next==null) return head;
+
+        ListNode newHead=reverse(head.next);
+
+        ListNode front = head.next;
+        front.next=head;
+        head.next = null;
+        return newHead;
+    }
+    public boolean isPalindrome(ListNode head) {
+        // Step 1). Find the middle of LL
+        ListNode fast = head;
+        ListNode slow=head;
+        while(fast.next!=null&&fast.next.next!=null)
+        {
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+
+        // Step 2). Reverse the second half of Linked List
+        ListNode newHead=reverse(slow.next);
+
+        ListNode first=head;
+        ListNode second=newHead;
+
+        // Step 3). Check if LL is palindrom or not by comparing the first and second half of LL.
+        while(second!=null)
+        {
+            if(first.val!=second.val)
+                return false;
+            first=first.next;
+            second=second.next;
+        }
+
+        // Step 4). Reverse the second half of LL and make it in the originla LL.
+        newHead = reverse(slow.next);
+        return true;
+    }
+}
+
+T.C. -> O(N/2)+O(N)
+S.C. -> O(1)
+
+
+
+
+
