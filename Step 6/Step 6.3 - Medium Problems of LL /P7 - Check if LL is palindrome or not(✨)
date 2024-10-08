@@ -1,6 +1,7 @@
 Problem Link:-
 https://leetcode.com/problems/palindrome-linked-list/description/
-
+https://www.geeksforgeeks.org/problems/check-if-linked-list-is-pallindrome/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+https://www.naukri.com/code360/problems/check-if-linked-list-is-palindrome_985248?leftPanelTabValue=PROBLEM
 
 Brute Force Solution:- Put the linked list in an arrayList and then check if arrayList elements are palindrome or not.
 
