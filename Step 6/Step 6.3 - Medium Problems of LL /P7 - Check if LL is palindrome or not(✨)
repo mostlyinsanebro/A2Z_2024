@@ -116,7 +116,7 @@ class Solution {
     }
 }
 
-T.C. -> O(N/2)+O(N)
+T.C. -> O(2N) ~O(N)
 S.C. -> O(1)
 
 Additionally, the reverse function can overflow the stack, so use iterative reversal of LinkedList. That is more memory efficient.
