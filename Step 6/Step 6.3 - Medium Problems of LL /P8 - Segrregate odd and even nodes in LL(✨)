@@ -1,9 +1,9 @@
 Problem Link:-
 https://leetcode.com/problems/odd-even-linked-list/description/
 https://www.naukri.com/code360/problems/segregate-even-and-odd-nodes-in-a-linked-list_1116100?leftPanelTabValue=PROBLEM
+https://www.geeksforgeeks.org/problems/segregate-even-and-odd-nodes-in-a-linked-list5035/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 
-
-Brute Force Method:- Use extra ArrayLists to store the values at even and odd indexes and then traverse the LL and put them there.
+Brute Force Method 1:- Use extra ArrayLists to store the values at even and odd indexes and then traverse the LL and put them there.
 
 Code:-
 class Solution {
@@ -51,5 +51,72 @@ class Solution {
 
 T.C. -> O(2N)
 S.C. -> O(N)
+
+Approach 2:- Store the even index values at the start of a new list and the odd index values at the end of the list and then traverse the list and replace
+elements of LL with the List.
+
+Code:-
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        ArrayList<Integer> al = new ArrayList<>();
+        if(head==null) return head;
+        ListNode temp=head;
+        while(temp!=null&&temp.next!=null)
+        {
+            al.add(temp.val);
+            temp=temp.next.next;
+        }
+        if(temp!=null) al.add(temp.val);
+
+        temp=head.next;
+        while(temp!=null&&temp.next!=null)
+        {
+            al.add(temp.val);
+            temp=temp.next.next;
+        }
+        if(temp!=null) al.add(temp.val);
+
+        temp=head;
+        int idx=0;
+        //System.out.print(al);
+        while(temp!=null)
+        {
+            temp.val=al.get(idx);
+            idx++;
+            temp=temp.next;
+        }
+        return head;
+    }
+}
+
+T.C. -> O(2N)
+S.C. -> O(N)
+
+
+Optimal Approach:- Change the pointers of the Linked List such that odd index nodes connect to the corresponding next odd index and even index nodes point to the
+next even index node and after that connect the last odd index node to the first even index node.
+
+Code:-
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head==null) return head;
+        ListNode odd = head;
+        ListNode even = head.next;
+
+        ListNode evenHead=even;
+        while(even!=null&&even.next!=null)
+        {
+            odd.next=odd.next.next;
+            odd=odd.next;
+            even.next=even.next.next;
+            even=even.next;
+        }
+        odd.next=evenHead;
+        return head;
+    }
+}
+
+T.C. -> O(N/2)
+S.C. -> O(1)
 
 
