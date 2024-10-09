@@ -1,7 +1,5 @@
-Problem Link:-
+Problem Link:- 
 https://leetcode.com/problems/odd-even-linked-list/description/
-https://www.naukri.com/code360/problems/segregate-even-and-odd-nodes-in-a-linked-list_1116100?leftPanelTabValue=PROBLEM
-https://www.geeksforgeeks.org/problems/segregate-even-and-odd-nodes-in-a-linked-list5035/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
 
 Brute Force Method 1:- Use extra ArrayLists to store the values at even and odd indexes and then traverse the LL and put them there.
 
