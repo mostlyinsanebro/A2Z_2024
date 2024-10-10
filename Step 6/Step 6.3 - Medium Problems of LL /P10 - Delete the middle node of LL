@@ -3,7 +3,7 @@ https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/descriptio
 https://www.geeksforgeeks.org/problems/delete-middle-of-linked-list/1
 https://www.naukri.com/code360/problems/delete-middle-node_763267
 
-Brute Force:- Fins the length of LL and then reach the node before middle node and delete middle node.
+Brute Force:- Fins the length of LL and then reaches the node before the middle node and deletes the middle node.
 Code:-
 class Solution {
     public ListNode deleteMiddle(ListNode head) {
@@ -57,6 +57,33 @@ class Solution {
         else
             slow.next=slow.next.next;
             return head;
+    }
+}
+
+T.C. -> O(N/2)
+S.C. -> O(1)
+
+
+
+Alternate Optimal Solution:-
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+       
+        // Edge Case
+        if(head==null||head.next==null) return null;
+        ListNode fast=head;
+        ListNode slow=head;
+
+        fast=fast.next.next;
+
+        while(fast!=null&&fast.next!=null)
+        {
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+
+        slow.next=slow.next.next;
+        return head;
     }
 }
 
