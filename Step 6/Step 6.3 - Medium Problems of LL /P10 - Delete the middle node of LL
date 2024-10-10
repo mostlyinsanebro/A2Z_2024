@@ -1,0 +1,67 @@
+Problem Link:-
+https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/
+https://www.geeksforgeeks.org/problems/delete-middle-of-linked-list/1
+https://www.naukri.com/code360/problems/delete-middle-node_763267
+
+Brute Force:- Fins the length of LL and then reach the node before middle node and delete middle node.
+Code:-
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        ListNode temp=head;
+        int idx=0;
+        if(head.next==null) return null;
+        while(temp!=null)
+        {
+            temp=temp.next;
+            idx++;
+        }
+        idx=idx/2;
+
+        temp=head;
+        int c=1;
+        while(c<idx&&temp!=null)
+        {
+            temp=temp.next;
+            c++;
+            if(c>=idx) break;
+        }
+
+        temp.next=temp.next.next;
+        return head;
+    }
+}
+
+T.C -> O(N)+O(N/2)  
+Worst Case:- O(2N)
+
+S.C. -> O(1)
+
+
+
+Optimal Solution:- Use tortoise hare method to reach the middle of LL and then remove the middle node.
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        ListNode fast=head;
+        ListNode slow=head;
+        ListNode prevSlow=head;
+        if(head.next==null) return null;
+        while(fast.next!=null&&fast.next.next!=null)
+        {
+            prevSlow=slow;
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        if(fast.next==null)
+        {
+            prevSlow.next=prevSlow.next.next;
+            return head;
+        }
+        else
+            slow.next=slow.next.next;
+            return head;
+    }
+}
+
+T.C. -> O(N/2)
+S.C. -> O(1)
+
