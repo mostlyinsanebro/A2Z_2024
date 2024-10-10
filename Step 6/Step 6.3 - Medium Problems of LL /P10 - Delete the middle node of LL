@@ -32,13 +32,11 @@ class Solution {
 }
 
 T.C -> O(N)+O(N/2)  
-Worst Case:- O(2N)
-
 S.C. -> O(1)
 
 
 
-Optimal Solution:- Use tortoise hare method to reach the middle of LL and then remove the middle node.
+Optimal Solution:- Use the tortoise-hare algorithm to reach the middle of LL and then remove the middle node.
 class Solution {
     public ListNode deleteMiddle(ListNode head) {
         ListNode fast=head;
