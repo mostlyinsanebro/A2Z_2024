@@ -1,0 +1,79 @@
+Problem Link:-
+https://leetcode.com/problems/sort-list/description/
+
+
+Brute Force Solution:- Transfer the LL into al and then merge sort the AL and then put the elements back in LL and return the answer.
+
+Code:-
+class Solution {
+    public ListNode sortList(ListNode head) {
+        ListNode temp=head;
+        ArrayList<Integer> al = new ArrayList<>();
+        while(temp!=null)
+        {
+            al.add(temp.val);
+            temp=temp.next;
+        }
+        mergeSort(al,0,al.size()-1);
+
+        temp=head;
+        int idx=0;
+        while(temp!=null)
+        {
+            temp.val=al.get(idx);
+            idx++;
+            temp=temp.next;
+        }
+        return head;
+    }
+
+    public void mergeSort(ArrayList al,int l,int h)
+    {
+        if(l>=h) return;
+
+        int mid=(l+h)/2;
+        mergeSort(al,l,mid);
+        mergeSort(al,mid+1,h);
+        merge(al,l,mid,h);
+    }
+    public void merge(ArrayList<Integer> al,int l,int mid,int h)
+    {
+        ArrayList<Integer> ans=new ArrayList<>();
+        int i=l;
+        int j=mid+1;
+        while(i<=mid&&j<=h)
+        {
+            if(al.get(i)<=al.get(j))
+            {
+                ans.add(al.get(i));
+                i++;
+            }
+            else
+            {
+                ans.add(al.get(j));
+                j++;
+            }
+        }
+
+        while(i<=mid)
+        {
+            ans.add(al.get(i));
+            i++;
+        }
+
+        while(j<=h)
+        {
+            ans.add(al.get(j));
+            j++;
+        }
+
+        for(i=0;i<ans.size();i++)
+        {
+            al.set(i+l,ans.get(i));
+        }
+    }
+}
+
+
+T.C. -> O(NlogN)
+S.C. -> O(2N)
