@@ -1,0 +1,82 @@
+Problem Link:-
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+https://www.naukri.com/code360/problems/delete-kth-node-from-end-in-linked-list_799912?leftPanelTabValue=SUBMISSION
+
+Brute Force Solution:- Find the length of the LL and then traverse to the node just before the nth node from the end and remove it.
+Code:-
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        
+        int l=0;
+        ListNode temp=head;
+
+        while(temp!=null)
+        {
+            temp=temp.next;
+            l++;
+        }
+
+        if(l==n) 
+        {
+            head=head.next;
+            return head;
+        }
+
+
+        temp=head;
+        int dl=l-n;
+        int idx=1;
+        while(idx<dl)
+        {
+            temp=temp.next;
+            idx++;
+        }
+         
+
+        ListNode nextNode = temp.next.next;
+        temp.next.next = null;
+        temp.next = nextNode;
+        return head;
+    }
+}
+
+T.C. -> O(N+(N-n)) ~ N is the length of LL and n is the input value of the position from where we want to remove the node from the end of LL.
+Worst Case:- O(2N)
+S.C. -> O(1)
+
+
+Optimal Approach:- The approach is to first move my pointer, fast, from the start and move it by n steps from the start, now take another pointer slow and place it at the
+start, now keep traversing both the fast and slow by one till fast reaches the end of LL. When fast reaches the end of LL, slow will reach at nth from the end
+because when we took slow, it was n behind fast and when fast reaches N, slow will be at n from the end. Now, we can remove the Node and return our answer
+
+
+Code:-
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode fast=head;
+        int idx=0;
+        while(idx!=n)
+        {
+            fast=fast.next;
+            idx++;
+        }
+        if(fast==null)
+            return head.next;
+
+        ListNode slow=head;
+
+        while(fast.next!=null)
+        {
+            fast=fast.next;
+            slow=slow.next;
+        }
+
+        slow.next=slow.next.next;
+        return head;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(1)
+
+
