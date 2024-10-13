@@ -2,7 +2,6 @@ Problem Link:-
 https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
 https://www.naukri.com/code360/problems/delete-kth-node-from-end-in-linked-list_799912?leftPanelTabValue=SUBMISSION
 
-
 Brute Force Solution:- Find the length of the LL and then traverse to the node just before the nth node from the end and remove it.
 Code:-
 class Solution {
