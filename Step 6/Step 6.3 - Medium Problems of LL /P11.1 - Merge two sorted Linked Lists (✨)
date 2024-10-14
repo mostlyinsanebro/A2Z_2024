@@ -1,6 +1,7 @@
 Problem Link:-
 https://leetcode.com/problems/merge-two-sorted-lists/description/
-
+https://www.geeksforgeeks.org/problems/merge-two-sorted-linked-lists/1
+https://www.naukri.com/code360/problems/merge-two-sorted-linked-lists_800332
 
 Brute Force:- Traverse both the Linked Lists and put all the elements in the array, sort the array and then create a new Linked List out of that sorted array and 
 return the head.
