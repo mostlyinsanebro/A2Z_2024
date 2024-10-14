@@ -76,4 +76,4 @@ class Solution {
 
 
 T.C. -> O(NlogN)
-S.C. -> O(2N)
+S.C. -> O(N)
