@@ -1,5 +1,7 @@
 Problem Link:-
 https://leetcode.com/problems/sort-list/description/
+https://www.geeksforgeeks.org/problems/merge-two-sorted-linked-lists/1
+https://www.naukri.com/code360/problems/sort-linked-list_920517
 
 
 Brute Force Solution:- Transfer the LL into al and then merge sort the AL and then put the elements back in LL and return the answer.
@@ -162,6 +164,8 @@ class Solution {
 }
 
 T.C. -> O((N+N/2)logN) 
+S.C. -> O(1)
+
 S.C. -> O(N) [ Stack space ] 
 
 else, O(1)
