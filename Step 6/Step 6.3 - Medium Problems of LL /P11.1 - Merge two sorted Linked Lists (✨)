@@ -1,0 +1,102 @@
+Problem Link:-
+https://leetcode.com/problems/merge-two-sorted-lists/description/
+
+
+Brute Force:- Traverse both the Linked Lists and put all the elements in the array, sort the array and then create a new Linked List out of that sorted array and 
+return the head.
+
+Code:-
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1==null) return list2;
+        if(list2==null) return list1;
+        ArrayList<Integer> al = new ArrayList<>();
+        ListNode temp=list1;
+
+        while(temp!=null)
+        {
+            al.add(temp.val);
+            temp=temp.next;
+        }
+
+        temp=list2;
+        while(temp!=null)
+        {
+            al.add(temp.val);
+            temp=temp.next;
+        }    
+
+        Collections.sort(al);
+        ListNode newHead=new ListNode(al.get(0));
+        temp = newHead;
+        for(int i=1;i<al.size();i++)
+        {
+            ListNode n = new ListNode(al.get(i));
+            temp.next=n;
+            temp=temp.next;
+        }
+        return newHead;
+        
+    }
+}
+
+T.C. -> O(N1)+O(N2)+O(NlogN)+O(N)
+S.C. -> O(N) -> for array +O(N) for new LL
+
+N = N1+N2 where N1 is the elements in LL1 and N2 is the elements in LL2.
+
+
+Optimal Solution: Make use of the dummy node and then keep the next pointer pointing to the smaller of t1 and t2 which are initially set to the heads of ll1 and ll2 
+respectively and keep comparing and moving ahead in the lists while you reach the end of one of the lists.After that, add the remaining elements to the list
+and return the head.
+
+Code:- 
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+
+        if(list1==null) return list2;
+        if(list2==null) return list1;
+        ListNode t1=list1;
+        ListNode t2=list2;
+
+        ListNode newHead=new ListNode(0);
+        ListNode temp=newHead;
+
+        while(t1!=null&&t2!=null)
+        {
+            if(t1.val<=t2.val)
+            {
+                temp.next = t1;
+                t1=t1.next;
+            }
+            else
+            {
+                temp.next = t2;
+                t2=t2.next;
+            }
+            temp=temp.next;
+        }
+
+        while(t1!=null)
+        {
+            temp.next = t1;
+            t1=t1.next;
+            temp=temp.next;
+        }
+
+        while(t2!=null)
+        {
+            temp.next = t2;
+            t2=t2.next;
+            temp=temp.next;
+        }
+        newHead=newHead.next;
+        return newHead;
+    }
+}
+
+T.C. -> O(N) where N = N1+N2
+S.C. -> O(1)
+
+
+
