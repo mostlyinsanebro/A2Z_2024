@@ -1,0 +1,44 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=add-1-to-a-number-represented-as-linked-list
+
+
+Brute Force Solution:- Convert the list into number and then add 1 to it, after that convert it to a string and take the elements from the start of the string
+character by character and convert each into an integer, creatre node out of it and keep on creating the LL. Return the new head.
+
+Code:-
+class Solution {
+    public Node addOne(Node head) {
+        // code here.
+        Node temp=head;
+        Long num=0L;
+        
+        while(temp!=null)
+        {
+            num=num*10+temp.data;
+            temp=temp.next;
+        }
+        num++;
+        
+        String str = Long.toString(num);
+        Node newHead=new Node(-1);
+        Node newTemp=newHead;
+        
+        temp=head;
+        int i=0,val=0;
+        char ch=' ';
+        while(i<str.length())
+        {
+            ch=str.charAt(i);
+            i++;
+            val=ch-'0';
+            Node n = new Node(val);
+            newTemp.next=n;
+            newTemp=newTemp.next;
+        }
+        return newHead.next;
+        
+    }
+}
+
+Note:- This code fails as long can not store very large values.
+
