@@ -32,9 +32,9 @@ T.C. -> O(N1*1+N2*1) ~ if storing and fetching takes O(1) else O(N1logN1+N2 logN
 S.C. -> O(N1)
 
 
-Optimal Approach:- The intuition behind this approach is to find the length of both the lists and then check which list is having larger length and 
-then find the difference. Whatever the difference will be, we will traverse that many steps in the larger LL , so that the starting point of both the lists
-can be at same distance from their corresponding ends and this will help a lot in finding the first intersection point.
+Better Approach:- The intuition behind this approach is to find the length of both lists, check which list is a larger length, and 
+then find the difference. Whatever the difference will be, we will traverse that many steps in the larger LL, so that the starting point of both the lists
+can be at the same distance from their corresponding ends and this will help a lot in finding the first intersection point.
 Now, keep traversing the nodes one by one in both lists simultaneously and return the first intersecting node else null will be returned if there is no intersection
 pointy in the lists.
 
@@ -91,6 +91,36 @@ public class Solution {
     }
 }
 
-T.C. -> O(N+d) ~ where d is the difference in lengths of LL.
+T.C. -> O(N1) + O(N2) +O(N2-N1) + O(N1) => O(N1+2N2) ~ where d is the difference in lengths of LL.
 S.C. -> O(1)
+
+
+Optimal Solution:- This solution includes the approach of taking the temp pointer to the head of the opposite Linked List whenever it reaches null, that way
+when the pointer of the smaller List stands on the head of the other list after traversing the whole of its own list, both pointers will be standing at
+an equal distance from the end and thus the intersection point can be easily found.
+
+Code:-
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode temp1=headA;
+        ListNode temp2 = headB;
+
+        while(temp1!=temp2)
+        {
+            temp1=temp1.next;
+            temp2=temp2.next;
+
+            if(temp1==temp2) return temp1;
+
+            if(temp1==null) temp1=headB;
+            if(temp2==null) temp2=headA;
+        }
+        return temp1;
+    }
+}
+
+T.C. -> O(N1+N2)
+S.C. -> O(1)
+
+
 
