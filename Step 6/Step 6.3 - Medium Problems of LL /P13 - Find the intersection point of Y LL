@@ -1,0 +1,96 @@
+Problem Link:-
+https://leetcode.com/problems/intersection-of-two-linked-lists/description/
+
+
+Brute Force Solution:-
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode temp=headA;
+
+        HashSet<ListNode> set = new HashSet<>();
+
+        while(temp!=null)
+        {
+            set.add(temp);
+            temp=temp.next;
+        }
+
+        temp=headB;
+
+        while(temp!=null)
+        {
+            if(set.contains(temp))
+                return temp;
+
+            temp=temp.next;
+        }
+        return null;
+    }
+}
+
+T.C. -> O(N1*1+N2*1) ~ if storing and fetching takes O(1) else O(N1logN1+N2 logN2) ~ if storing and fetching takes logN time.
+S.C. -> O(N1)
+
+
+Optimal Approach:- The intuition behind this approach is to find the length of both the lists and then check which list is having larger length and 
+then find the difference. Whatever the difference will be, we will traverse that many steps in the larger LL , so that the starting point of both the lists
+can be at same distance from their corresponding ends and this will help a lot in finding the first intersection point.
+Now, keep traversing the nodes one by one in both lists simultaneously and return the first intersecting node else null will be returned if there is no intersection
+pointy in the lists.
+
+Code:-
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int l1=0,l2=0,d=0;
+
+        ListNode temp1=headA;
+        ListNode temp2=headB;
+
+        while(temp1!=null)
+        {
+            l1++;
+            temp1=temp1.next;
+        }
+
+        while(temp2!=null)
+        {
+            l2++;
+            temp2=temp2.next;
+        }
+
+        temp1=headA;
+        temp2=headB;
+        
+        int i=0;
+        if(l1>l2)
+        {
+            d = l1-l2;
+            while(i<d)
+            {
+                temp1=temp1.next;
+                i++;
+            }
+        }
+        else
+        {
+            d=l2-l1;
+            while(i<d)
+            {
+                temp2=temp2.next;
+                i++;
+            }
+        }
+
+        while(temp1!=null&&temp1!=temp2)
+        {
+            temp1=temp1.next;
+            temp2=temp2.next;
+        }
+        return temp1;
+
+    }
+}
+
+T.C. -> O(N+d) ~ where d is the difference in lengths of LL.
+S.C. -> O(1)
+
