@@ -1,0 +1,150 @@
+Problem Link:-
+https://leetcode.com/problems/add-two-numbers/ -- this problem seems a bit off, the addition logic is not correct.
+https://www.geeksforgeeks.org/problems/add-two-numbers-represented-by-linked-lists/1
+https://www.naukri.com/code360/problems/add-two-linked-lists_799487
+
+
+
+Leetcode Solution:-  Add them simply and add if there is a carry left at the end, then create a new node for that carry and add it to the tail of LL and return answer.
+Code:-
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // l1= reverse(l1);
+        // l2= reverse(l2);
+
+        ListNode temp1=l1;
+        ListNode temp2=l2;
+
+        ListNode newHead = new ListNode(-1); 
+        ListNode temp=newHead;
+
+        int sum=0,carry=0;
+        ListNode prev = null;
+
+        while(temp1!=null||temp2!=null)
+        {
+            sum=carry;
+
+            if(temp1!=null) sum+=temp1.val;
+            if(temp2!=null) sum+=temp2.val;
+            if(sum>=10)
+            {
+                carry = 1;
+                sum=sum%10;
+            }
+            else
+            {
+                carry=0;
+            }
+
+            ListNode n = new ListNode(sum);
+            temp.next = n;
+            temp=temp.next;
+            prev = temp;
+
+            if(temp1!=null) temp1=temp1.next;
+            if(temp2!=null) temp2=temp2.next;
+        }
+        newHead=newHead.next;
+        if(carry== 1)
+        {
+            ListNode n = new ListNode(1);
+            prev.next = n;
+        }
+        return newHead;
+    }
+}
+
+T.C. -> O(max(N1,N2))
+S.C. -> O(max(N1,N2)) 
+
+
+GFG and CN solution:- Reverse both the LL, add them and then return the answer using the carry formula.
+
+Code:-
+    class Solution {
+    // Function to add two numbers represented by linked list.
+    static Node addTwoLists(Node num1, Node num2) {
+        // code here
+        // return head of sum list
+        
+        num1 = reverse(num1);
+        num2 = reverse(num2);
+        
+        
+        Node head = new Node(-1);
+        Node temp=head;
+        
+        Node temp1=num1;
+        Node temp2=num2;
+        
+        Node prev = null;
+        
+        int sum=0,carry=0;
+        
+        while(temp1!=null||temp2!=null)
+        {
+            sum=carry;
+            
+            if(temp1!=null) sum+=temp1.data;
+            if(temp2!=null) sum+=temp2.data;
+            
+            
+            if(sum>=10)
+            {
+                carry=sum/10;
+                sum=sum%10;
+            }
+            else
+            {
+                carry=0;
+            }
+            
+            Node n = new Node(sum);
+            temp.next = n;
+            temp = temp.next;
+            prev=temp;
+            
+            
+            if(temp1!=null) temp1 = temp1.next;
+            if(temp2!=null)  temp2 = temp2.next;
+        }
+        
+        head = head.next;
+        head = reverse(head);
+        
+        if(carry!=0)
+        {
+            Node n = new Node(carry);
+            n.next = head;
+            head=n;
+        }
+        return head;
+        
+    }
+    
+    public static Node reverse(Node head)
+    {
+        
+        if(head==null||head.next==null) return head;
+        Node prev = null;
+        Node curr=head;
+        Node ahead = curr.next;
+        
+        while(ahead!=null)
+        {
+            curr.next = prev;
+            prev = curr;
+            curr=ahead;
+            ahead=ahead.next;
+        }
+        
+        curr.next = prev;
+        return curr;
+    }
+    
+}
+
+
+T.C. -> O(N1) + O(N2) + O(max(N1+N2)) + O(max(N1+N2)) ~ O(3N1) where N = N1+N2
+S.C. -> O(max(N1,N2)) ~ for creating and storing new LL.
