@@ -1,6 +1,6 @@
 Problem Link:-
 https://www.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=add-1-to-a-number-represented-as-linked-list
-
+https://www.naukri.com/code360/problems/add-one-to-linked-list_920557
 
 Brute Force Solution:- Convert the list into number and then add 1 to it, after that convert it to a string and take the elements from the start of the string
 character by character and convert each into an integer, creatre node out of it and keep on creating the LL. Return the new head.
@@ -40,5 +40,122 @@ class Solution {
     }
 }
 
-Note:- This code fails as long can not store very large values.
+Note:- This code fails as it can not store huge values.
+
+
+Better approach and one that works:- Reverse the LL because we need to add 1 to the last and then take a carry, keep adding the carry to the individual digit
+until the digit is 9, as soon as we get a number < 9, we add carry to it and break out. Reverse the LL and we have got 1 added to the LL.
+
+Code:-
+class Solution {
+    public Node addOne(Node head) {
+        // code here.
+        
+        Node newHead = reverse(head);
+        
+        Node temp = newHead;
+        
+        int carry=1;
+        while(temp!=null)
+        {
+            if(carry == 0) break;
+            
+            temp.data +=carry;
+            
+            if(temp.data==10)
+            {
+                temp.data=0;
+                carry=1;
+            }
+            else
+            {
+                carry=0;
+            }
+            
+            temp=temp.next;
+        }
+        
+        if(carry==0) return reverse(newHead);
+        
+        //System.out.println(carry);
+        
+        Node n = new Node(carry);
+        head = reverse(newHead);
+        n.next = head;
+        head = n;
+        return head;
+        
+        
+    }
+    public Node reverse(Node head)
+    {
+        if(head==null||head.next==null) return head;
+        
+        
+        Node prev=null;
+        Node curr=head;
+        Node ahead=curr.next;
+        
+        while(ahead!=null)
+        {
+            curr.next = prev;
+            prev=curr;
+            curr=ahead;
+            ahead = ahead.next;
+        }
+        curr.next = prev;
+        return curr;
+    }
+}
+
+T.C. -> O(3N) ~ because we are reversing it twice, so O(N) for each of that action and then O(N) for traversing it.
+S.C. -> O(1)
+
+Note:- This code fails in large test cases if we write the reverse using a recursive solution but a simple solution passes for it.
+
+Optimal Approach: We will use recursion for it.
+
+Code:-
+class Solution {
+    public Node addOne(Node head) {
+        // code here.
+        
+        int val = recAddOne(head);
+        if(val==1)
+        {
+            Node n = new Node(1);
+            n.next = head;
+            head=n;
+        }
+        return head;
+    }
+    
+    public int recAddOne(Node head)
+    {
+        if(head==null) return 1;
+        
+        int carry = recAddOne(head.next);
+        
+        if(carry==0) return carry;
+        
+        head.data += carry;
+        
+        if(head.data==10)
+        {
+            head.data=0;
+            return 1;
+        }
+        else
+            return 0;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(N) ~ for recursive stack space.
+
+Note:- Both the iterative and recursive solutions have their pros and cons, the recursive solution achieves the result w/o tampering with the data values i.e.
+does everything in place but takes O(N) as stack space.
+On the other hand, the iterative solution does not take any stack or extra space but it does the job in O(3N) i.e. takes 3 traversals and also tampers the links 
+of nodes in the LL to achieve the result.
+
 
