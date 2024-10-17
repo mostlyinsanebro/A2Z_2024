@@ -5,6 +5,8 @@ https://www.youtube.com/watch?v=0eKMU10uEDI&ab_channel=takeUforward
 Concepts:- A doubly Linked List is one where all the nodes in that LL contain data, next and prev where data contains the data of the node, next contains the pointer
 to the next node in the list and prev contains the pointetr to the previous node in the list.
 
+Use case:- DLL is used in our browser when we browse the different things there and can go to front or last using <- -> keys.
+
 Class for a DLL:-
 class Node
 {
