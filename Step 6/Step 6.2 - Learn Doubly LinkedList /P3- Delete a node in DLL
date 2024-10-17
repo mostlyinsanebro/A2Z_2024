@@ -1,0 +1,57 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/delete-node-in-doubly-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=delete-node-in-doubly-linked-list
+
+
+Solution:-
+class Solution {
+    public Node deleteNode(Node head, int x) {
+        // code here
+        
+        // First traverse to the xth node and then check if it is the head,tail or 
+        // middle node and delete accordingly.
+        
+        Node temp = head;
+        int c=0;
+        
+        while(temp!=null)
+        {
+            c++;
+            if(c==x) break;
+            
+            temp=temp.next;
+        }
+        
+        
+        // If there is only a single element in the LL
+        if(temp.next==null&&temp.prev==null)
+        {
+            return null;
+        }
+        // if the xth node is the head of LL
+        else if(temp.prev==null)
+        {
+            head=temp.next;
+            temp.next.prev = null;
+            temp.next=null;
+        }
+        // if the xth node is the tail of LL
+        else if(temp.next==null)
+        {
+            temp.prev.next=null;
+            temp.prev=null;
+        }
+        else
+        {
+            temp.prev.next = temp.next;
+            temp.next.prev=temp.prev;
+            temp.next=null;
+            temp.prev=null;
+        }
+        
+        return head;
+    }
+}
+
+
+T.C. -> O(N)
+S.C. -> O(1)
