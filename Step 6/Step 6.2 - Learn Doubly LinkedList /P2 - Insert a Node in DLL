@@ -1,0 +1,44 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/insert-a-node-in-doubly-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=insert-a-node-in-doubly-linked-list
+
+
+Solution:-
+class Solution {
+    // Function to insert a new node at given position in doubly linked list.
+    Node addNode(Node head, int p, int x) {
+        // Your code here
+        
+        int c=0;
+        Node temp=head;
+        
+        while(temp!=null)
+        {
+            
+            if(c==p) break;
+            
+            c++;
+            
+            temp=temp.next;
+        }
+        
+        Node nn = new Node(x);
+        
+        // If we are at the tail of LL
+         if(temp.next==null)
+        {
+            temp.next=nn;
+            nn.prev=temp;
+        }
+        else
+        {
+            temp.next.prev=nn;
+            nn.next=temp.next;
+            nn.prev=temp;
+            temp.next=nn;
+        }
+        return head;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(1)
