@@ -1,0 +1,29 @@
+Problem Link:-
+https://www.naukri.com/code360/problems/remove-duplicates-from-a-sorted-doubly-linked-list_2420283
+
+
+Code:-
+public class Solution {
+    public static Node uniqueSortedList(Node head) {
+        // Write your code here.
+        if(head==null) return head;
+
+        Node curr=head;
+        Node nextNode = head.next;
+
+        while(nextNode!=null)
+        {
+            if(curr.data!=nextNode.data)
+            {
+                curr.next=nextNode;
+                curr=nextNode;
+            }
+            nextNode = nextNode.next;
+        }
+        curr.next=nextNode;
+        return head;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(1)
