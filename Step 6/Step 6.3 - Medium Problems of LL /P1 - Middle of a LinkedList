@@ -2,6 +2,7 @@ Problem Link:-
 https://www.codingninjas.com/studio/problems/middle-of-linked-list_973250?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
 https://leetcode.com/problems/middle-of-the-linked-list/description/
 
+
 Solution:-
 Brute Force:- Take the count of LL and then half it and traverse to that node and return it.
 Code:-
