@@ -56,51 +56,38 @@ S.C. -> O(N) ~ for using extra array.
 
 Optimal Solution:- Use the concept of fast and slow pointers here. First make fast go to kth index and then start to increase both slow and fast by one..
 when fast reaches last node, break link b/w slow and slow.next and make link of fast with head and return slow's next as new head.
+
+Code:-
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
-        // Break the bond between n-kth node and n-k+1th node and make the n-k+1th node as the new head
-        // and join last node of list to head and return the new head.
+        if(head==null) return head;
+        int len=1,i=1;
+        ListNode temp=head;
 
-        if(head==null||head.next==null) return head;
-        int c=0,n=0;
-        ListNode fast=head;
-        ListNode slow = head;
-        ListNode newHead=null;
-
-        while(fast!=null)
+        while(temp.next!=null)
         {
-            fast=fast.next;
-            n++;
+            len++;
+            temp=temp.next;
+        }
+        if(k%len==0) return head;
+
+        temp.next=head;
+
+        k = k%len;
+
+        temp=head;
+        while(i!=len-k)
+        {
+            i++;
+            temp=temp.next;
         }
 
-
-        fast=head;
-
-        k=k%n;
-        if(k==0) return head;
-        System.out.println("length  = "+n+" rotate =  "+k);
-
-        while(fast!=null&&c!=k)
-        {
-            c++;
-            fast=fast.next;
-        }   
-
-
-        while(fast.next!=null)
-        {
-            slow=slow.next;
-            fast=fast.next;
-        }
-
-        // Break the link.
-        newHead = slow.next;
-        slow.next = null;
-        fast.next=head;
+        ListNode newHead=temp.next;
+        temp.next=null;
         return newHead;
-        
+
     }
 }
 
-T.C. -> O(2N)
+T.C. -> O(N+k)
 S.C. -> O(1)
