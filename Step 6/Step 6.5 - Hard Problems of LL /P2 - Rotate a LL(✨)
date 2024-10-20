@@ -1,5 +1,7 @@
 Problem Link:-
 https://leetcode.com/problems/rotate-list/
+https://www.geeksforgeeks.org/problems/rotate-a-linked-list/1
+https://www.naukri.com/code360/problems/rotate-linked-list_920454
 
 
 Brute Force Solution:- Put the Linked List in an array, rotate it and put elements back to the LL and return the head.
