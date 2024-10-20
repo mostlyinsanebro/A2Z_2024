@@ -54,8 +54,8 @@ T.C. -> O(2N)
 S.C. -> O(N) ~ for using extra array.
 
 
-Optimal Solution:- Use the concept of fast and slow pointers here. First make fast go to kth index and then start to increase both slow and fast by one..
-when fast reaches last node, break link b/w slow and slow.next and make link of fast with head and return slow's next as new head.
+Optimal Solution:- Travel to the end of LL and create link between end node and head node and then traverse to the kth node from the start and make the newHead
+as the k+1 th node and break link between kth and k+1th node and return newHead.
 
 Code:-
 class Solution {
