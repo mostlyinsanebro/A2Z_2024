@@ -1,0 +1,133 @@
+Problem Link:-
+https://leetcode.com/problems/reverse-nodes-in-k-group/description/
+
+
+Brute Force Solution:- This solution includes manipulating the node data and using an extra array.
+We will traverse the LL and will start putting elements of LL in an al and as soon as we reach the end of first subgroup of size k, we reverse the arrayList and then
+put all elements of that arrayList back to the LL for that subgroup and we continue this till we reach the end of LL.
+
+Code:-
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if(head==null) return head;
+
+        ListNode start=head;
+        ListNode temp=head;
+        int c=0,i=0;
+        ArrayList<Integer> al = new ArrayList<>();
+        while(temp!=null&&c!=k)
+        {
+            c++;
+            al.add(temp.val);
+            if(temp==null) break;
+            temp=temp.next;
+            if(c==k)
+            {
+                reverse(al);
+                i=0;
+                while(start!=temp)
+                {
+                    start.val=al.get(i);
+                    i++;
+                    start=start.next;
+                }
+                c=0;
+                i=0;
+                al=new ArrayList<>();
+            }
+        }
+        return head;
+    }
+
+    public static void reverse(ArrayList<Integer> al)
+    {
+        int l=0,h=al.size()-1;
+        int temp=0;
+        while(l<h)
+        {
+            temp=al.get(l);
+            al.set(l,al.get(h));
+            al.set(h,temp);
+            l++;
+            h--;
+        }
+    }
+}
+
+T.C. -> O(N+(N/k)*k) i.e. O(2N) ~ the code is traversing the LL once simply and whenever we reached k, we used to reverse the LL for that using an arrayList
+S.C. -> O((N/k)*k) i.e. O(N) => for the arrayList.
+
+
+Optimal Solution:-
+
+Code:- 
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if(head==null) return head;
+        ListNode temp=head;
+        ListNode nextNode = null;
+        ListNode prevNode  = null;
+        ListNode KNode = null;
+        ListNode newHead = null;
+
+        while(temp!=null)
+        {
+            KNode  = KNodes(temp,k);
+            //if(KNode!=null) System.out.println(KNode.val);
+            if(KNode==null)
+            {
+                if(nextNode!=null) prevNode.next = nextNode;
+                break;
+            }
+
+            nextNode = KNode.next;
+            KNode.next = null;
+            newHead = reverse(temp);
+
+            if(temp==head)
+            {
+                prevNode = head;
+                head = newHead;
+                temp=nextNode;
+            }
+            else
+            {
+                prevNode.next = newHead;
+                prevNode = temp;
+                temp=nextNode;
+            }
+        }
+        return head;
+    }
+
+    public static ListNode KNodes(ListNode temp,int k)
+    {
+        int c=0;
+        while(temp!=null&&c!=k-1)
+        {
+            temp=temp.next;
+            c++;
+        }
+        return temp;
+    }
+
+    public static ListNode reverse(ListNode temp)
+    {
+        ListNode prev=null;
+        ListNode curr=temp;
+        ListNode ahead=temp.next;
+
+        while(ahead!=null)
+        {
+            curr.next=prev;
+            prev=curr;
+            curr=ahead;
+            ahead=ahead.next;
+        }
+        curr.next=prev;
+        return curr;
+    }
+}
+
+T.C. -> O(2N)
+S.C. -> O(1)
