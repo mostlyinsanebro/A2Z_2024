@@ -1,5 +1,6 @@
 Problem Link:-
 https://leetcode.com/problems/reverse-nodes-in-k-group/description/
+https://www.naukri.com/code360/problems/reverse-list-in-k-groups_983644
 
 
 Brute Force Solution:- This solution includes manipulating the node data and using an extra array.
@@ -133,3 +134,90 @@ class Solution {
 
 T.C. -> O(2N)
 S.C. -> O(1)
+
+
+
+GFG Problem Link:-
+https://www.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
+
+Code:-
+class Solution {
+    public static Node reverse(Node node, int k) {
+        // Your code here
+        Node head=node;
+        Node temp=head;
+        Node nextNode=null;
+        Node prevNode=null;
+        Node KNode   =null;
+        Node newHead=null;
+        
+        while(temp!=null)
+        {
+            // Get the Kth Node from the list
+            KNode = KNode(temp,k);
+            
+            // If the Kth Node is null, then that means the LL is < k size, so break out.
+            if(KNode==null)
+            {
+                // If the next Node !=null, then make sure to join it with prev Node.
+                // if(nextNode!=null) prevNode.next=nextNode;
+                break;
+            }
+            
+            // Break the link between Kth Node and nextNode
+            nextNode = KNode.next;
+            KNode.next=null;
+            
+            // Reverse the separated LL and you will get a new head which will be the head
+            // of the reversed LL.
+            newHead = reverse(temp);
+            
+            // If temp==head means that the we are breaking down and reversing the first 
+            // subgroup of LL.
+            if(temp==head)
+            {
+                temp=nextNode;
+                prevNode=head;
+                head=newHead;
+            }
+            // for all the subsequent subgroups of LL after first sub-group.
+            else
+            {
+                prevNode.next = newHead;
+                prevNode=temp;
+                temp=nextNode;
+            }
+        }
+        return head;
+    }
+    
+    public static Node KNode(Node temp,int k)
+    {
+        int c=0;
+        
+        while(temp.next!=null&&c!=k-1)
+        {
+            temp=temp.next;
+            c++;
+        }
+        return temp;
+    }
+    
+    public static Node reverse(Node temp)
+    {
+        Node prev=null;
+        Node curr=temp;
+        Node ahead=temp.next;
+        while(ahead!=null)
+        {
+            curr.next=prev;
+            prev=curr;
+            curr=ahead;
+            ahead=ahead.next;
+        }
+        curr.next=prev;
+        return curr;
+    }
+}
+
+
