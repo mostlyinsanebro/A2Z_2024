@@ -1,0 +1,106 @@
+Problem Link:-
+https://leetcode.com/problems/rotate-list/
+
+
+Brute Force Solution:- Put the Linked List in an array, rotate it and put elements back to the LL and return the head.
+Code:-
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+
+        if(head==null) return head;
+        ArrayList<Integer> al = new ArrayList<>();
+
+        ListNode temp=head;
+        int n=0;
+        while(temp!=null)
+        {
+            al.add(temp.val);
+            n++;
+            temp=temp.next;
+        }
+
+        k=k%n;
+
+        reverse(al,0,al.size()-k-1);  ~ T.C. -> O(N-k)
+        reverse(al,al.size()-k,al.size()-1); ~ T.C. -> O(k)
+        reverse(al,0,al.size()-1); ~ T. . -> O(N)
+
+        temp=head;
+        int i=0;
+        while(temp!=null)
+        {
+            temp.val=al.get(i);
+            temp=temp.next;
+            i++;
+        }
+        return head;
+    }
+
+    public static void reverse(ArrayList<Integer> al,int l, int r)
+    {
+        int temp=-0;
+        while(l<r)
+        {
+            temp=al.get(l);
+            al.set(l,al.get(r));
+            al.set(r,temp);
+            l++;
+            r--;
+        }
+    }
+}
+
+T.C. -> O(2N)
+S.C. -> O(N) ~ for using extra array.
+
+
+Optimal Solution:- Use the concept of fast and slow pointers here. First make fast go to kth index and then start to increase both slow and fast by one..
+when fast reaches last node, break link b/w slow and slow.next and make link of fast with head and return slow's next as new head.
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        // Break the bond between n-kth node and n-k+1th node and make the n-k+1th node as the new head
+        // and join last node of list to head and return the new head.
+
+        if(head==null||head.next==null) return head;
+        int c=0,n=0;
+        ListNode fast=head;
+        ListNode slow = head;
+        ListNode newHead=null;
+
+        while(fast!=null)
+        {
+            fast=fast.next;
+            n++;
+        }
+
+
+        fast=head;
+
+        k=k%n;
+        if(k==0) return head;
+        System.out.println("length  = "+n+" rotate =  "+k);
+
+        while(fast!=null&&c!=k)
+        {
+            c++;
+            fast=fast.next;
+        }   
+
+
+        while(fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next;
+        }
+
+        // Break the link.
+        newHead = slow.next;
+        slow.next = null;
+        fast.next=head;
+        return newHead;
+        
+    }
+}
+
+T.C. -> O(2N)
+S.C. -> O(1)
