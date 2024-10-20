@@ -59,6 +59,8 @@ S.C. -> O((N/k)*k) i.e. O(N) => for the arrayList.
 
 
 Optimal Solution:-
+Approach:- Break the LL into K-sized LL one by one and reverse them accordingly. To attach the broken LL correctly with one another, handle the cases 
+separately for when the broken LL is the first LL or the one after that. Also, break out if the broken LL has a size smaller than k.
 
 Code:- 
 class Solution {
