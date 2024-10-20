@@ -1,0 +1,107 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/flattening-a-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=flattening-a-linked-list
+https://www.naukri.com/code360/problems/flatten-a-linked-list_1112655?leftPanelTabValue=SUBMISSION
+
+Brute Force Solution:-
+Traverse the Linked List from right -> left and for each node traverse the list from top -> bottom and put all elements in an arrayList and sort the arrayList.
+Create LL out of that arrayList and return the answer.
+
+Code:-
+class Solution {
+    // Function to flatten a linked list
+    Node flatten(Node root) {
+        // code here
+        ArrayList<Integer> al = new ArrayList<>();
+        
+        Node temp=root;
+        Node temp1=root;
+        while(temp!=null)
+        {
+            temp1=temp;
+            while(temp1!=null)
+            {
+                al.add(temp1.data);
+                temp1=temp1.bottom;
+            }
+            temp=temp.next;
+        }
+        
+        Collections.sort(al);
+        //System.out.println(al);
+        int i=0;
+        Node dummy=new Node(-1);
+        temp=dummy;
+        while(i!=al.size())
+        {
+            Node nn = new Node(al.get(i));
+            temp.bottom=nn;
+            temp=temp.bottom;
+            i++;
+        }
+        
+        return dummy.bottom;
+    }
+}
+
+T.C. -> O(N+N*logN+N) ~ N is the total number of elements in Linked List
+S.C. -> O(2N) ~ N for arrayList and N for LinkedList.
+
+Optimal Solution:- We are going to make use of 2 things for our optimal solution.
+1. The LL is sorted in vertical fashion.
+2. We can do the changes to LL in place and return the result.
+
+We will use recursion for it.
+
+Code:-
+class Solution {
+    // Function to flatten a linked list
+    Node flatten(Node root) {
+        // code here
+        if(root==null||root.next==null)
+            return root;
+            
+        Node newHead = flatten(root.next);
+        
+        newHead = merge(root,newHead);
+        
+        return newHead;
+    }
+    
+    Node merge(Node l1,Node l2)
+    {
+        if(l2==null) return l1;
+        
+        Node t1=l1;
+        Node t2=l2;
+        Node dummy=new Node(-1);
+        Node temp=dummy;
+        
+        while(t1!=null&&t2!=null)
+        {
+            if(t1.data<=t2.data)
+            {
+                Node nn = new Node(t1.data);
+                t1=t1.bottom;
+                temp.bottom = nn;
+                temp=temp.bottom;
+            }
+            else
+            {
+                Node nn = new Node(t2.data);
+                t2=t2.bottom;
+                temp.bottom=nn;
+                temp=temp.bottom;
+            }
+            temp.next = null;
+        }
+        
+        if(t1!=null) temp.bottom=t1;
+        else temp.bottom = t2;
+        
+        return dummy.bottom;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(N) ~ only for stack space...
+
