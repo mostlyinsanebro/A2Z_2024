@@ -1,0 +1,96 @@
+Problem Link:-
+https://leetcode.com/problems/copy-list-with-random-pointer/
+
+
+Brute Force Solution:- First of all, we need to identify what is the issue with copying this LL like a simple singly LL. The issue is that the next pointer could be 
+pointing to any random node that has not been created yet and so we can not use that approach. Instead, we will have to use a HashMap for it, where the hashMap stores
+the original Node and it's copy node and while traversing the LL, we point our copied nodes to the correct nodes using the original LL.
+
+Code:-
+class Solution {
+    public Node copyRandomList(Node head) {
+        
+        if(head==null) return head;
+        
+        HashMap<Node,Node> map = new HashMap<>();
+        Node temp=head;
+
+        while(temp!=null)
+        {
+            Node newNode = new Node(temp.val);
+            map.put(temp,newNode);
+            temp=temp.next;
+        }
+
+        temp=head;
+
+        while(temp!=null)
+        {
+            Node currNode = map.get(temp);
+            currNode.next = map.get(temp.next);
+            currNode.random = map.get(temp.random);
+            temp=temp.next;
+        }
+        return map.get(head);
+    }
+}
+
+
+Note:- Original pointers can not be used anywhere.
+
+T.C. -> O(2N)
+S.C. -> O(N) + O(N) ~ one for HashMap and one for LL.
+
+
+Optimal Solution:- This solution involves 3 steps.
+
+Step 1). Insert the copy node for each node just right after each original node.
+Step 2). Traverse the originla LL and make the random pointers of the copy of each node connect to the copy nodes of random pointers of their corresponding 
+        original node.
+Step 3). Traverse the array and link the copy nodes with one another and restore the original LL to it's original position.
+
+Code:-
+class Solution {
+    public Node copyRandomList(Node head) {
+        Node temp=head;
+        Node nextNode = null;
+
+        while(temp!=null)
+        {
+            Node nn = new Node(temp.val);
+            nextNode = temp.next;
+            temp.next = nn;
+            nn.next = nextNode;
+            temp=nextNode;
+        }
+
+
+        temp=head;
+        while(temp!=null)
+        {
+            if(temp.random!=null)temp.next.random = temp.random.next;
+            else temp.next.random=null;
+            temp=temp.next.next;
+        }
+
+        temp=head;
+        Node dummy = new Node(-1);
+        temp=head;
+        Node res=  dummy;
+
+        while(temp!=null)
+        {
+           
+                res.next = temp.next;
+                res=res.next;
+                temp.next=temp.next.next;
+                temp=temp.next;
+            
+        }
+
+        return dummy.next;
+    }
+}
+
+T.C. -> O(3N)
+S.C.-> O(N) ~ which we are using to just create a copy and nothing else.
