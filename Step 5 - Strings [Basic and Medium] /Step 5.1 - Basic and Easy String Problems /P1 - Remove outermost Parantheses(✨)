@@ -1,0 +1,46 @@
+Problem Link:-
+https://leetcode.com/problems/remove-outermost-parentheses/description/
+https://www.geeksforgeeks.org/problems/outermost-parentheses/0
+
+
+
+Solution:- The algorithm for it goes like this:-
+If you encounter a (, then check if stack is empty or not and if stack if non-empty, add that ( top answer. We will add it to the top of stack nonetheless.
+If you encounter a ), then pop the top element from the stack and if then the size of stack !=0, then add that ) to the stack.
+Return the answer at last.
+
+class Solution {
+    public String removeOuterParentheses(String s) {
+        int i=0;
+        String ans="";
+        Stack<Character> st = new Stack<>();
+        char ch = ' ';
+        while(i!=s.length())
+        {
+            ch=s.charAt(i);
+
+            if(ch=='(')
+            {
+                if(st.size()!=0)
+                {
+                    ans+=ch;
+                }
+                st.push(ch);
+            }
+            else
+            {
+                st.pop();
+                if(st.size()!=0)
+                {
+                    ans+=ch;
+                }
+            }
+            i++;
+        }
+       return ans; 
+    }
+}
+
+
+T.C. -> O(N)
+S.C. -> O(N) ~ for the stack
