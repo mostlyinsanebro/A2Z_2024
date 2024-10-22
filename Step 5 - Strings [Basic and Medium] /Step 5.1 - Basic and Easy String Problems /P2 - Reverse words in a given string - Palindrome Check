@@ -1,0 +1,40 @@
+Problem Link:-
+https://leetcode.com/problems/reverse-words-in-a-string/description/
+https://www.naukri.com/code360/problems/reverse-words_696444?leftPanelTabValue=PROBLEM
+https://www.geeksforgeeks.org/problems/reverse-words-in-a-given-string5459/1
+
+
+Solution:-
+class Solution {
+    public String reverseWords(String s) {
+        char ch = ' ';
+        String lans="";
+        String ans="";
+        int i=0;
+        while(i!=s.length())
+        {
+            ch=s.charAt(i);
+            if(ch!=' ')
+            {
+                lans+=ch;
+            }
+            else if(ch==' '&&lans!="")
+            {
+                if(ans=="") ans=lans;
+                else ans = lans+" "+ans;
+                lans="";
+            }
+            i++;
+        }
+        if(lans!="")
+        {
+           if(ans=="") ans=lans;
+            else ans = lans+" "+ans; 
+        }
+
+        return ans;
+    }
+}
+
+T.C. -> O(str.len()))
+S.C. -> O(str.len())
