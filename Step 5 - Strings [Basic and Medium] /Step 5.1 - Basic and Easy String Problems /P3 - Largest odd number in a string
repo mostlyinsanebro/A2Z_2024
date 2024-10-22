@@ -1,0 +1,30 @@
+Problem Link:-
+https://leetcode.com/problems/largest-odd-number-in-string/
+https://www.geeksforgeeks.org/problems/largest-odd-number-in-string/0
+
+Solution:-
+class Solution {
+    public String largestOddNumber(String num) {
+        int i=num.length()-1;
+        char ch = ' ';
+        int chnum=0;
+        while(i>=0)
+        {
+            ch = num.charAt(i);
+            chnum = (int)(ch-'0');
+            if(chnum%2==0)
+            {
+                i--;
+                num = num.substring(0,num.length()-1);
+            }
+            else
+            {
+                return num;
+            }
+        }
+        return num;
+    }
+}
+
+T.C. -> O(len(str))
+S.C. -> O(1)
