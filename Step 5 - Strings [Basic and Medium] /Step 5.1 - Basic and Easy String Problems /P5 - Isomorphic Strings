@@ -1,0 +1,36 @@
+Problem Link:-
+https://leetcode.com/problems/isomorphic-strings/description/
+https://www.geeksforgeeks.org/problems/isomorphic-strings-1587115620/1
+https://www.geeksforgeeks.org/problems/isomorphic-strings-1587115620/1
+
+Solution:- We can use a hashMap for storing the value to be replaced and then replacing that value in the string and we can also use the same hashmap to check
+that no two different characters get replaced by the same character.
+
+Code:-
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        
+        if(s.length()!=t.length()) return false;
+
+        String ans="";
+
+        HashMap<Character,Character> map = new HashMap<>();
+
+        for(int i=0;i<s.length();i++)
+        {
+            if(map.containsKey(s.charAt(i))==false && map.containsValue(t.charAt(i))==true)
+                return false;
+            if(map.containsKey(s.charAt(i))==false)
+                map.put(s.charAt(i),t.charAt(i));
+
+            ans+=map.get(s.charAt(i));
+        }
+
+        return ans.equals(t);
+    }
+}
+
+T.C. -> O(N*logN) ~ if insertion and retrieval of values take logN time from HashMap
+S.C. -> O(N) ~ for hashmap and O(N) for string.  ~ where N is the length of the string.
+
+
