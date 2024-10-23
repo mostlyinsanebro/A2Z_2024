@@ -69,3 +69,5 @@ class Solution {
 
 T.C. -> O(N)
 S.C. -> O(2N)
+
+Need a better solution still..neither did pass in gfg and Coding Ninjas...
