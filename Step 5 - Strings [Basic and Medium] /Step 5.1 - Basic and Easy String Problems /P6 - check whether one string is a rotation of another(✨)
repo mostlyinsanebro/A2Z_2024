@@ -1,0 +1,71 @@
+Problem Link:-
+https://leetcode.com/problems/rotate-string/description/
+https://www.geeksforgeeks.org/problems/check-if-strings-are-rotations-of-each-other-or-not-1587115620/1
+https://www.naukri.com/code360/problems/check-if-one-string-is-a-rotation-of-another-string_1115683
+
+Brute Force Solution:- Make all comvbinations of str1 after rotation and check if any of the combinations equals st2. If yes, return true else if the combination
+reaches back to original str1 after all the rotations, then that means str1 can not be rotated to make str2 out of it.
+
+Code:-
+class Solution {
+    public boolean rotateString(String s, String goal) {
+       
+       if(s.equals(goal)) return true;
+       String ans=s;
+       char ch = s.charAt(0);
+       s = s.substring(1);
+       s=s+ch;
+       while(!s.equals(ans))
+       {
+            if(s.equals(goal)) return true;
+
+            ch = s.charAt(0);
+            s = s.substring(1);
+            s=s+ch;
+       }
+       return false;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(N) ~ for the ans string.
+
+
+Using Queue Solution:-
+class Solution {
+    public boolean rotateString(String s, String goal) {
+
+        if(s.length()!=goal.length()) return false;
+        Queue<Character> q1=new LinkedList<>();
+        Queue<Character> q2 = new LinkedList<>();
+
+        for(int i=0;i<s.length();i++)
+        {
+            q1.add(s.charAt(i));
+            q2.add(goal.charAt(i));
+        }
+        System.out.println(q2);
+
+        int k=0;
+        char ch = ' ';
+        while(k!=s.length())
+        {
+            System.out.println(q1);
+            if(q1.toString().equals(q2.toString()))
+            {
+                System.out.print(k);
+                return true;
+            }
+
+            ch = q1.poll();
+            q1.add(ch);
+            k++;
+        }
+
+        return false;
+
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(2N)
