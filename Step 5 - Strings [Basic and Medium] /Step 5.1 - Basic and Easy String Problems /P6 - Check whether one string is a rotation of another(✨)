@@ -6,6 +6,7 @@ https://www.naukri.com/code360/problems/check-if-one-string-is-a-rotation-of-ano
 Brute Force Solution:- Make all comvbinations of str1 after rotation and check if any of the combinations equals st2. If yes, return true else if the combination
 reaches back to original str1 after all the rotations, then that means str1 can not be rotated to make str2 out of it.
 
+
 Code:-
 class Solution {
     public boolean rotateString(String s, String goal) {
