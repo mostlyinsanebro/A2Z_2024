@@ -3,6 +3,7 @@ https://leetcode.com/problems/copy-list-with-random-pointer/
 https://www.geeksforgeeks.org/problems/clone-a-linked-list-with-next-and-random-pointer/1
 https://www.naukri.com/code360/problems/clone-a-linked-list-with-random-pointers_983604
 
+
 Brute Force Solution:- First of all, we need to identify what is the issue with copying this LL like a simple singly LL. The issue is that the next pointer could be 
 pointing to any random node that has not been created yet and so we can not use that approach. Instead, we will have to use a HashMap for it, where the hashMap stores
 the original Node and it's copy node and while traversing the LL, we point our copied nodes to the correct nodes using the original LL.
