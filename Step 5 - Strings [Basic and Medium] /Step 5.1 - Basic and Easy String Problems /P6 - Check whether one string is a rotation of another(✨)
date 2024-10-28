@@ -71,3 +71,54 @@ T.C. -> O(N*N)
 S.C. -> O(2N)
 
 Need a better solution still..neither did pass in gfg and Coding Ninjas...
+
+
+Best Solution: First of all make s1 = s1+s1 and then search the goal pattern in it, because if any rotation of the original s1 may be equal to the goal string, then
+the goal string will exist in the newly created s1 which is equal to s1+s2. Because any rotation of a string will exist as the substring in the string which will
+be obtained by adding the original string twice.
+
+Code:-
+ class Solution
+{
+    //Function to check if two strings are rotations of each other or not.
+    public static boolean areRotations(String s1, String s2 )
+    {
+        // Your code here
+        if(s1.length()!=s2.length()) return false;
+        s1 = s1+s1;
+        int i=0,j=0;
+        
+        while(i!=s1.length()&&s1.charAt(i)!=s2.charAt(j))
+        {
+            i++;
+        }
+        
+        while(i!=s1.length())
+        {
+            if(s1.charAt(i)==s2.charAt(j))
+            {
+                i++;
+                j++;
+            }
+            else
+            {
+                if(j==0) i++;
+                
+                else
+                {
+                    while(j>0&&s2.charAt(j)!=s1.charAt(i))
+                    {
+                        j--;
+                    }
+                }
+            }
+            
+            if(j==s2.length()) return true;
+        }
+        return false;
+    }
+    
+}
+
+T.C. -> O(3N)
+S.C. -> O(2N) ~ for the newly created string s1.
