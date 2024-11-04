@@ -1,0 +1,103 @@
+Problem Link:-
+https://leetcode.com/problems/valid-anagram/description/
+https://www.geeksforgeeks.org/problems/anagram-1587115620/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+https://www.naukri.com/code360/problems/anagram-pairs_626517?leftPanelTabValue=PROBLEM
+
+Solution:- 
+Traverse the first string and keep increasing the count of characters in the character hash array as they come, now traverse the second string and if the found
+character has occurence of > 0 already in character hash array, then decrease the count by one else increase the count by 1.
+If the two strings would be anagrams of one another, then the sum of arr will be 0 at the end, else it will be > 0.
+
+Code:-
+class Solution {
+    public boolean isAnagram(String s, String t) {
+
+        if(s.length()!=t.length()) return false;
+        
+        int arr[]=new int[26];
+
+        char ch=' ';
+        for(int i=0;i<s.length();i++)
+        {
+            ch= s.charAt(i);
+            arr[ch-'a']++;
+        }
+        int occ = 0;
+
+        for(int i=0;i<t.length();i++)
+        {
+            ch=t.charAt(i);
+            if(arr[ch-'a']>0) arr[ch-'a']--;
+            else arr[ch-'a']++;
+        }
+        int sum=0;
+
+       for(int i=0;i<arr.length;i++)
+       {
+            sum+=arr[i];
+       }
+
+        if(sum==0) return true;
+
+        return false;
+    }
+}
+
+T.C. -> O(N1+N2+26) ~ N1 is length of string 1, N2 is string of length 2, 26 is for traversing character array.
+S.C. -> O(26)  ~ for character array.
+
+
+Using HashMap:-
+class Solution {
+    public boolean isAnagram(String s, String t) {
+
+        if(s.length()!=t.length()) return false;
+        
+        HashMap<Character,Integer> map = new HashMap<>();
+
+        char ch=' ';
+        for(int i=0;i<s.length();i++)
+        {
+            ch= s.charAt(i);
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+
+        int occ = 0;
+
+                map.forEach((k,v) -> {
+            System.out.print(k+"->"+v);
+        });
+
+        for(int i=0;i<t.length();i++)
+        {
+            ch=t.charAt(i);
+            if(map.containsKey(ch)&&map.get(ch)>0) occ = map.get(ch);
+            else return false;
+            occ--;
+
+            map.put(ch,occ);
+        }
+
+        
+        int arr[]={0};
+
+        map.forEach((k,v) -> {
+            arr[0]+=v;
+        });
+
+        
+                map.forEach((k,v) -> {
+            System.out.print(k+"->"+v);
+        });
+System.out.print(arr[0]);
+        if(arr[0]==0) return true;
+
+        return false;
+    }
+}
+
+
+T.C.-> O(logN1+logN2+logN1)
+S.C. -> O(N1)
+
+
