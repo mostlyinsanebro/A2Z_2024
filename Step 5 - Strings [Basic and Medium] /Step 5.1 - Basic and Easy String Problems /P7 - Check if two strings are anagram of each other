@@ -101,3 +101,36 @@ T.C.-> O(logN1+logN2+logN1)
 S.C. -> O(N1)
 
 
+Optimal Solution:- Use a hash array, traverse the first string, and increase the occurrences of positions of elements found in the string s1.
+Now, traverse the string s2 and decrease the occurrence of positions of elements found in string s2, as soon as we get any occurrence to be < 0,
+then that means that they are not anagrams, else they are anagrams.
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()) return false;
+
+
+        int arr[]=new int[26];
+        char ch=' ';
+        for(int i=0;i<s.length();i++)
+        {
+            ch=s.charAt(i);
+            arr[ch-'a']++;
+        }
+
+        for(int i=0;i<t.length();i++)
+        {
+            ch=t.charAt(i);
+            arr[ch-'a']--;
+
+            if(arr[ch-'a']<0) return false;
+        }
+        return true;
+    }
+}
+
+T.C. -> O(N1+N2)
+S.C. -> O(26)
+
+
+
