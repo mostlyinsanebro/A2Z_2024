@@ -1,0 +1,66 @@
+Problem Link:-
+https://leetcode.com/problems/sort-characters-by-frequency/description/
+
+
+Solution:- 
+Approach:- First traverse the whole string and put the occurence of each element in a hash character array. After that, create an arrayList out of that ch,occ count
+pairs using class. Then, sort the arrayList using Comparator in descending order and after that, create a StringBuilder by traversing through the sorted arrayList
+having pairs of ch and their corresponding counts. Convert the created StringBuilder to String and return it as an answer.
+
+Question:- How does Comparator work and how does the compare work in order to sort the elements in arraylist in descending order.
+
+Code:-
+class Solution {
+    class Pair
+    {
+        int count;
+        char ch;
+
+        Pair(char ch,int count)
+        {
+            this.count=count;
+            this.ch=ch;
+        }
+    }
+    public String frequencySort(String s) {
+        int arr[]=new int[128];
+
+        for(char ch:s.toCharArray())
+        {
+            arr[ch]++;
+        }
+
+        ArrayList<Pair> al=new ArrayList<>();
+
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]>0)
+            {
+                al.add(new Pair((char)i,arr[i]));
+            }
+        }
+
+        Collections.sort(al,new Comparator<Pair>(){
+            public int compare(Pair a,Pair b)
+            {
+                return b.count-a.count;
+            }
+        });
+
+
+        StringBuilder sb=new StringBuilder();
+
+        for(Pair p:al)
+        {
+            for(int i=0;i<p.count;i++)
+            {
+                sb.append(p.ch);
+            }
+        }
+        return sb.toString();
+    }
+}
+
+
+T.C.-> O(N)+O(128)+O(NlogN)+O(NlogN)
+S.C.-> O(N)~ for arrayList+O(128)~for array
