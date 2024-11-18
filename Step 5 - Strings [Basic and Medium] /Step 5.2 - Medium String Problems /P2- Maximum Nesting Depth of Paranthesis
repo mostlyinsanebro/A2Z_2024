@@ -1,0 +1,31 @@
+Problem Link:-
+https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/description/
+https://www.naukri.com/code360/problems/maximum-nesting-depth-of-the-parentheses_8144741?leftPanelTabValue=PROBLEM
+https://www.geeksforgeeks.org/problems/maximum-nesting-depth-of-the-parentheses/0
+
+Code:- Using stack
+class Solution {
+    public int maxDepth(String s) {
+        Stack<Character> st=new Stack<>();
+
+        int max=0;
+        for(char ch:s.toCharArray())
+        {
+            if(ch=='(')
+                st.push(ch);
+            else if(ch==')'&&st.peek()=='(')
+            {
+                max=Math.max(max,st.size());
+                st.pop();
+            }
+            else
+                max=Math.max(st.size(),max);
+        }
+
+        return max;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(N)
+
