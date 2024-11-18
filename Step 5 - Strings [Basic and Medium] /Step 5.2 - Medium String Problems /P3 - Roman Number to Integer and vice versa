@@ -1,0 +1,66 @@
+Problem Link:-
+https://leetcode.com/problems/roman-to-integer/description/
+https://www.geeksforgeeks.org/problems/roman-number-to-integer3201/1
+https://www.naukri.com/code360/problems/roman-numeral-to-integer_981308
+
+Code:-
+class Solution {
+    public int romanToInt(String s) {
+        int sum=0;
+        char prev = ' ';
+        char ch=' ';
+
+        for(int i=0;i<s.length();i++)
+        {
+            ch = s.charAt(i);
+            if(i>=1) prev=s.charAt(i-1);
+            if(ch=='I') sum+=1;
+            else if(ch=='V') 
+            {
+                if(prev=='I')
+                    sum+=3;
+                else
+                sum+=5;
+            }
+            else if(ch=='X') 
+            {
+                if(prev=='I')
+                    sum+=8;
+                else
+                sum+=10;
+            }
+            else if(ch=='L') 
+            {
+                if(prev=='X')
+                    sum+=30;
+                else
+                    sum+=50;
+            }
+            else if(ch=='C') 
+            {
+                if(prev=='X')
+                    sum+=80;
+                else
+                    sum+=100;
+            }
+            else if(ch=='D') 
+            {
+                if(prev=='C')
+                    sum+=300;
+                else 
+                    sum+=500;
+            }
+            else 
+            {
+                if(prev=='C')
+                    sum+=800;
+                else
+                    sum+=1000;
+            }
+        }
+        return sum;
+    }
+}
+
+T.C.-> O(N)
+S.C.-> O(1)
