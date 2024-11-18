@@ -29,3 +29,30 @@ class Solution {
 T.C. -> O(N)
 S.C. -> O(N)
 
+
+Optimal Solution:- Using 2 variables. Increase the curr counter whenever an "(" is encountered and compare curr with max if it has become > max and replace max
+with curr if it has. Else if we encounter a ")", simply decrease the count.
+
+Code:-
+class Solution {
+    public int maxDepth(String s) {
+        int max=0,curr=0;
+
+        for(char ch:s.toCharArray())
+        {
+            if(ch=='(')
+            {
+                curr++;
+                max=Math.max(max,curr);
+            }
+            else if(ch==')')
+                curr--;
+        }
+        return max;
+    }
+}
+
+T.C.-> O(N)
+S.C.-> O(1)
+
+
