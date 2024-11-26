@@ -1,0 +1,191 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/count-number-of-substrings4528/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=count-number-of-substrings
+https://www.naukri.com/code360/problems/count-with-k-different-characters_1214627
+
+Brute Force Solution:-
+import java.util.*;
+public class Solution {
+    public static int countSubStrings(String str, int k) {
+        // Write your code here.
+            int ans=0,count=0;
+        char ch=' ';
+
+        int arr[] =new int[128];
+
+        for(int i=0;i<str.length();i++)
+        {
+            for(int j=i;j<str.length();j++)
+            {
+                count=0;
+                Arrays.fill(arr,0);
+                for(int z=i;z<=j;z++)
+                {
+                    ch=str.charAt(z);
+                    if(arr[ch]==0)
+                    {
+                        count++;
+                    }
+                    arr[ch]++;
+                }
+                
+                if(count==k) ans++;
+            }
+        }
+        return ans;
+    }
+}
+
+T.C. -> O(N^3)
+S.C. -> O(1)
+
+
+Optimal Solution:- Using HashMaps
+Code:-
+class Solution {
+    public int ansfork1(String str)
+    {
+        HashMap<Character,Integer> map=new HashMap<>();
+        
+        int i=-1;
+        int j=-1;
+        char ch=' ';
+        int sum=0;
+        
+        while(true)
+        {
+            boolean f1=false;
+            boolean f2=false;
+            
+            while(i<str.length()-1)
+            {
+                f1=true;
+                i++;
+                
+                ch=str.charAt(i);
+                map.put(ch,map.getOrDefault(ch,0)+1);
+                
+                if(map.size()==2)
+                {
+                    removeChars(ch,map);
+                    i--;
+                    break;
+                }
+            }
+            
+            while(j<i)
+            {
+                f2=true;
+                
+                if(map.size()==1)
+                    sum+=i-j;
+                
+                j++;
+                ch =str.charAt(j);
+                
+                removeChars(ch,map);
+                if(map.size()==0) break;
+                
+            }
+            if(f1==false&&f2==false) break;
+        }
+        return sum;
+    }
+    int countSubstr(String str, int k) {
+        // your code here
+        
+        if(k==1)
+        {
+            return ansfork1(str);
+        }
+        HashMap<Character,Integer> bH = new HashMap<>();
+        HashMap<Character,Integer> sH = new HashMap<>();
+        
+        int is=-1;
+        int ib=-1;
+        int sum=0,val=0;
+        int j=-1;
+        
+        boolean f1=false,f2=false,f3=false;
+        char ch=' ';
+        while(true)
+        {
+            f1=false;
+            f2=false;
+            f3=false;
+            while(ib<str.length()-1)
+            {
+                f1=true;
+                 ib++;
+                ch=str.charAt(ib);
+                bH.put(ch,bH.getOrDefault(ch,0)+1);
+                
+                if(bH.size()==k+1)
+                {
+                    removeChars(ch,bH);
+                    ib--;
+                    break;
+                }
+                
+               
+            }
+            
+            while(is<ib)
+            {
+                f2=true;
+                 is++;
+                ch=str.charAt(is);
+                sH.put(ch,sH.getOrDefault(ch,0)+1);
+                
+                if(sH.size()==k)
+                {
+                    removeChars(ch,sH);
+                    is--;
+                    break;
+                }
+                
+               
+            }
+            
+            while(j<is)
+            {
+                f3=true;
+                
+               
+                
+                if(bH.size()==k&&sH.size()==k-1)
+                    sum+=ib-is;
+                 j++;
+
+                    
+                ch=str.charAt(j);
+                
+                removeChars(ch,bH);
+                removeChars(ch,sH);
+                
+                if(bH.size()<k||sH.size()<k-1)
+                    break;
+                    
+
+                
+            }
+            
+            if(f1==false&&f2==false&&f3==false)  break;
+            
+            
+        }
+        return sum;
+        
+    }
+    
+    public static void removeChars(char ch, HashMap<Character,Integer> map)
+    {
+        if(map.get(ch)==1)
+            map.remove(ch);
+        else
+            map.put(ch,map.get(ch)-1);
+    }
+}
+
+
+T.C. -> O(N)
+S.C. -> O(1)
