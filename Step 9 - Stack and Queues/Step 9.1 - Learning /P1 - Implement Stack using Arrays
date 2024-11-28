@@ -1,0 +1,113 @@
+Stack - A ds that holds a certain kind of data, can be Integer, pair, Character, Long double or custom type.
+It follows LIFO(Last In First Out) mechanism to store data.
+
+Functions:- 
+push(x) :- pushes value on top of stack.
+pop() - pops out the value from top of the stack.
+top() - shows or prints the value at the top of stack.
+size() - shows the size of the Stack.
+
+Stack<Integer> st = new Stack<>();
+st.push(x)
+st.pop();
+st.top()
+st.size()
+
+Queue:- A ds that allows us to store and retrieve values in FIFO(First In First Out) manner.
+Functions:- 
+push(x) :- pushes value on top of queue.
+pop() - pops out the value from start of the queue.
+top() - shows or prints the value from the start of queue.
+size() - shows the size of the queue.
+
+Queue<Integer> q = new Queue<>();
+
+q.push(x)
+q.pop()
+q.top()
+q.size()
+
+Stack and Queues are present in Collections in Java.
+
+IMPLEMENTATION OF STACK USNG ARRAY:-
+For implementiong Stack using Arrays, we have to know the size of the ds, suppose it is 10...
+
+class StackImp
+{
+  int top=-1;
+  int st[]=new int[10]; ~ assuming the interviewer tells us to take an array of size 10.
+
+  public void push(int x)
+  {
+    if(top==st.length)
+    {
+      System.out.println("Stack Full");
+      return;
+    }
+
+    top++;
+    st[top]=x;
+  }
+
+  public int top()
+  {
+    if(top==-1)
+    {
+      System.out.println("Stack Empty");
+      return -1;
+    }
+    return st[top];
+  }
+
+  public void pop()
+  {
+    if(top==-1)
+    {
+      System.out.println("Stack Empty");
+      return -1;
+    }   
+
+    top--;
+  }
+
+  public int size()
+  {
+    return top+1;
+  }
+}
+
+Problem Link:- https://www.geeksforgeeks.org/problems/implement-stack-using-array/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=implement-stack-using-array
+Solution:-
+class MyStack {
+    private int[] arr;
+    private int top;
+
+    public MyStack() {
+        arr = new int[1000];
+        top = -1;
+    }
+
+    public void push(int x) {
+        // Your Code
+        top++;
+        if(top==1000) return;
+        
+        arr[top]=x;
+    }
+
+    public int pop() {
+        // Your Code
+        if(top==-1) return -1;
+        
+        int ans = arr[top];
+        top--;
+        return ans;
+    }
+}
+
+
+
+
+
+
+
