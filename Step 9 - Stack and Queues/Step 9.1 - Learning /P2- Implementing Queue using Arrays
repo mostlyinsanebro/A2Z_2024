@@ -1,0 +1,138 @@
+Code:- We are assuming that the interviwer will give a fixed sized array to us.
+
+class QueueImp
+{
+  int size=10;
+  int start=-1;
+  int end=-1;
+  int currSize=0;
+  int arr[]=new int[size];
+
+  void push(int x)
+  {
+    if(currSize==0)
+    {
+      end++;
+      start++;
+
+    }
+    else if(currSize==size)
+    {
+        System.out.println("Queue full");
+        return -1;
+    }
+    else
+    {
+      end = (end+1)%size;
+    }
+    arr[end]=x;
+    currSize++;
+  }
+
+int pop()
+{
+    if(currSize==0)
+    {
+        System.out.println("Queue empty");
+        return;
+    }
+    else if(start==0&&end==0)
+    {
+      end--;
+      currSize--;
+      return arr[start--];
+    }
+    else
+    {
+        start = (start+1)%size;
+        ans=arr[start];
+        currSize--;
+        return ans;
+    }
+}
+
+int top()
+{
+  if(start==-1)
+  {
+    System.out.println("Queue empty");
+    return -1;
+  }
+  return arr[start];
+  }
+
+int size()
+{
+  return currSize;
+}
+}
+
+
+Problem Link:-
+https://www.geeksforgeeks.org/problems/implement-queue-using-array/1
+
+Solution:-
+class MyQueue {
+
+    int front, rear;
+    int currSize;
+	int arr[] = new int[100005];
+	int size=arr.length;
+
+    MyQueue()
+	{
+		front=-1;
+		rear=-1;
+		currSize=0;
+	}
+	
+	//Function to push an element x in a queue.
+	void push(int x)
+	{
+	    // Your code here
+	    if(currSize==arr.length) return;
+	    else if(front==-1&&rear==-1)
+	    {
+	        front++;
+	        arr[++rear]=x;
+	        currSize++;
+	    }
+	    else
+	    {
+	        rear=(rear+1)%arr.length;
+	        arr[rear]=x;
+	        currSize++;
+	    }
+	} 
+
+    //Function to pop an element from queue and return that element.
+	int pop()
+	{
+		// Your code here
+		if(currSize==0) return -1;
+		else if(rear==0&&front==0)
+		{
+		    int ans=arr[front];
+		    front--;
+		    rear--;
+		    currSize--;
+		    return ans;
+		}
+		else
+		{
+		    int ans=arr[front];
+		    front=(front+1)%arr.length;
+		    currSize--;
+		    return ans;
+		}
+	} 
+}
+
+T.C. -> O(1)
+S.C.-> O(size)
+
+We can solve the S.C. problem by using LinkedList or ArrayList.
+
+        
+
+  
