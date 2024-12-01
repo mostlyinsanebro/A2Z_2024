@@ -105,6 +105,11 @@ class MyStack {
     }
 }
 
+NOTE:- The issue with this approach is that we are going to have a static Stack and we will not be able to increase the size of the stack even if we wanted to,
+we will have to use LinkedList in place of the static array to have a dynamic-sized Stack.
+
+For this, we will have to implement Stack using Linked-List.
+
 
 
 
