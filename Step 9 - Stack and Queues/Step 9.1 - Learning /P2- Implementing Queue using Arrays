@@ -70,6 +70,7 @@ int size()
 
 Problem Link:-
 https://www.geeksforgeeks.org/problems/implement-queue-using-array/1
+https://www.naukri.com/code360/problems/implement-queue-using-arrays_8390825?leftPanelTabValue=PROBLEM
 
 Solution:-
 class MyQueue {
