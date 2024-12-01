@@ -1,0 +1,182 @@
+Implementation:-
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+class Node
+{
+    int data;
+    Node next;
+    Node(int data)
+    {
+        this.data=data;
+    }
+}
+
+class QueueImp
+{
+    Node front;
+    Node rear;
+    int currSize;
+    QueueImp()
+    {
+        front=null;
+        rear=null;
+        currSize=0;
+    }
+
+    void push(int x)
+    {
+        if(front==null&&rear==null)
+        {
+            Node nn=new Node(x);
+            front=nn;
+            rear=nn;
+            currSize++;
+        }
+        else
+        {
+            Node nn=new Node(x);
+            rear.next=nn;
+            rear=rear.next;
+            currSize++;
+            }
+    }
+
+    int pop()
+    {
+        if(front==null) return -1;
+        else if(front==rear)
+        {
+            int ans=front.data;
+            front=null;
+            rear=null;
+            currSize--;
+            return ans;
+        }
+        else{
+            int ans=front.data;
+            Node temp=front;
+            front=front.next;
+            temp.next=null;
+            currSize--;
+            return ans;
+        }
+    }
+
+    int top()
+    {
+        if(front==null) return -1;
+        else 
+            return front.data;
+    }
+
+    int size()
+    {
+        return currSize;
+    }
+}
+class Solution {
+    public static void main(String[] args) {
+        // Write your code here
+        QueueImp q=new QueueImp();
+        q.push(7);
+        q.push(2);
+        q.push(3);
+        q.push(5);
+        System.out.println(q.pop());
+        System.out.println(q.top());
+        System.out.println(q.pop());
+        System.out.println(q.pop());
+        System.out.println(q.top());
+        System.out.println(q.pop());
+        System.out.println(q.size());
+        System.out.println(q.top());
+    }
+}
+
+T.C. -> O(1)
+S.C. -> O(size) ~ size of Queue.
+
+Problem Link:-
+https://www.naukri.com/code360/problems/implement-queue-using-linked-list_8161235
+https://www.geeksforgeeks.org/problems/implement-queue-using-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=implement-queue-using-linked-list
+
+Code:-
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ };
+
+ class Queue{
+     Node front;
+     Node rear;
+     void push(){};
+     Queue() {
+         front = null;
+         rear = null;
+     }
+ }
+
+ *****************************************************************/
+
+public class Solution extends Queue{
+    public void push(int x) {
+        // Write Your Code Here
+        Node nn = new Node(x);
+        if(front==null)
+        {
+            front=nn;
+            rear=nn;
+        }
+        else
+        {
+            rear.next=nn;
+            rear=rear.next;
+        }
+    }
+
+    public int pop() {
+        // Write Your Code Here
+        int ans;
+        if(front==null) return -1;
+        else if(front==rear) 
+        {
+            ans=front.data;
+            front=null;
+            rear=null;
+            return ans;
+        }
+        else
+        {
+            Node temp=front;
+            ans=front.data;
+            front=front.next;
+            temp.next=null;
+            return ans;
+        }
+    }
+}
+
+T.C. -> O(1)
+S.C. -> O(size) ~ size for storing the queue data.
