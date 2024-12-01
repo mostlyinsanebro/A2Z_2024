@@ -1,0 +1,62 @@
+Problem Links:-
+https://www.naukri.com/code360/problems/stack-using-queue_795152?leftPanelTabValue=PROBLEM
+https://leetcode.com/problems/implement-stack-using-queues/description/
+
+CN solution:-
+import java.util.*;
+public class Solution{
+    static class Stack {
+        // Define the data members.
+        int top;
+        Queue<Integer> q;
+        public Stack() {
+            // Implement the Constructor.
+            q = new LinkedList<>();
+            top=-1;
+        }
+
+        /*----------------- Public Functions of Stack -----------------*/
+
+        public int getSize() {
+            // Implement the getSize() function.
+            return q.size();
+        }
+
+        public boolean isEmpty() {
+            // Implement the isEmpty() function.
+            if(q.size()==0) return true;
+            return false;
+        }
+
+        public void push(int element) {
+            // Implement the push(element) function.
+            if(q.size()==0)
+            { q.add(element);
+            top=element;
+            }
+            else{
+                q.add(element);
+                int curr=0;
+                int dest=q.size()-1;
+                while(curr!=dest)
+                {
+                    int val=q.remove();
+                    q.add(val);
+                    curr++;
+                }
+            }
+        }
+
+        public int pop() {
+            // Implement the pop() function.
+            if(q.size()==0) return -1;
+            return q.remove();
+        }
+
+        public int top() {
+            // Implement the top() function.
+            if(q.size()==0) return -1;
+            return q.peek();
+        }
+    }
+}
