@@ -1,0 +1,165 @@
+Implementation:-
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+ class Node
+    {
+        int data;
+        Node next;
+
+        Node(int data,Node next)
+        {
+            this.data=data;
+            this.next=next;
+        }
+
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+
+     class StackImp
+    {
+        Node top;
+        int currSize;
+
+        StackImp()
+        {
+            top=null;
+            currSize=0;
+        }
+
+        void push(int x)
+        {
+            Node nn=new Node(x);
+            nn.next=top;
+            top=nn;
+            currSize++;
+        }
+
+        int pop()
+        {
+            if(currSize==0) return -1;
+            else
+            {
+                Node temp=top;
+                int ans;
+                if(top==null) ans= -1;
+                else ans= top.data;
+                top=top.next;
+                currSize--;
+                top.next=null;
+                //if(top==null) return -1;
+                 return ans;
+            }
+        }
+
+        int top()
+        {
+            if(top==null) return -1;
+            else return top.data;
+        }
+
+        int size()
+        {
+            return currSize;
+        }
+    }
+class Solution {
+    
+    
+    
+    public static void main(String[] args) {
+        // Write your code here
+
+        StackImp st=new StackImp();
+        st.push(4);
+        st.push(2);
+        st.push(3);
+        st.push(1);
+        System.out.println(st.top());
+        System.out.println(st.pop());
+        st.push(7);
+        System.out.println(st.top());
+        st.pop();
+        System.out.println(st.top());
+        System.out.println(st.size());
+        
+    }
+}
+
+
+Problem Link:-
+https://www.geeksforgeeks.org/problems/implement-stack-using-linked-list/1
+https://www.naukri.com/code360/problems/implement-stack-with-linked-list_630475
+
+Code:- 
+public class Solution {
+
+    static class Node{
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    static class Stack {
+        //Write your code here
+        Node top;
+        int currSize;
+
+        Stack()
+        {
+            //Write your code here
+            currSize=0;
+            top=null;
+        }
+
+        int getSize()
+        {
+            //Write your code here
+            return currSize;
+        }
+
+        boolean isEmpty()
+        {
+            //Write your code here
+            if(currSize==0) return true;
+            return false;
+        }
+
+        void push(int data)
+        {
+            //Write your code here
+            Node nn = new Node(data);
+            nn.next=top;
+            top=nn;
+            currSize++;
+        }
+
+        void pop()
+        {
+            //Write your code here
+            if(currSize==0) return;
+            Node temp=top;
+            top=top.next;
+            currSize--;
+            temp.next=null;
+        }
+
+        int getTop()
+        {
+            //Write your code here
+            if(top==null) return -1;
+            return top.data;
+        }
+    }
+}
+
+
+T.C.-> O(1)
+S.C.-> O(1) ~ as we are not using any extra space, just to store the elements.
+
