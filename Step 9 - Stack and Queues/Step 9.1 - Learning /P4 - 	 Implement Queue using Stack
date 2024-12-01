@@ -1,0 +1,51 @@
+Problem Links:-
+https://www.geeksforgeeks.org/problems/queue-using-stack/1
+https://www.naukri.com/code360/problems/queue-using-stack_799482
+https://leetcode.com/problems/implement-queue-using-stacks/
+
+L.C. Solution:-
+class MyQueue {
+    Stack<Integer> s1;
+    Stack<Integer> s2;
+
+    public MyQueue() {
+        s1 = new Stack<>();
+        s2 = new Stack<>(); 
+    }
+    
+    public void push(int x) {
+        if(s1.size()==0) s1.push(x);
+        else
+        {
+            while(s1.size()!=0)
+            {
+                int val=s1.pop();
+                s2.push(val);
+            }
+            s1.push(x);
+            while(s2.size()!=0)
+            {
+                int val=s2.pop();
+                s1.push(val);
+            }
+        }
+    }
+    
+    public int pop() {
+        if(s1.size()==0) return -1;
+        return s1.pop();
+    }
+    
+    public int peek() {
+        if(s1.size()==0) return -1;
+        return s1.peek();        
+    }
+    
+    public boolean empty() {
+        if(s1.size()==0) return true;
+        return false;        
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(2N)
