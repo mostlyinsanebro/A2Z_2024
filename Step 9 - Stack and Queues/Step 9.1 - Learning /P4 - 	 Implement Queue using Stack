@@ -47,5 +47,69 @@ class MyQueue {
     }
 }
 
-T.C. -> O(N)
+Note:- This solution is very expensive.
+
+T.C. -> O(N) ~ it is O(N) in all the push operations.
+S.C. -> O(2N)
+
+
+
+Approach 2:- Optimising the push operation and adding steps in the pop and top operation.
+
+Code:-
+class MyQueue {
+
+    Stack<Integer> s1;
+    Stack<Integer> s2;
+
+    public MyQueue() {
+        s1=new Stack<>();
+        s2=new Stack<>();
+    }
+    
+    public void push(int x) {
+        s1.push(x);
+    }
+    
+    public int pop() {
+        if(s1.size()==0&&s2.size()==0) return -1;
+        if(s2.empty()==false)
+        {
+            return s2.pop();
+        }
+        else
+        {
+            while(s1.size()!=0)
+            {
+                int val=s1.pop();
+                s2.push(val);
+            }
+            return s2.pop();
+        }
+    }
+    
+    public int peek() {
+        if(s1.size()==0&&s2.size()==0) return -1;
+        if(s2.empty()==false)
+        {
+            return s2.peek();
+        }
+        else
+        {
+            while(s1.size()!=0)
+            {
+                int val=s1.pop();
+                s2.push(val);
+            }
+            return s2.peek();
+        }
+    }
+    
+    public boolean empty() {
+        if(s1.size()==0&&s2.size()==0) return true;
+        return false;
+    }
+}
+
+T.C. -> O(N) ~ it is O(N) in occasional operations and not in all the push operations like Approach 1.
 S.C. -> O(2N)
