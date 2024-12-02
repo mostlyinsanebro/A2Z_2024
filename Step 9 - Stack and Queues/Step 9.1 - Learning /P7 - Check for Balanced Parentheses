@@ -1,0 +1,42 @@
+Problem Link:-
+https://leetcode.com/problems/valid-parentheses/description/
+https://www.geeksforgeeks.org/problems/parenthesis-checker2744/1
+https://www.naukri.com/code360/problems/valid-parenthesis_795104
+
+
+Solution:-
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+
+        char it=' ';
+        for(int i=0;i<s.length();i++)
+        {
+            it = s.charAt(i);
+            //System.out.println(ch);
+            if(it=='('||it=='{'||it=='[')
+                st.push(it);
+            else
+            {
+                if(st.isEmpty()) 
+                {
+                    //System.out.println("1");
+                    return false;
+                }
+
+                char ch = st.pop();
+
+                if((it==')'&&ch=='(')||(it=='}'&&ch=='{')||(it==']'&&ch=='['))
+                {
+                   continue;
+                }
+                else return false;
+            }
+        }
+        //System.out.println(st);
+        return st.isEmpty();
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(N) ~ if all are opening brackets...
