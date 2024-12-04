@@ -1,0 +1,69 @@
+Problem Link:-
+https://leetcode.com/problems/min-stack/description/
+
+
+Better Solution:-
+class Pair
+{
+    int val;
+    int min;
+
+    Pair(int val,int min)
+    {
+        this.val=val;
+        this.min=min;
+    }
+}
+class MinStack {
+
+    Stack<Pair> st;
+    int m;
+
+    public MinStack() {
+        st=new Stack<>();
+        m=Integer.MAX_VALUE;
+    }
+    
+    public void push(int val) {
+        if(st.isEmpty())
+        {
+            m=val;
+            Pair p = new Pair(val,val);
+            st.push(p);
+        }
+        else
+        {
+            m=st.peek().min;
+            m=Math.min(m,val);
+            Pair p = new Pair(val,m);
+            st.push(p);
+        }
+    }
+    
+    public void pop() {
+        if(st.isEmpty())
+            return;
+        st.pop();
+    }
+    
+    public int top() {
+        if(st.isEmpty())
+            return -1;
+        return st.peek().val;
+    }
+    
+    public int getMin() {
+        if(st.isEmpty())
+            return -1;
+        return st.peek().min;
+    }
+}
+
+T.C. -> O(1)
+S.C. -> O(2N)~ this can be optimised by storing a single value instaed of a pair in Stack.
+
+
+Optimised Solution:- Use a formula to store ans retrieve the values.
+
+Code:-
+
