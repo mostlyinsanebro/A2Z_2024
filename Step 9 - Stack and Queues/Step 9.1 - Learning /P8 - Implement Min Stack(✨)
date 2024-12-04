@@ -60,10 +60,96 @@ class MinStack {
 }
 
 T.C. -> O(1)
-S.C. -> O(2N)~ this can be optimised by storing a single value instaed of a pair in Stack.
+S.C. -> O(2N)~ this can be optimized by storing a single value instead of a pair in Stack.
 
 
-Optimised Solution:- Use a formula to store ans retrieve the values.
+Optimized Solution:- Use a formula to store and retrieve the values.
+
+Approach:-
+Whenever the new value to be inserted in the stack is < min, use the formula 2*val- prev_min = newValue, to generate a newValue that will be inserted on
+at the top of the stack, replace the min with the original new value, and do top() and pop() accordingly.
 
 Code:-
+class MinStack {
+    Stack<Long> st;
+    long min;
+
+    public MinStack() {
+        st=new Stack<Long>();
+        min=Long.MIN_VALUE;
+    }
+    
+    public void push(int val) {
+        long nval = Long.valueOf(val);  
+        if(st.isEmpty())
+        {
+
+            st.push(nval);
+            min=nval;
+        }
+        else
+        {
+            if(val<=min)
+            {
+                long newValue= 2*nval-min;
+                st.push(newValue);
+                min=nval;
+            }
+            else
+            {
+                st.push(nval);
+            }
+        }
+    }
+    
+    public void pop() {
+        if(st.isEmpty())
+        {
+            return;
+        }
+        else
+        {
+            if(st.peek()<=min)
+            {
+                long newValue = 2*Long.valueOf(min)-st.pop();
+                min=newValue;
+            }
+            else
+            {
+                st.pop();
+            }
+        }
+    }
+    
+    public int top() {
+        if(st.isEmpty())
+        {
+            return -1;
+        }
+        else
+        {
+            if(st.peek()<=min)
+            {
+                return (int)(min);
+            }
+            else
+            {
+                int ans= (st.peek()).intValue();
+                return ans;
+            }
+        }
+    }
+    
+    public int getMin() {
+        if(st.isEmpty()) return -1;
+        else
+            {
+                int ans=(int)min;
+                return (int)ans;
+            }
+    }
+}
+
+T.C. -> O(1)
+S.C. -> O(N)
 
