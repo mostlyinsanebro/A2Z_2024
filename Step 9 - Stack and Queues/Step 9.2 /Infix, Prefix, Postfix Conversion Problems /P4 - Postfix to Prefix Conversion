@@ -1,0 +1,31 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/postfix-to-prefix-conversion/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=postfix-to-prefix-conversion
+https://www.naukri.com/code360/problems/postfix-to-prefix_1788455?leftPanelTabValue=PROBLEM
+
+Approach:- Traverse the string from start to end as this is postfix and when an operand is there, push it onto the stack. If anoperator is there, pop the top 2 elements from the stack
+and do operator+top2+top1 and push it back on the stack. At last, the value on the top of the stack will be the prefix expression.
+
+Code:-
+class Solution {
+    static String postToPre(String str) {
+        // code here
+        int i=0;
+        Stack<String> st = new Stack<>();
+        for(char ch:str.toCharArray())
+        {
+            if((ch>='A'&&ch<='Z')||(ch>='a'&&ch<='z')||(ch>='0'&&ch<='9'))
+                st.push(Character.toString(ch));
+            else
+            {
+                String top1 = st.pop();
+                String top2 = st.pop();
+                String ans = ch+top2+top1;
+                st.push(ans);
+            }
+        }
+        return st.pop();
+    }
+}
+
+T.C.-> O(N)+O(N)
+S.C. -> O(N)
