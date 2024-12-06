@@ -1,0 +1,37 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/postfix-to-infix-conversion/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=postfix-to-prefix-conversion
+
+
+Solution:-
+Approach:- The approach is that whenever we encounter an alpahabet or didgit in the string, we push it on the top of the stack and if we encounter an operator, we will take out the top 2 valid elements
+from the stack and then put the operator between them, put the resultant expression in () and then push the result on the top of the stack. On the compeltion of the traversal of the string, we will have the 
+infix expression on the top of the stack.
+
+Code:-
+class Solution {
+    static String postToInfix(String exp) {
+        // code here
+        int i=0;
+        Stack<String> st = new Stack<>();
+        char ch = ' ';
+        
+        while(i<exp.length()) ~ Takes O(N) time
+        {
+            ch = exp.charAt(i);
+            if((ch>='A'&&ch<='Z')||(ch>='a'&&ch<='z')||(ch>='0'&&ch<='9'))
+                st.push(Character.toString(ch));
+            else
+            {
+                String b = st.pop();
+                String a = st.pop();
+                String ans = "("+a+ch+b+")"; // may take O(N1+N2) for the addition of 2 strings, so will have to take this into account.
+                st.push(ans);
+            }
+            i++;
+        }
+        return st.pop();
+    }
+}
+
+T.C. -> O(N) + O(N)
+S.C. -> O(N)
