@@ -3,6 +3,7 @@ https://www.geeksforgeeks.org/problems/postfix-to-infix-conversion/1?utm_source=
 
 
 Solution:-
+Traverse from beginning,if alphabet ot digit, push on stack, if operator is there do, top2+operator+top1 and push it on top of stack.
 Approach:- The approach is that whenever we encounter an alpahabet or didgit in the string, we push it on the top of the stack and if we encounter an operator, we will take out the top 2 valid elements
 from the stack and then put the operator between them, put the resultant expression in () and then push the result on the top of the stack. On the compeltion of the traversal of the string, we will have the 
 infix expression on the top of the stack.
