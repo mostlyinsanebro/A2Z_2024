@@ -1,0 +1,107 @@
+Problem Link:-
+https://leetcode.com/problems/next-greater-element-ii/description/
+https://www.naukri.com/code360/problems/next-greater-element-ii_6212757?leftPanelTabValue=PROBLEM
+
+Brute Force Solution:- 
+Code:-
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int ans[]=new int[nums.length];
+
+        boolean f = false;
+        for(int i=0;i<nums.length;i++)
+        {
+            f=false;
+            for(int j=i;j<nums.length;j++)
+            {
+                if(nums[j]>nums[i])
+                {
+                    f=true;
+                    ans[i]=nums[j];
+                    break;
+                }
+            }
+
+            if(f==false)
+            {
+                for(int k=0;k<i;k++)
+                {
+                    if(nums[k]>nums[i])
+                    {
+                        ans[i]=nums[k];
+                        f=true;
+                        break;
+                    }
+                }
+            }
+
+            if(f==false)
+            ans[i]=-1;
+        }
+        return ans;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(N) ~ for returning the answer.
+
+Alternate Solution:- Using circular array.
+Code:-
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n=nums.length;
+        int ans[]=new int[n];
+        int idx=0;
+        boolean f=false;
+
+        for(int i=0;i<n;i++)
+        {
+            f=false;
+            for(int j=i+1;j<=i+n-1;j++)
+            {
+                idx=(j%n);
+                if(nums[idx]>nums[i])
+                {
+                    ans[i]=nums[idx];
+                    f=true;
+                    break;
+                }
+            }
+
+            if(f==false)  ans[i]=-1;
+        }
+        return ans;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(N) ~ for returning the answer.
+
+Optimal Solution:- Using circular array and monotonic stack.
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n= nums.length;
+
+        int ans[]=new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=2*n-1;i>=0;i--)
+        {
+            while(!st.isEmpty()&&(nums[i%n]>=st.peek()))
+            {
+                st.pop();
+            }
+
+            if(i<n)
+            {
+                if(st.isEmpty()) ans[i]=-1;
+                else ans[i]=st.peek();
+            }
+            st.push(nums[i%n]);
+        }
+        return ans;
+    }
+}
+
+T.C. -> O(2N)+O(2N)
+S.C. -> O(2N)+O(N)
