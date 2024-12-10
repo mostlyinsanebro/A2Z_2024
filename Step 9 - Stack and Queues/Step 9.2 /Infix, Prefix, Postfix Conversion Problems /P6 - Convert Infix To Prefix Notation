@@ -1,0 +1,84 @@
+Expression:- 
+Input: x+y*z/w+u
+Output: ++x/*yzwu
+
+Approach:-
+Step 1). Reverse the infix expression.
+Step 2). After reversal, convert "(" to ")" and vice versa. Convert it to postfix with controlled condition, i.e. the same precedence 
+operator goes on top of the stack.
+Step 3). Reverse the expression.
+
+Code:-
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class Solution {
+    public static int priority(char ch)
+    {
+        if(ch=='^') return 3;
+        else if(ch=='*'||ch=='/') return 2;
+        else if(ch=='+'||ch=='-') return 1;
+        else return 0;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        String revStr = "";
+        for(int i=str.length()-1;i>=0;i--)
+        {
+            char ch = str.charAt(i);
+            if(ch=='(') revStr =revStr+ ')';
+            else if(ch==')') revStr=revStr+'(';
+            else revStr+=ch;
+        }
+        String ans="";
+        System.out.println(revStr);
+        Stack<Character> st = new Stack<>();
+        for(char ch:revStr.toCharArray())
+        {
+            if((ch>='A'&&ch<='Z')||(ch>='a'&&ch<='z')||(ch>='0'&&ch<='9'))
+                ans+=ch;
+            else
+            {
+                if(ch=='(')
+                {
+                    st.push(ch);
+                }
+                else if(ch==')')
+                {
+                    while(!st.isEmpty()&&st.peek()!='(')
+                    {
+                        ans+=st.pop();
+                    }
+                    st.pop();
+                }
+                else
+                {
+                    while(!st.isEmpty()&&priority(ch)<priority(st.peek()))
+                    {
+                        ans+=st.pop();
+                    }
+                    st.push(ch);
+                }                    
+            }
+        }
+        
+        while(!st.isEmpty())
+        {
+            ans+=st.pop();
+        }
+
+                    String f="";
+        for(int i=ans.length()-1;i>=0;i--)
+        {
+            char ch = ans.charAt(i);
+            if(ch=='(') ch = ')';
+            if(ch==')') ch='(';
+            f+=ch;
+        }
+        System.out.println(f);
+    }
+}
+
+T.C. -> O(N)+O(2N)+O(N) ~ O(N)
+S.C. -> O(N)
