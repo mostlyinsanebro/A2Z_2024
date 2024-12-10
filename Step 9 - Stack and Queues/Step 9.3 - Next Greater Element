@@ -1,0 +1,151 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/next-larger-element-1587115620/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+https://leetcode.com/problems/next-greater-element-i
+
+Brute Force Solution:-
+class Solution {
+    // Function to find the next greater element for each element of the array.
+    public ArrayList<Integer> nextLargerElement(int[] arr) {
+        // code here
+        
+        ArrayList<Integer> al = new ArrayList<>();
+        
+        boolean g=false;
+        for(int i=0;i<arr.length;i++)
+        {
+            g=false;
+            for(int j=i;j<arr.length;j++)
+            {
+                if(arr[j]>arr[i])
+                {
+                    al.add(arr[j]);
+                    g=true;
+                    break;
+                }
+            }
+            if(g==false)
+                al.add(-1);
+        }
+        
+        return al;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(N) ~ for arrayList
+
+Optimal Solution:- Using a monotonic stack.
+
+Monotonic stack -> A stack in which elements are stored in a specif order i.e. increasing, decreasing etc.
+
+Code:-
+class Solution {
+    // Function to find the next greater element for each element of the array.
+    public ArrayList<Integer> nextLargerElement(int[] arr) {
+        // code here
+        ArrayList<Integer> al = new ArrayList<>();
+        
+        Stack<Integer> st = new Stack<>();
+        
+        for(int i=arr.length-1;i>=0;i--)
+        {
+            while(!st.isEmpty()&&arr[i]>=st.peek())
+            {
+                st.pop();
+            }
+            
+            if(!st.isEmpty()) al.add(st.peek());
+            else al.add(-1);
+            
+            st.push(arr[i]);
+        }
+        Collections.reverse(al);
+        return al;
+    }
+}
+
+T.C.-> O(N) + O(N) + O(N)
+S.C. -> O(N) ~ for stack + O(N) ~ for returning the answer.
+
+-- We used monotonic stack because we were storing elements in decreasing order in the stack.
+
+Brute Force Solution:-
+Traverse the first array, then check for that element in the second array and on finding it, find the next greater element to it's right
+and return the result in array.
+
+Code:-
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+       boolean g=false;
+        for(int i=0;i<nums1.length;i++)
+        {
+            for(int j=0;j<nums2.length;j++)
+            {
+                if(nums1[i]==nums2[j])
+                {
+                    g=false;
+                    for(int k=j;k<nums2.length;k++)
+                    {
+                        if(nums2[k]>nums2[j])
+                        {
+                            g=true;
+                            nums1[i]=nums2[k];
+                            break;
+                        }
+                    }
+                    if(g==false)
+                    {
+                        nums1[i]=-1;
+                    }
+
+                    break;
+                }
+            }
+        }
+        return nums1;
+    }
+}
+
+T.C. -> O(N^3)
+S.C. -> No extra space used.
+
+Better Solution:- Use monotonic stack.
+
+Code:-
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int ans[] = new int[nums2.length];
+
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=nums2.length-1;i>=0;i--)
+        {
+            while(!st.isEmpty()&&nums2[i]>=st.peek())
+            {
+                st.pop();
+            }
+
+            if(!st.isEmpty()) ans[i]=st.peek();
+            else ans[i]=-1;
+
+            st.push(nums2[i]);
+        }
+
+        for(int i=0;i<nums1.length;i++)
+        {
+            for(int j=0;j<nums2.length;j++)
+            {
+                if(nums1[i]==nums2[j])
+                {
+                    nums1[i]=ans[j];
+                    break;
+                }
+            }
+        }
+        return nums1;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(2N)
+
