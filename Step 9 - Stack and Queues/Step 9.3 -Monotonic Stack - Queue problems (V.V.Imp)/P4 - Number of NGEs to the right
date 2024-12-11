@@ -1,0 +1,65 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/number-of-nges-to-the-right/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=number-of-nges-to-the-right
+https://www.naukri.com/code360/problems/count-of-greater-elements-to-the-right_8365436?leftPanelTabValue=SUBMISSION
+
+BF Solution:-
+class Solution {
+  public static int[] count_NGEs(int N, int arr[], int queries, int indices[]) {
+    // code here
+    int cnt=0;
+    int ans[]=new int[indices.length];
+    
+    for(int i=0;i<indices.length;i++)
+    {
+        cnt=0;
+        for(int j=indices[i]+1;j<N;j++)
+        {
+            if(arr[j]>arr[indices[i]])
+                cnt++;
+        }
+        ans[i]=cnt;
+    }
+    return ans;
+     
+  }
+}
+
+T.C. -> O(N^size of indices array)
+S.C. -> O(size of indices array)
+
+Optimal Solution:- Uisng 2 stacks
+class Solution {
+  public static int[] count_NGEs(int N, int arr[], int queries, int indices[]) {
+    // code here
+    Stack<Integer> st1=new Stack<>();
+    Stack<Integer> st2=new Stack<>();
+    
+    int ans[] = new int[N];
+    
+    for(int i=N-1;i>=0;i--)
+    {
+        while(!st1.isEmpty()&&arr[i]>=st1.peek())
+        {
+            st2.push(st1.pop());
+        }
+        ans[i]=st1.size();
+        st1.push(arr[i]);
+        
+        while(!st2.isEmpty())
+        {
+            st1.push(st2.pop());
+        }
+    }
+    
+    for(int i=0;i<indices.length;i++)
+    {
+        indices[i]=ans[indices[i]];
+    }
+    return indices;
+     
+  }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(3N)
+
