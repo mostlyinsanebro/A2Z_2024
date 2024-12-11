@@ -1,0 +1,66 @@
+Problem Link:-
+https://www.naukri.com/code360/problems/next-smaller-element_1112581
+https://www.geeksforgeeks.org/problems/help-classmates--141631/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+
+Brute Force:- Simply traverse the right of the array for each element and find the next greater and return the resultant array in the end.
+Code:-
+class Solution {
+	public static int[] help_classmate(int arr[], int n) 
+	{ 
+	    // Your code goes here
+	    int ans[]=new int[n];
+	    
+	    boolean s = false;
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        s=false;
+	        for(int j=i;j<n;j++)
+	        {
+	            if(arr[j]<arr[i])
+	            {
+	                s=true;
+	                ans[i]=arr[j];
+	                break;
+	            }
+	        }
+	        
+	        if(s==false) ans[i]=-1;
+	    }
+	    return ans;
+	} 
+}
+
+T.C. -> O(N^2)
+S.C. -> O(N)
+
+Optimal Solution:- Using monotonic stack.
+Traverse the array from the end to the start of the array and on encountering a smaller element for the traversed element
+on the top of the stack, put that element in the answer array, else put -1 in the answer array and after that push that element to the 
+top of the stack.
+We are using a monotonic stack here which stores elements in an increasing order.
+
+Code:-
+class Solution {
+	public static int[] help_classmate(int arr[], int n) 
+	{ 
+	    // Your code goes here
+	    int ans[]=new int[n];
+	    
+	    Stack<Integer> st = new Stack<>();
+	    
+	    for(int i=n-1;i>=0;i--)
+	    {
+	        while(!st.isEmpty()&&arr[i]<=st.peek())
+	            st.pop();
+	        
+	           
+	       ans[i]=st.isEmpty()?-1:st.peek();
+	       st.push(arr[i]);
+	    }
+	    return ans;
+	} 
+}
+
+T.C. -> O(N)+O(N) ~ N for traversing array and N for traversing elements from the stack.
+S.C. -> O(N)+O(N) ~ N for stack and N for returning array
