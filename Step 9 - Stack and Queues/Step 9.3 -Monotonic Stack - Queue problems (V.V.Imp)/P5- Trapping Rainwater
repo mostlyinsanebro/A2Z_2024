@@ -1,0 +1,172 @@
+Problem Link:-
+https://leetcode.com/problems/trapping-rain-water/
+https://www.geeksforgeeks.org/problems/trapping-rain-water-1587115621/1
+https://www.naukri.com/code360/problems/trapping-rainwater_630519
+
+Brute Force Method:- Traverse te array from i=1 to i=n-2 and find the lmax and rmax for each element, after that find the minimum of lmax and rmax, if either of the lmax or
+rmax is == element, then that element can not store any water, else do min(lmax,rmax) - element and add it to the resultant sum.
+
+Code:-
+class Solution {
+    public int trap(int[] arr) {
+        int lmax=0,rmax=0;
+        int sum=0;
+
+        for(int i=1;i<arr.length-1;i++)
+        {
+            lmax=arr[i];
+            rmax=arr[i];
+            for(int j=i-1;j>=0;j--)
+            {
+                if(arr[j]>lmax) lmax=arr[j];
+            }
+
+            for(int j=i+1;j<arr.length;j++)
+            {
+                if(arr[j]>rmax) rmax=arr[j];
+            }
+
+
+            if(lmax==arr[i]||rmax==arr[i])
+            {
+                sum+=0;
+            }
+            else
+            {
+                sum+=Math.min(lmax,rmax)-arr[i];
+            }
+        }
+        return sum;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(1)
+
+Note:- It exceeds the Time Limit. Find an optimal solution.
+
+Better Solution:- Use prefix max and suffix max for finding and storing the lmax and rmax for each element and then use it to construct the answer.
+
+Code:-
+class Solution {
+    public int trap(int[] arr) {
+        int n=arr.length;
+
+        int pmax[]=new int[n];
+        int smax[]=new int[n];
+
+        pmax[0]=arr[0];
+        for(int i=1;i<n;i++)
+        {
+            pmax[i] = Math.max(pmax[i-1],arr[i]);
+        }
+
+        smax[n-1]=arr[n-1];
+        for(int i=n-2;i>=0;i--)
+        {
+            smax[i]=Math.max(arr[i],smax[i+1]);
+        }
+
+        int total=0;
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]<pmax[i]&&arr[i]<smax[i])
+            {
+                total+= Math.min(pmax[i],smax[i])-arr[i];
+            }
+        }
+        return total;
+    }
+}
+
+T.C. -> O(3N)
+S.C. -> O(2N)
+
+Better solution w/o prefix max array:-
+class Solution {
+    public int trap(int[] arr) {
+        int n=arr.length;
+
+       // int pmax[]=new int[n];
+        int smax[]=new int[n];
+
+        // pmax[0]=arr[0];
+        // for(int i=1;i<n;i++)
+        // {
+        //     pmax[i] = Math.max(pmax[i-1],arr[i]);
+        // }
+
+        smax[n-1]=arr[n-1];
+        for(int i=n-2;i>=0;i--)
+        {
+            smax[i]=Math.max(arr[i],smax[i+1]);
+        }
+
+        int total=0;
+        int lmax=arr[0];
+        for(int i=0;i<n;i++)
+        {
+            
+            if(arr[i]<lmax&&arr[i]<smax[i])
+            {
+                total+= Math.min(lmax,smax[i])-arr[i];
+            }
+            lmax = Math.max(lmax,arr[i]);
+        }
+        return total;
+    }
+}
+
+T.C. -> O(2N)
+S.C. -> O(N)
+
+
+Optimal Solution:-
+We have taken 2 pointers here, one left and one right, now what we will do is that we will move that element which is smaller of the left and right, that will make sure that we are 
+traversing only the smaller values. So, if the left element is smaller than right element, we will move it and it also means that all the elements to the left of left element are 
+smaller than the right of right element which means that lmax will be smaller than rmax, thus if the left element is smaller than lmax, we can add the difference to the asnwer, else
+update the lmax and move. left pointer ahead.
+If the right element is smaller than left element, that will mean that all elements to the right of right element will be smaller than all elelments to the left of left element
+and thus rmax will be smaller than lmax, and we can add difference of rmax and right element to answer if right element is smaller than rmax, else update rmax and after that move rmax 
+to one place left.
+Do this until l<=r.
+
+class Solution {
+    public int trap(int[] arr) {
+        int n=arr.length;
+        int lmax=0;
+        int rmax=0;
+        int l=0;
+        int r=n-1;
+        int total=0;
+
+        while(l<=r)
+        {
+            if(arr[l]<=arr[r])
+            {
+                if(arr[l]<lmax)
+                {
+                    total+=lmax-arr[l];
+                }
+                lmax=Math.max(arr[l],lmax);
+
+                l++;
+            }
+            else
+            {
+                if(arr[r]<rmax)
+                {
+                    total+=rmax-arr[r];
+                }
+                rmax=Math.max(rmax,arr[r]);
+
+                r--;
+            }
+        }
+        return total;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(1)
+
