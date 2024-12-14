@@ -1,6 +1,7 @@
 Problem Link:-
 https://leetcode.com/problems/sum-of-subarray-minimums/
 https://www.geeksforgeeks.org/problems/sum-of-subarray-minimum/1
+https://www.naukri.com/code360/problems/sum-of-subarray-minimums_8365431?leftPanelTabValue=PROBLEM
 
 Brute Force Approach:- Simply traverse through all the subarray combinations and get the min of the subarray and then add it to the sum.
 Code:-
@@ -25,4 +26,69 @@ class Solution {
 T.C. -> O(N^2)
 S.C. -> O(1)
 
-Optimal Solution:-
+Optimal Solution:- The solution includes considering the contribution of every element in each subarray as the minimum of that subarray and then adding its contribution to the total answer. The contribution can 
+be calculated by finding the Previous Smaller Element for each element using a monotonic stack and storing it in nse[]. Also, find the Next smaller or equal element using m. Stack for each element. We are 
+considering equal as well to consider the edge case when two elements are equal in the array. Store the result in nsoe[]. Now, traverse the initial array and find the contribution for each element using the 
+formula, (i-pse[i])*([nsoe[i]-i])*arr[i]. Return the total after traversing the whole array.
+
+Code:-
+class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        int nsoe[]=findNSOE(arr);
+        int pse[] = findPSE(arr);
+
+        long total = 0;
+        int mod = (int)(Math.pow(10,9)+7);
+
+        for(int i=0;i<arr.length;i++)
+        {
+            total+=(long)(i-pse[i])*(nsoe[i]-i)%mod*arr[i]%mod;
+            total = total%mod;
+        }
+        return (int)total;
+    }
+
+    public int[] findPSE(int arr[])
+    {
+        int ans[] = new int[arr.length];
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=0;i<arr.length;i++)
+        {
+            while(!st.isEmpty()&&arr[i]<=arr[st.peek()])
+                st.pop();
+
+            if(st.isEmpty()) ans[i]=-1;
+            else ans[i]=st.peek();
+
+            st.push(i);
+        }
+
+        return ans;
+    }
+
+    public int[] findNSOE(int arr[])
+    {
+        int ans[] = new int[arr.length];
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=arr.length-1;i>=0;i--)
+        {
+            while(!st.isEmpty()&&arr[i]<arr[st.peek()])
+                st.pop();
+
+            if(st.isEmpty()) ans[i]=arr.length;
+            else ans[i]=st.peek();
+
+            st.push(i);
+        }
+
+        return ans;
+    }
+}
+
+T.C. -> O(N)+O(N)+O(N) ~ O(3N)
+S.C. -> O(2N)+O(2N) ~ O(4N)
+
+
+
