@@ -34,8 +34,8 @@ formula, (i-pse[i])*([nsoe[i]-i])*arr[i]. Return the total after traversing the 
 Code:-
 class Solution {
     public int sumSubarrayMins(int[] arr) {
-        int nsoe[]=findNSOE(arr);
-        int pse[] = findPSE(arr);
+        int nsoe[]=findNSOE(arr); ~ O(2N) S.C. and O(2N) T.C.
+        int pse[] = findPSE(arr); ~ O(2N) S.C. and O(2N) T.C.
 
         long total = 0;
         int mod = (int)(Math.pow(10,9)+7);
@@ -87,8 +87,8 @@ class Solution {
     }
 }
 
-T.C. -> O(N)+O(N)+O(N) ~ O(3N)
-S.C. -> O(2N)+O(2N) ~ O(4N)
+T.C. -> O(5N)
+S.C. -> O(4N)
 
 
 
