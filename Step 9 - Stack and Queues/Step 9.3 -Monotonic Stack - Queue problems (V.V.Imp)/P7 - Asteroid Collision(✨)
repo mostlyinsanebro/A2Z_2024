@@ -1,0 +1,64 @@
+Problem Link:-
+https://leetcode.com/problems/asteroid-collision/description/
+https://www.geeksforgeeks.org/problems/asteroid-collision/0
+https://www.naukri.com/code360/problems/asteroid-collision_977232
+
+Solution:- Use a stack to store the asteroids. 
+
+Run a for loop for i=0-> arr.length,
+
+When encountering a positive asteroid, push it on top of the stack, 
+
+When a negative asteroid is encountered,
+the top of the stack is checked, if it is +ve and smaller than that of the abs of the current asteroid, pop it from the stack..do  this in a while loop until 
+the stack becomes empty or a bigger +ve value is not encountered on top of the stack.
+Then, check if the stack is empty or the stack top has a -ve asteroid, then push the current asteroid on top of the stack, 
+else, check if the stack is not empty and the top asteroid of the stack is a +ve and is == current asteroid, then pop it from the stack.
+
+Other conditions will be taken care automatically by the for loop.
+
+Code:-
+class Solution {
+    public int[] asteroidCollision(int[] arr) {
+        int n=arr.length;
+        Stack<Integer> st = new Stack<>();
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]>0)
+            {
+                st.push(arr[i]);
+            }
+            else
+            {
+                while(!st.isEmpty()&&st.peek()>0&&st.peek()<(int)Math.abs(arr[i]))
+                {
+                    st.pop();
+                }
+
+                if(!st.isEmpty()&&st.peek()==(int)Math.abs(arr[i]))
+                {
+                    st.pop();
+                }
+                else if(st.isEmpty()||st.peek()<0)
+                {
+                    st.push(arr[i]);
+                }
+            }
+        }
+
+        int ans[]=new int[st.size()];
+        //return ans;
+        for(int i=ans.length-1;i>=0;i--)
+        {
+            ans[i]=st.pop();
+        }
+         return ans;
+    }
+}
+
+
+T.C. -> O(2N)
+S.C. -> O(2N)
+
+
+
