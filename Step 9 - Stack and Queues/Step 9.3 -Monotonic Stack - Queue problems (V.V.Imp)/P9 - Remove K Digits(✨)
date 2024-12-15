@@ -1,0 +1,88 @@
+Problem Link:-
+https://leetcode.com/problems/remove-k-digits/
+https://www.geeksforgeeks.org/problems/remove-k-digits/1
+https://www.naukri.com/code360/problems/remove-k-digits_1461221
+
+Solution:- 
+Steps:- Traverse the string from left to right, if the stack is empty, push element on the stack and if we get a larger element on top of the stack, pop it
+from the stack. If we reach the end of the string or k becomes < 0 , then escape the loop. After that, put all the remaing elements of the strings which are not 
+yet traversed to teh top of the stack. Now, make the answer array.
+
+Now, cover 3 edge cases => if k==n, return "0".
+if answer at end is "00200", then return it as "200".
+if after whole traversal of the string and doing operations, k>0, then remove the k elemets from the end. 
+
+Code:-
+class Solution {
+    public String removeKdigits(String num, int k) {
+        Stack<Integer> st = new Stack<>();
+
+        int i=0,el=0;
+        String ans="";
+
+        if(k==num.length()) return "0";
+
+        while(i<num.length()&&k>0)
+        {
+            el = (int)(num.charAt(i)-'0');
+            //System.out.print(el+" ");
+            if(st.isEmpty())
+            {
+                st.push(el);
+                i++;
+            }
+            else
+            {
+                while(!st.isEmpty()&&k>0&&st.peek()>el)
+                {
+                    st.pop();
+                    k--;
+                }
+
+                st.push(el);
+                i++;
+            }
+        }
+
+       
+
+        while(i<num.length())
+        {
+            el=(int)(num.charAt(i)-'0');
+            st.push(el);
+            i++;
+        }
+
+        System.out.println(st);
+
+        while(!st.isEmpty())
+        {
+            ans=st.pop()+ans;
+        }
+
+        i=0;
+
+        if(k>0)
+        {
+            ans=ans.substring(0,ans.length()-k);
+        }
+
+        while(ans.length()>0&&ans.charAt(0)=='0')
+        {
+            ans = ans.substring(1);
+        }
+
+        if(ans.length()==0) return "0";
+
+        return ans;
+
+    }
+}
+
+
+T.C. -> O(3N)
+S.C. -> O(2N)
+
+
+
+
