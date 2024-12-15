@@ -3,7 +3,7 @@ https://leetcode.com/problems/remove-k-digits/
 https://www.geeksforgeeks.org/problems/remove-k-digits/1
 https://www.naukri.com/code360/problems/remove-k-digits_1461221
 
-Solution:- 
+Solution:- Passes LC and CN, gives TLE in GFG.
 Steps:- Traverse the string from left to right, if the stack is empty, push element on the stack and if we get a larger element on top of the stack, pop it
 from the stack. If we reach the end of the string or k becomes < 0 , then escape the loop. After that, put all the remaing elements of the strings which are not 
 yet traversed to teh top of the stack. Now, make the answer array.
@@ -84,5 +84,8 @@ T.C. -> O(3N)
 S.C. -> O(2N)
 
 
+Note: My solution exceeds TL in GFG. Check striver's solution.
+
+Code:-
 
 
