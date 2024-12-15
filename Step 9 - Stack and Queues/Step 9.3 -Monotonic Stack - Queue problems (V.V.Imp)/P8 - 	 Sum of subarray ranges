@@ -1,0 +1,146 @@
+Problem Link:-
+https://leetcode.com/problems/sum-of-subarray-ranges/
+https://www.geeksforgeeks.org/problems/sum-of-subarray-ranges/0
+https://www.naukri.com/code360/problems/subarray-range-sum_8365419?leftPanelTabValue=PROBLEM
+
+
+Brute Force Solution:- Create all subarrays and while doing so, find the largest and smallest at the same time and keep adding the difference between the 
+largest and smallest to the sum and return the sum at the end.
+class Solution {
+    public long subArrayRanges(int[] nums) {
+        int max=Integer.MIN_VALUE;
+        int min=Integer.MAX_VALUE;
+        long sum=0;
+
+        for(int i=0;i<nums.length;i++)
+        {
+            max=nums[i];
+            min=nums[i];
+            for(int j=i+1;j<nums.length;j++)
+            {
+                max=Math.max(max,nums[j]);
+                min=Math.min(min,nums[j]);
+                sum+=max-min;
+            }
+        }
+        return sum;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(1)
+
+Optimal Solution:- Find the sum of subarray minimums and seperately find the sum of subarray maximums, their difference will be the sum of subaaray ranges.
+Code:-
+class Solution {
+    public long subArrayRanges(int[] nums) {
+        
+        long sumMin = findSumSubMin(nums);
+        long sumMax = findSumSubMax(nums);
+
+        System.out.println(sumMax+" "+sumMin);
+
+        long diff = sumMax-sumMin;
+        return diff;
+    }
+
+    public long findSumSubMin(int arr[])
+    {
+        int pse[]=findPSE(arr);
+        int nsoe[]=findNSOE(arr);
+        long sum=0;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            sum+= (long)(i-pse[i])*(nsoe[i]-i)*arr[i];
+        }
+        return sum;
+    }
+
+    public int[] findPSE(int arr[])
+    {
+        int n=arr.length;
+        int ans[]=new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=0;i<n;i++)
+        {
+            while(!st.isEmpty()&&arr[st.peek()]>=arr[i])
+            {
+                st.pop();
+            }
+            ans[i]=st.isEmpty()?-1:st.peek();
+            st.push(i);
+        }
+        return ans;
+    }
+    
+    public int[] findNSOE(int arr[])
+    {
+        int n=arr.length;
+        int ans[]=new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!st.isEmpty()&&arr[st.peek()]>arr[i])
+            {
+                st.pop();
+            }
+            ans[i]=st.isEmpty()?n:st.peek();
+            st.push(i);
+        }
+        return ans;
+    }
+
+    public long findSumSubMax(int arr[])
+    {
+        int pge[]=findPGE(arr);
+        int ngoe[]=findNGOE(arr);
+        long sum=0;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            sum+=(long)(i-pge[i])*(ngoe[i]-i)*arr[i];
+        }
+        return sum;
+    }
+    public int[] findPGE(int arr[])
+    {
+        int n=arr.length;
+        int ans[]=new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=0;i<n;i++)
+        {
+            while(!st.isEmpty()&&arr[st.peek()]<=arr[i])
+            {
+                st.pop();
+            }
+            ans[i]=st.isEmpty()?-1:st.peek();
+            st.push(i);
+        }
+        return ans;
+    }
+
+    public int[] findNGOE(int arr[])
+    {
+        int n=arr.length;
+        int ans[]=new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=n-1;i>=0;i--)
+        {
+            while(!st.isEmpty()&&arr[st.peek()]<arr[i])
+            {
+                st.pop();
+            }
+            ans[i]=st.isEmpty()?n:st.peek();
+            st.push(i);
+        }
+        return ans;
+    }
+}
+
+T.C. -> O(10N) ~ O(N)
+S.C. -> O(8N) ~ O(N)
