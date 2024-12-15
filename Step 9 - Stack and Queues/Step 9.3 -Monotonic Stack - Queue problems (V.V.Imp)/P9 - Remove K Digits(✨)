@@ -14,68 +14,46 @@ if after whole traversal of the string and doing operations, k>0, then remove th
 
 Code:-
 class Solution {
-    public String removeKdigits(String num, int k) {
-        Stack<Integer> st = new Stack<>();
-
-        int i=0,el=0;
+    public String removeKdigits(String S, int K) {
+        // code here
+        
+        if(K==S.length()) return "0";
+        
+        Stack<Character> st = new Stack<>();
+        
+        
+        for(int i=0;i<S.length();i++)
+        {
+            while(!st.isEmpty()&&K>0&&(int)st.peek()-'0'>(int)S.charAt(i)-'0')
+            {
+                st.pop();
+                K--;
+            }
+            
+            st.push(S.charAt(i));
+        }
+        
+        
+        while(K>0)
+        {
+            st.pop();
+            K--;
+        }
+        
+        if(st.isEmpty()) return "0";
+        
         String ans="";
-
-        if(k==num.length()) return "0";
-
-        while(i<num.length()&&k>0)
-        {
-            el = (int)(num.charAt(i)-'0');
-            //System.out.print(el+" ");
-            if(st.isEmpty())
-            {
-                st.push(el);
-                i++;
-            }
-            else
-            {
-                while(!st.isEmpty()&&k>0&&st.peek()>el)
-                {
-                    st.pop();
-                    k--;
-                }
-
-                st.push(el);
-                i++;
-            }
-        }
-
-       
-
-        while(i<num.length())
-        {
-            el=(int)(num.charAt(i)-'0');
-            st.push(el);
-            i++;
-        }
-
-        System.out.println(st);
-
         while(!st.isEmpty())
         {
             ans=st.pop()+ans;
         }
-
-        i=0;
-
-        if(k>0)
-        {
-            ans=ans.substring(0,ans.length()-k);
-        }
-
-        while(ans.length()>0&&ans.charAt(0)=='0')
-        {
-            ans = ans.substring(1);
-        }
-
+        
+        while(ans.length()>0&&ans.charAt(0)=='0') ans=ans.substring(1);
+        
         if(ans.length()==0) return "0";
-
         return ans;
-
+        
+        
     }
 }
 
@@ -84,8 +62,60 @@ T.C. -> O(3N)
 S.C. -> O(2N)
 
 
-Note: My solution exceeds TL in GFG. Check striver's solution.
+Note: My solution exceeds TL in GFG. Check a solution on GFG.
 
-Code:-
+Code:- It has some minor tweaks...
+class Solution {
+    public String removeKdigits(String S, int K) {
+        // code here
+        
+        if(K==S.length()) return "0";
+        
+        Stack<Character> st = new Stack<>();
+        
+        
+        for(int i=0;i<S.length();i++)
+        {
+            while(!st.isEmpty()&&K>0&&(int)st.peek()-'0'>(int)S.charAt(i)-'0')
+            {
+                st.pop();
+                K--;
+            }
+            
+            if(st.isEmpty()&&S.charAt(i)=='0')
+                continue;
+            
+            st.push(S.charAt(i));
+        }
+        
+        
+        while(!st.isEmpty()&&K>0)
+        {
+            st.pop();
+            K--;
+        }
+        
+        if(st.isEmpty()) return "0";
+        
+        // String ans="";
+        // while(!st.isEmpty())
+        // {
+        //     ans=st.pop()+ans;
+        // }
+        
+        // while(ans.length()>0&&ans.charAt(0)=='0') ans=ans.substring(1);
+        
+        // if(ans.length()==0) return "0";
+        // return ans;
+        
+        StringBuilder sb = new StringBuilder();
+        while(!st.isEmpty())
+        {
+            sb.append(st.pop());
+        }
+        return sb.reverse().toString();
+    }
+}
+
 
 
