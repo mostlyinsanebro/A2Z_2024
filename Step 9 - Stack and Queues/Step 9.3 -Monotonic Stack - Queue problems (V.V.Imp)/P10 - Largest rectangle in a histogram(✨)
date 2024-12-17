@@ -1,9 +1,10 @@
 Problem Link:-
 https://leetcode.com/problems/largest-rectangle-in-histogram/description/
 https://www.geeksforgeeks.org/problems/maximum-rectangular-area-in-a-histogram-1587115620/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+https://www.naukri.com/code360/problems/largest-rectangle-in-a-histogram_1058184
 
 Brute Force Solution:- For each element, find how many elements are smaller than or equal to itself before and after it in continuation and find the area of 
-rectangle that it creates and keep storing the max of them and return max Area at the end.
+a rectangle that it creates and keep storing the max of them and return max Area at the end.
 
 Code:-
 class Solution {
@@ -105,4 +106,45 @@ Therefore, it is a 2-pass solution.
 
 Optimal Solution:- One-pass solution...
 
-Approach:-
+Approach:- The approach is to find the PSE for each array while traversing the array from left to right (we are making use of the fact here that we pop out) 
+all the smaller elements from the stack before inserting an element in the stack which will give me the PSE automatically for it when we need it) ans we are 
+calculating the nse of a component while it is being popped out of the stack, calculate the area at that time, and return the maxArea.
+
+Code:-
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        
+        int maxArea=Integer.MIN_VALUE;
+
+        int ci=0,pse=0,nse=0;
+        int n=heights.length;
+
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=0;i<heights.length;i++)
+        {
+            while(!st.isEmpty()&&heights[st.peek()]>heights[i])
+            {
+                ci=st.pop();
+                pse=st.isEmpty()?-1:st.peek();
+                maxArea=Math.max(maxArea,(i-pse-1)*heights[ci]);
+            }
+            st.push(i);
+        }
+
+        while(!st.isEmpty())
+        {
+            ci=st.pop();
+            pse=st.isEmpty()?-1:st.peek();
+            maxArea=Math.max(maxArea,(n-pse-1)*heights[ci]);
+        }
+
+        return maxArea;
+    }
+}
+
+
+T.C. -> O(N)
+S.C. -> O(N)
+
+
