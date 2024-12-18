@@ -1,0 +1,78 @@
+Problem Link:-
+https://leetcode.com/problems/maximal-rectangle/
+https://www.geeksforgeeks.org/problems/max-rectangle/1
+https://www.naukri.com/code360/problems/maximum-size-rectangle-sub-matrix-with-all-1-s_893017?leftPanelTabValue=PROBLEM
+
+
+Solution:- The solution is to compute the prefix sum for all the elements column wise for the whole matrix and after that compute the largest hist. row-wise. That will 
+be our answer.
+
+Code:-
+class Solution {
+    public int maximalRectangle(char[][] matrix) {
+        
+        int n = matrix.length;
+        int m=matrix[0].length;
+        int val=0;
+
+        int psum[][] = new int[n][m];
+        int sum=0;
+
+        for(int j=0;j<m;j++)
+        {
+            sum=0;
+            for(int i=0;i<n;i++)
+            {
+                val=matrix[i][j]-'0';
+
+                sum+=val;
+
+                if(matrix[i][j]=='0') sum=0;
+
+                psum[i][j]=sum;
+            }
+        }
+
+        int maxArea = Integer.MIN_VALUE;
+
+        for(int i=0;i<n;i++) ~ O(n)
+        {
+            maxArea=Math.max(maxArea,findLAH(psum[i])); ~ O(2n)
+        }
+
+        return maxArea;
+    }
+
+    public int findLAH(int arr[])
+    {
+        int n=arr.length;
+        int pse=0,ci=0,max=0;
+
+        Stack<Integer> st = new Stack<>();
+
+        for(int i=0;i<n;i++)
+        {
+            while(!st.isEmpty()&&arr[st.peek()]>=arr[i])
+            {
+                ci=st.pop();
+                pse=st.isEmpty()?-1:st.peek();
+                max=Math.max(max,(i-pse-1)*arr[ci]);
+            }
+            st.push(i);
+        }
+
+        while(!st.isEmpty())
+        {
+            ci=st.pop();
+            pse=st.isEmpty()?-1:st.peek();
+            max=Math.max(max,(n-pse-1)*arr[ci]);
+        }
+
+        return max;
+    } 
+}
+
+
+T.C. -> O(n*m) + O(n*2m)
+S.C. -> O(n*m)+O(m)
+
