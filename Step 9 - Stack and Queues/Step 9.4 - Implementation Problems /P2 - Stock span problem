@@ -1,6 +1,7 @@
 Problem Link:-
 https://leetcode.com/problems/online-stock-span/description/
-
+https://www.geeksforgeeks.org/problems/stock-span-problem-1587115621/1
+https://www.naukri.com/code360/problems/stock-span_5243295?leftPanelTabValue=PROBLEM
 
 Brute Force Solution:-
 class StockSpanner {
@@ -39,3 +40,28 @@ S.C. -> O(N)
 
 
 Optimal Solution:- Use monotonic stack.
+class StockSpanner {
+
+    ArrayList<Integer> al;
+    Stack<Integer> st;
+    public StockSpanner() {
+        al = new ArrayList<>();
+        st=new Stack<>();
+    }
+    
+    public int next(int price) {
+        int idx=al.size();
+
+        while(!st.isEmpty()&&al.get(st.peek())<=price)
+            st.pop();
+
+        int ans = st.isEmpty()?idx+1:idx-st.peek();
+        st.push(idx);
+        al.add(price);
+        return ans;
+    }
+}
+
+T.C. -> O(2N)
+S.C. -> O(2N)
+
