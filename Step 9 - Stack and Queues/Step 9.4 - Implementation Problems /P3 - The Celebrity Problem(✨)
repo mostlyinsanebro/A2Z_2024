@@ -1,0 +1,120 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/the-celebrity-problem/1
+
+
+My Brute Force Solution:-
+class Solution {
+    public int celebrity(int mat[][]) {
+        
+        if(mat.length==1) return 0;
+        for(int i=0;i<mat.length;i++)
+        {
+            for(int j=0;j<mat[0].length;j++)
+            {
+                if(mat[i][j]==1)
+                {
+                    if(isCelebrity(mat,j)) return j;
+                }
+            }
+        }
+        return -1;
+    }
+    
+    public boolean isCelebrity(int mat[][],int x)
+    {
+        
+        for(int j=0;j<mat[0].length;j++)
+        {
+            if(mat[x][j]==1) return false;
+        }
+        
+        for(int i=0;i<mat.length;i++)
+        {
+            if(i!=x&&mat[i][x]==0) return false;
+        }
+        
+        return true;
+    }
+}
+
+T.C. -> O(N^4)
+S.C. -> O(1)
+
+
+
+
+Better Solution:- Using 2 arrays-> I know and Know Me array. I will check how many people I know and how many people do I know. If I for any element, the number
+of know me elements is N-1 and number of I know elements is 0, then it is a celebrity, else there is no celebrity.
+
+Code:-
+class Solution {
+    // Function to find if there is a celebrity in the party or not.
+    public int celebrity(int mat[][]) {
+        // code here
+        int IK[] = new int[mat.length];
+        int KM[] = new int[mat.length];
+        
+        for(int i=0;i<mat.length;i++)
+        {
+            for(int j=0;j<mat.length;j++)
+            {
+                if(mat[i][j]==1)
+                {
+                    IK[i]++;
+                    KM[j]++;
+                }
+            }
+        }
+        
+        for(int i=0;i<mat.length;i++)
+        {
+            if(KM[i]==mat.length-1&&IK[i]==0) return i;
+        }
+        return -1;
+    }
+}
+
+T.C. -> O(N^2+N)
+S.C. -> O(2N)
+
+
+
+Optimal Solution:- Use the elimination Method
+Code:-
+class Solution {
+    // Function to find if there is a celebrity in the party or not.
+    public int celebrity(int mat[][]) {
+        // code here
+        int top=0,down=mat.length-1;
+        
+        while(top<down)
+        {
+            if(mat[top][down]==1)   top++;
+            else if(mat[down][top]==1) down--;
+            else
+            {  
+                top++; down--;
+            }
+        }
+        
+        if(top>down) return -1;
+        
+        for(int j=0;j<mat.length;j++)
+        {
+            if(mat[top][j]==1) return -1;
+        }
+        
+        for(int i=0;i<mat.length;i++)
+        {
+            if(i!=top&&mat[i][top]==0) return -1;
+        }
+        
+        return top;
+    }
+}
+
+
+T.C. -> O(2N)
+S.C. -> O(1)
+
+
