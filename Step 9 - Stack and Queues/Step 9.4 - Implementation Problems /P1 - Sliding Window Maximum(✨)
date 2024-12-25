@@ -29,7 +29,7 @@ class Solution {
 T.C. -> O((N-k)*k)
 S.C. -> O(N-k+1)
 
-Optimal Solution:-
+Optimal Solution:- Keep storing the k elements and store elements in decreasing order as well.
 class Solution {
     public int[] maxSlidingWindow(int[] arr, int k) {
         Deque<Integer> dq = new ArrayDeque<>();
