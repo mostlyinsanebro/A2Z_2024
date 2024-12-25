@@ -63,5 +63,5 @@ class StockSpanner {
 }
 
 T.C. -> O(2N)
-S.C. -> O(2N)
+S.C. -> O(N)
 
