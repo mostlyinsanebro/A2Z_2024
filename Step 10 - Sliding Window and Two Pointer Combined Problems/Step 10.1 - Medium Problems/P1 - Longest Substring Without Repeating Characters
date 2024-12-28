@@ -70,7 +70,7 @@ T.C. -> O(2N)
 S.C. -> O(N)
 
 
-Best Solution:- Use sliding window and 2pointer approach but in a better way.
+Best Solution using map:- Use sliding window and 2pointer approach but in a better way.
 Code:-
 class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -94,6 +94,36 @@ class Solution {
     }
 }
 
+T.C. -> O(N) ~ or more if map operations take time.
+S.C. -> O(N)
+
+
+Best Solution using character array:-
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        //HashMap<Character,Integer> map = new HashMap<>();
+        int carr[] = new int[256];
+        int max=0;
+        int l=0;
+        char c = ' ';
+        Arrays.fill(carr,-1);
+
+        for(int r=0;r<s.length();r++)
+        {
+            c = s.charAt(r);
+
+            if(carr[c]!=-1&&carr[c]>=l)
+            {
+                l = carr[c]+1;
+            }
+            carr[c]=r;
+            max=Math.max(max,r-l+1); 
+        }
+        return max;
+    }
+}
+
 T.C. -> O(N)
-s.c. -> O(1)
+S.C. -> O(256)
 
