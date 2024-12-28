@@ -1,0 +1,71 @@
+Problem Link:-
+https://leetcode.com/problems/longest-substring-without-repeating-characters/
+https://www.geeksforgeeks.org/problems/length-of-the-longest-substring3036/1
+https://www.naukri.com/code360/problems/longest-substring-without-repeating-characters_758894?leftPanelTabValue=PROBLEM
+
+Brute Force Solution:-
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        int max = 0,c=0;
+
+        for(int i=0;i<s.length();i++)
+        {
+            c=0;
+            map.clear();
+
+            for(int j=i;j<s.length();j++)
+            {
+                if(map.containsKey(s.charAt(j))) break;
+
+                map.put(s.charAt(j),1);
+                c++;
+            }
+
+            max = Math.max(max,c);
+        }
+        return max;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(N)
+
+Optimal Solution:- Make use of sliding window and HashMap to get the solution in one pass
+Code:-
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int max=0,st=0,cs=0;
+        
+        HashMap<Character,Integer> map = new HashMap<>();
+        char c=' ';
+        char lc = ' ';
+        
+        for(int i=0;i<s.length();i++)
+        {
+            c=s.charAt(i);
+            map.put(c,map.getOrDefault(c,0)+1);
+            cs++;
+            
+            
+            if(map.get(c)>1)
+            {
+                while(st<i&&map.get(c)>1)
+                {
+                    lc = s.charAt(st);
+                    if(map.get(lc)==1) map.remove(lc);
+                    else map.put(lc,map.get(lc)-1);
+                    
+                    cs--;
+                    st++;
+                }
+            }
+            max=Math.max(max,cs);
+        }
+        return max;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(N)
+
