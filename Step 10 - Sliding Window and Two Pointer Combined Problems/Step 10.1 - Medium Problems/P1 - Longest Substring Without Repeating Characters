@@ -31,7 +31,7 @@ class Solution {
 T.C. -> O(N^2)
 S.C. -> O(N)
 
-Optimal Solution:- Make use of sliding window and HashMap to get the solution in one pass
+Better Solution:- Make use of sliding window and HashMap to get the solution in one pass
 Code:-
 class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -66,6 +66,34 @@ class Solution {
     }
 }
 
-T.C. -> O(N)
+T.C. -> O(2N)
 S.C. -> O(N)
+
+
+Best Solution:- Use sliding window and 2pointer approach but in a better way.
+Code:-
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        int max=0;
+        int l=0;
+        char c = ' ';
+
+        for(int r=0;r<s.length();r++)
+        {
+            c = s.charAt(r);
+
+            if(map.containsKey(c)&&map.get(c)>=l)
+            {
+                l = map.get(c)+1;
+            }
+            map.put(c,r);
+            max=Math.max(max,r-l+1); 
+        }
+        return max;
+    }
+}
+
+T.C. -> O(N)
+s.c. -> O(1)
 
