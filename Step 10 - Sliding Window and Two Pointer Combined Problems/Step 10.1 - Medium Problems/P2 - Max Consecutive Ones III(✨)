@@ -1,0 +1,68 @@
+Problem Link:-
+https://leetcode.com/problems/max-consecutive-ones-iii/description/
+https://www.geeksforgeeks.org/problems/maximize-number-of-1s0905/1
+https://www.naukri.com/code360/problems/maximum-consecutive-ones_892994
+
+
+Brute Force Approach:- Find the max subarray length with atmost k zeroes
+Code:-
+class Solution {
+    public int longestOnes(int[] arr, int k) {
+        int n=arr.length;
+        int maxLen=0,temp=k;
+
+        for(int i=0;i<n;i++)
+        {
+            temp=k;
+            for(int j=i;j<n;j++)
+            {
+                if(arr[j]==0&&temp==0) break;
+                else if(arr[j]==0) temp--;
+                
+                maxLen=Math.max(maxLen,j-i+1);
+            }
+        }
+        return maxLen;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(1)
+
+
+Better Solution:- Use 2 pointers and sliding window.
+Code:-
+class Solution {
+    public int longestOnes(int[] arr, int k) {
+        int l=0,r=0;
+        int maxLen=0;
+        int temp=0;
+        while(r<arr.length)
+        {
+            if(arr[r]==1) r++;
+            else if(arr[r]==0)
+            {
+                if(temp<k)
+                {
+                    r++;
+                    temp++;
+                }
+                else
+                {
+                    if(arr[l]==0) temp--;
+                    l++;
+                }
+            }
+
+            maxLen=Math.max(maxLen,r-l);
+        }
+        return maxLen;
+    }
+}
+
+T.C. -> O(2N)
+S.C. -> O(1)
+
+
+Optimal Solution:-
+
