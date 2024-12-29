@@ -1,0 +1,136 @@
+Video Link:-
+https://www.youtube.com/watch?v=9kdHxplyl5I&ab_channel=takeUforward
+
+
+Notes:-
+This is not a typical but a cosnstructive algorithm. We will be talking about templates which will help us in solving most of the problems if not all.
+Patters:-
+1. CONSTANT WINDOW:- Suppose you are given an array of positives and negatives and you are given a value k. You need to find the maximum sum of k consecutive
+elements in the array. We can make use of sliding window in this problem and the window size will be fixed. We will create a window of k size from the start and 
+will keep shifting the window by one element to the right and keep computing the window sum and coparing it with max.
+
+Ex:- [-1,2,3,,4,4,5,-1,7]  k-4. Find the window having max sum.
+Code:-
+public int maxSum(int arr[],int k)
+{
+  int l=0,r=k,sum=0,max=Integer.MIN_VALUE;
+  for(int i=l;i<r;i++)
+  {
+    sum+=arr[i];
+  }
+max=Math.max(max,sum);
+while(r<arr.length)
+{
+  sum-=arr[l];
+  l++;
+  sum+=arr[r];
+  r++;
+  max=Math.max(max,sum);
+}
+
+  return max;
+}
+
+// We can assign a constant window depending on the condition.
+
+2. LONGEST SUBARRAY/SUBSTRING where condition:- Most common problem.
+Example:- [2,5,1,7,10]  k=14
+Problem:- Pick out the longest subarray where sum<=k
+
+Approaches:- Brute force approach is generating all the subarrays, check their sum and get the answer.
+Code:-
+public int longestSubarray(int arr[],tar)
+{
+  int maxLen=0,sum=0;
+  for(int i=0;i<arr.length;i++)
+  {
+    sum=0;
+    for(int j=i;j<arr.length;j++)
+    {
+      sum+=arr[j];
+      if(sum<=k)
+        maxLen=Math.max(maxLen,j-i+1);
+      else
+        break;
+    }
+  }
+return maxLen;
+}
+
+Better approach:- Use 2 pointers and sliding window.
+Code:-
+public int longestSubaaray(int arr[],int tar)
+{
+  int maxLen=0,sum=0;
+  int l=0,r=0;
+  while(l<=r&&r<arr.length)
+  {
+    sum+=arr[r];
+    
+    while(l<r&&sum>tar)
+    {
+          sum-=arr[l];
+          l++;
+    }
+
+    if(sum<=tar)
+    {
+      maxLen=Math.max(maxLen,r-l+1);
+    }
+    r++;
+    }
+return maxLen;
+}
+
+// In all the templates, all the code will stay same just the checking condition changes.
+
+T.C. -> O(2N)
+S.C. -> O(1)
+
+
+Optimized approach:- This is for when we need to find out the max subarray length only and not the whole subarray itself. We will make use of the approach that
+we will not allow our current window to shrink to a size lesser than the maxLen because going smaller than that for the window will not help anyways.
+Code:-
+public int longestSubaaray(int arr[],int tar)
+{
+  int maxLen=0,sum=0;
+  int l=0,r=0;
+  while(l<=r&&r<arr.length)
+  {
+    sum+=arr[r];
+    
+    if(sum>tar) // This if in place o0f while will ensure that the window size will not shrink down to a size less than the maxLen.
+    {
+          sum-=arr[l];
+          l++;
+    }
+
+    if(sum<=tar)
+    {
+      maxLen=Math.max(maxLen,r-l+1);
+    }
+    r++;
+    }
+return maxLen;
+}
+
+T.C. -> O(N)
+S.C. -> O(1)
+
+3. NUMBER OF SUBARRAYS with CONDITION:- Solved using pattern 2.
+Ex:- Get no. of subarrays with sum = k. -> when there is a constant condition. break it into 2 things. 
+i) find no. of subarrays where sum<=k   => x
+ii) find no. of subarrays with sum<=k-1  => y
+
+Our answer will be x-y, which will give us the number of subarrays with sum == k.
+
+4. SHORTEST/MIN WINDOW with condition:- First expand the window to get a valid subarray and then shrink the window from the start till the window is a valid one.
+
+
+Every problem revolves around :- Generating all subarrays, expanding and shrinking the window and then using the if condition to make sure that we are shrinking 
+just by one place and not more than that so that T.C. is in check.
+
+
+
+
+
