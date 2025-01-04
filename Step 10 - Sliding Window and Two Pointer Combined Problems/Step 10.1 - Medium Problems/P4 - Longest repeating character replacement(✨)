@@ -1,0 +1,77 @@
+Problem Link:-
+https://leetcode.com/problems/longest-repeating-character-replacement/description/
+https://www.geeksforgeeks.org/problems/longest-repeating-character-replacement/1
+https://www.naukri.com/code360/problems/longest-repeating-substring_980523?leftPanelTabValue=PROBLEM
+
+Brute Force Solution:- Create all the subarrays in a string and then find the highest frequency element for each substring and subtract it from the length of
+the substring, we will get the number of elements whether the same or unique that we need to convert to make the whole substring contain the same character, 
+if that number is <=k, compare it with maxlen and return the maxlen at the end.
+Code:-
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int maxf=0,maxlen=0;
+        int carr[]=new int[26];
+
+        for(int i=0;i<s.length();i++)
+        {
+            maxf=0;
+            Arrays.fill(carr,0);
+            for(int j=i;j<s.length();j++)
+            {
+                carr[s.charAt(j)-'A']++;
+                maxf=Math.max(maxf,carr[s.charAt(j)-'A']);
+
+                if((j-i+1)-maxf<=k)
+                {
+                    maxlen = Math.max(maxlen,j-i+1);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        return maxlen;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(26).
+
+Optimal Solution:- Use 2 pointers and sliding window approach. We are taking 2 pointers l and r and we are keeping track of the maxf element and 
+we will keep updating the maxlen as long as we get the (r-l+1)-maxf <=k, meaning as long as we are having a subarray where the elements apart from the maxf elements
+are <=k, we will keep updating the maxlen and also keep taking r forward. As soon as that figure is >k, we will start to take l forward and we will keep doing so,
+till we get a subaaray in which there are at most k elements apart from the most occuring character. Return lexlen at the end as answer.
+Code:-
+class Solution {
+    public int characterReplacement(String s, int k) {
+        int l=0,r=0,maxf=0,maxlen=0;
+        int carr[] = new int[26];
+
+        while(r<s.length())
+        {
+            carr[s.charAt(r)-'A']++;
+            maxf=Math.max(maxf,carr[s.charAt(r)-'A']);
+
+            if((r-l+1)-maxf<=k)
+            {
+                maxlen=Math.max(maxlen,r-l+1);
+            }
+            else
+            {
+                while((r-l+1)-maxf>k)
+                {
+                    char ch = s.charAt(l);
+                    l++;
+                    carr[ch-'A']--;
+                    maxf=Math.max(maxf,carr[ch-'A']);
+                }
+            }
+            r++;
+        }
+        return maxlen;
+    }
+}
+
+T.C. -> O(2N)
+S.C. -> O(26)
