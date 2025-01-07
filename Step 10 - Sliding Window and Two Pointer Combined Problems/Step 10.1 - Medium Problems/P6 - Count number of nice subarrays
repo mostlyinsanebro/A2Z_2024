@@ -42,6 +42,7 @@ class Solution {
     public int noOfSubarrays(int arr[],int k)
     {
         int l=0,r=0,cnt=0,odd=0;
+        if(k<0) return 0;
         while(r<arr.length)
         {
             if(arr[r]%2!=0) odd++;
