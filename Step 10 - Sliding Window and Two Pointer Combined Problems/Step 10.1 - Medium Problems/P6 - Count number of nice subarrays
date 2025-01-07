@@ -1,0 +1,65 @@
+Problem Link:-
+https://leetcode.com/problems/count-number-of-nice-subarrays/description/
+https://www.geeksforgeeks.org/problems/count-subarray-with-k-odds/1
+
+Brute Force Solution:-
+class Solution {
+    public int numberOfSubarrays(int[] arr, int k) {
+        int cnt=0,odd=0;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            odd=0;
+            for(int j=i;j<arr.length;j++)
+            {
+                if(arr[j]%2!=0) odd++;
+
+                if(odd==k) cnt++;
+
+                if(odd>k) break;
+            }
+        }
+        return cnt;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(1)
+
+
+Optimal Solution:- Use 2 pointer and sliding window approach.
+Number of subarrays with odd elements == k => Number of subarrays with odd elements <= k - Number of subarrays with odd elements <= k-1.
+This approach is used when we encounter the issue that on reaching the number of subarrays with odd elements == k, we can't decide whether to increment l or r. 
+Code:-
+class Solution {
+    public int numberOfSubarrays(int[] arr, int k) {
+        int a = noOfSubarrays(arr,k);
+        int b = noOfSubarrays(arr,k-1);
+        System.out.println(a+" "+b);
+        return a-b;
+    }
+    public int noOfSubarrays(int arr[],int k)
+    {
+        int l=0,r=0,cnt=0,odd=0;
+        while(r<arr.length)
+        {
+            if(arr[r]%2!=0) odd++;
+
+            while(odd>k)
+            {
+                if(arr[l]%2!=0) odd--;
+                l++;
+            }
+
+            cnt+=r-l+1;
+
+            r++;
+        }
+        return cnt;
+    }
+}
+
+T.C. -> O(4N)
+S.C. -> O(1)
+
+
