@@ -1,6 +1,7 @@
 Problem Link:-
 https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/
-
+https://www.geeksforgeeks.org/problems/count-substring/1
+https://www.naukri.com/code360/problems/count-substring-with-abc_8160465?leftPanelTabValue=PROBLEM
 
 Brute Force Solution:-
 class Solution {
@@ -26,4 +27,64 @@ class Solution {
 T.C. -> O(N^2)
 S.C. -> O(1)
 
-Optimal Solution:-
+Optimised Brute Force Solution:-
+class Solution {
+    public int numberOfSubstrings(String s) {
+        HashSet<Character> set = new HashSet<>();
+        int ans=0;
+        for(int i=0;i<s.length();i++)
+        {
+            set.clear();
+            for(int j=i;j<s.length();j++)
+            {
+                set.add(s.charAt(j));
+
+                if(set.size()==3) 
+                {
+                    ans = ans+s.length()-j;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(1)
+
+Optimal Solution:- Traverse from the left and keep storing the last index of where each of a, b and c were seen, as soon as all of them become != -1, get the min 
+idx of those 3, that idx will be used to create our answer because all the characters appearing before it will contribute to add to our answer only. Then traverse 
+ahead and repeat these steps. Return the answer at the end.
+Code:-
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int arr[]=new int[3];
+        int ans=0;
+        arr[0]=arr[1]=arr[2]=-1;
+
+        for(int i=0;i<s.length();i++)
+        {
+            arr[s.charAt(i)-'a'] = i;
+            ans+=findMin(arr)+1;
+        }
+        return ans;
+    }
+    public int findMin(int arr[])
+    {
+        if(arr[0]==-1||arr[1]==-1||arr[2]==-1)
+            return -1;
+        
+        int min=Integer.MAX_VALUE;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            min=Math.min(min,arr[i]);
+        }
+        return min;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(1)
+
