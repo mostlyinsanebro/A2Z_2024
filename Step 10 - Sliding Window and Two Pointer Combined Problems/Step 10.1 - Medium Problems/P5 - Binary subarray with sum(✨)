@@ -1,6 +1,6 @@
 Problem Link:-
 https://leetcode.com/problems/binary-subarrays-with-sum/
-
+https://www.geeksforgeeks.org/problems/binary-subarray-with-sum/0
 
 Brute Force Solution:-
 class Solution {
@@ -53,7 +53,40 @@ T.C. -> O(N)
 S.C. -> O(N)
 
 
-Optimal Solution:- Use 2 pointers and sliding window here.
+Optimal Approach:- Number of subarrays having sum==goal => No of subarrays with sum<=goal - Number of subrrays with sum <=goal-1
+
 Code:-
+class Solution {
+    public int numSubarraysWithSum(int[] arr, int goal) {
+        int a = noOfSubarrays(arr,goal);
+        int b = noOfSubarrays(arr,goal-1);
+        //System.out.println(a+"-"+b);
+        return a-b;
+    }
+    public int noOfSubarrays(int arr[],int goal)
+    {
+        int l=0,r=0,sum=0,cnt=0;
+        if(goal<0) return 0;
+        while(r<arr.length)
+        {
+            sum+=arr[r];
+
+            while(sum>goal)
+            {
+                sum-=arr[l];
+                l++;
+            }
+
+            cnt+=r-l+1;
+
+            r++;
+        }
+        return cnt;
+    }
+}
+
+T.C. -> O(4N)
+S.C. -> O(1)
+
 
 
