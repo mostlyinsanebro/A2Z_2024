@@ -54,6 +54,7 @@ S.C. -> O(N)
 
 
 Optimal Approach:- Number of subarrays having sum==goal => No of subarrays with sum<=goal - Number of subrrays with sum <=goal-1
+This approach is used when we encounter the issue that on reaching the sum==goal, we can't decide whether to increment l or r. 
 
 Code:-
 class Solution {
