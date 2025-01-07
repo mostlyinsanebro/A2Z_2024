@@ -3,7 +3,6 @@ https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/descripti
 https://www.geeksforgeeks.org/problems/maximum-point-you-can-obtain-from-cards/0
 https://www.naukri.com/code360/problems/maximum-points-from-cards_8391016?leftPanelTabValue=PROBLEM
 
-
 Brute Force Solution:- Make all the combinations for selecting k elements from the start and then end and compare and get the max.
 Code:-
 class Solution {
