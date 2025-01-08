@@ -1,0 +1,69 @@
+Problem Link:-
+https://leetcode.com/problems/subarrays-with-k-different-integers/
+https://www.geeksforgeeks.org/problems/subarrays-with-k-different-integers/0
+https://www.naukri.com/code360/problems/subarrays-with-at-most-k-distinct-values_1473804?leftPanelTabValue=PROBLEM
+
+Brute Force Solution:-
+class Solution {
+    public int subarraysWithKDistinct(int[] arr, int k) {
+        int cnt=0;
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int i=0;i<arr.length;i++)
+        {
+            set.clear();
+
+            for(int j=i;j<arr.length;j++)
+            {
+                set.add(arr[j]);
+
+                if(set.size()==k) cnt++;
+
+                if(set.size()>k) break;
+            }
+        }
+        return cnt;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(k)
+
+Better Solution:- Use 2 pointers and a sliding window.
+Code:-
+class Solution {
+    public int subarraysWithKDistinct(int[] arr, int k) {
+        return noOfSubarrays(arr,k)-noOfSubarrays(arr,k-1);
+    }
+
+    public int noOfSubarrays(int arr[],int k)
+    {
+        int l=0,r=0,cnt=0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        if(k<0) return 0;
+        while(r<arr.length)
+        {
+            map.put(arr[r],map.getOrDefault(arr[r],0)+1);
+
+            while(map.size()>k)
+            {
+                map.put(arr[l],map.get(arr[l])-1);
+                if(map.get(arr[l])==0)
+                    map.remove(arr[l]);
+
+                l++;
+            }
+
+            cnt+=r-l+1;
+
+            r++;
+        }
+        return cnt;
+    }
+}
+
+T.C. -> O(4N)
+S.C. -> O(2k)
+
+
