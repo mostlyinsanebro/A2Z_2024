@@ -1,0 +1,103 @@
+Problem Link:-
+https://www.geeksforgeeks.org/problems/longest-k-unique-characters-substring0853/1
+https://www.naukri.com/code360/problems/distinct-characters_2221410?leftPanelTabValue=PROBLEM
+
+Brute Force:-
+class Solution {
+    public int longestkSubstr(String s, int k) {
+        // code here
+        HashSet<Character> set = new HashSet<>();
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<s.length();i++)
+        {
+            set.clear();
+            for(int j=i;j<s.length();j++)
+            {
+                set.add(s.charAt(j));
+                
+                if(set.size()==k)
+                    max = Math.max(max,j-i+1);
+                    
+                if(set.size()>k) break;
+            }
+        }
+        if(max==Integer.MIN_VALUE) return -1;
+        
+        return max;
+    }
+}
+
+T.C. -> O(N^2)
+S.C. -> O(k)
+
+
+Better Solution:- Use 2 pointers and a sliding window along with a hashMap.
+Code:- 
+class Solution {
+    public int longestkSubstr(String s, int k) {
+        // code here
+        int l=0,r=0,max=Integer.MIN_VALUE;
+        HashMap<Character,Integer> map = new HashMap<>();
+        
+        while(r<s.length())
+        {
+            map.put(s.charAt(r),map.getOrDefault(s.charAt(r),0)+1);
+            
+            while(map.size()>k)
+            {
+                map.put(s.charAt(l),map.get(s.charAt(l))-1);
+                if(map.get(s.charAt(l))==0) map.remove(s.charAt(l));
+                
+                l++;
+            }
+            
+            if(map.size()==k)
+                max = Math.max(max,r-l+1);
+                
+            r++;
+        }
+        
+        if(max==Integer.MIN_VALUE) return -1;
+        return max;
+    }
+}
+
+T.C. -> O(2N)
+S.C. -> O(k)
+
+
+Optimal Solution:- Use the concept that once we get a length, we will not consider any length lesser than that in our answer.
+Code:-
+class Solution {
+    public int longestkSubstr(String s, int k) {
+        // code here
+        int l=0,r=0,max=Integer.MIN_VALUE;
+        HashMap<Character,Integer> map = new HashMap<>();
+        
+        while(r<s.length())
+        {
+            map.put(s.charAt(r),map.getOrDefault(s.charAt(r),0)+1);
+            
+            if(map.size()>k)
+            {
+                map.put(s.charAt(l),map.get(s.charAt(l))-1);
+                if(map.get(s.charAt(l))==0) map.remove(s.charAt(l));
+                
+                l++;
+            }
+            
+            if(map.size()<=k)
+                max = Math.max(max,r-l+1);
+                
+            r++;
+        }
+        
+        if(max==Integer.MIN_VALUE) return -1;
+        return max;
+    }
+}
+
+T.C. -> O(N)
+S.C. -> O(K)
+
+
